@@ -53,7 +53,8 @@ object Dx2Plan {
     (
       input(
         id := demonNameId,
-        autofocus := true,
+        autofocus := idx == 0,
+        tabindex := idx * 10 + 1,
         oninput := { () => {
           val elem = dom.document.getElementById(demonNameId)
           selections(idx).demon() = Demon.find(elem.asInstanceOf[HTMLInputElement].value)
@@ -61,6 +62,7 @@ object Dx2Plan {
       ),
       select(
         id := demonArchetypeId,
+        tabindex := idx * 10 + 2,
         oninput := { () => {
           val elem = dom.document.getElementById(demonArchetypeId)
           selections(idx).color() = elem.asInstanceOf[HTMLSelectElement].value match {
