@@ -11,7 +11,9 @@ import rx._
 import scala.scalajs.js.annotation.JSExport
 
 case class DemonSelection(demon: Var[Option[Demon]] = Var[Option[Demon]](None),
-                          color: Var[Color] = Var[Color](Color.Clear))
+                          color: Var[Color] = Var[Color](Color.Clear),
+                          divine: Var[Boolean] = Var[Boolean](false),
+                          lead: Var[Boolean] = Var[Boolean](false))
 
 @JSExport
 object Dx2Plan {
@@ -50,6 +52,8 @@ object Dx2Plan {
 
     val demonNameId = s"demon${idx}Name";
     val demonArchetypeId = s"demon${idx}Archetype";
+    val demonDivineId = s"demon${idx}Divine";
+    val demonLeadId = s"demon${idx}Lead";
     (
       input(
         id := demonNameId,
@@ -79,6 +83,24 @@ object Dx2Plan {
         option(value := "purple", "Purple"),
         option(value := "teal", "Teal"),
       ),
+      input(
+        id := demonDivineId,
+        tabindex := idx * 10 + 3,
+        `type` := "checkbox",
+        onchange := { () => {
+          val elem = dom.document.getElementById(demonDivineId)
+          selections(idx).divine() = elem.asInstanceOf[HTMLInputElement].value == "on"
+        } }
+      ),
+      input(
+        id := demonLeadId,
+        tabindex := idx * 10 + 4,
+        `type` := "checkbox",
+        onchange := { () => {
+          val elem = dom.document.getElementById(demonLeadId)
+          selections(idx).lead() = elem.asInstanceOf[HTMLInputElement].value == "on"
+        } }
+      ),
       Rx { skillDescriptions(selections(idx).demon(), selections(idx).color()).map(p(_)) }
     )
   }
@@ -90,18 +112,28 @@ object Dx2Plan {
 
     val demonSelectionElements = (0 until 4) map generateDemonSelection
     dom.document.body.appendChild(
-      table(
-        tr(
-          th("Name"),
-          demonSelectionElements.map(elements => td(elements._1))
-        ),
-        tr(
-          th("Archetype"),
-          demonSelectionElements.map(elements => td(elements._2))
-        ),
-        tr(
-          th("Skills"),
-          demonSelectionElements.map(elements => td(elements._3))
+      section(
+        table(
+          tr(
+            th("Name"),
+            demonSelectionElements.map(elements => td(elements._1))
+          ),
+          tr(
+            th("Archetype"),
+            demonSelectionElements.map(elements => td(elements._2))
+          ),
+          tr(
+            th("Divine Brand"),
+            demonSelectionElements.map(elements => td(elements._3))
+          ),
+          tr(
+            th("Lead Brand"),
+            demonSelectionElements.map(elements => td(elements._4))
+          ),
+          tr(
+            th("Skills"),
+            demonSelectionElements.map(elements => td(elements._5))
+          ),
         )
       ).render
     )
