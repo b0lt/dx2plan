@@ -5,11 +5,12 @@ import kantan.csv.ops._
 import kantan.csv.generic._
 
 final case class DemonRow(
-  name: String, race: String, grade: Int, rarity: Int, hp: String, strength: String, magic: String,
-  vitality: String, agility: String, luck: String, phys: String, fire: String, ice: String,
-  elec: String, force: String, light: String, dark: String, skill1: String, skill2: String,
-  skill3: String, skillClear: String, skillRed: String, skillYellow: String, skillPurple: String,
-  skillTeal: String, ai: String, physAtk: String, physDef: String, magAtk: String, magDef: String
+  name: String, race: String, grade: Int, rarity: Int, phys: String, fire: String, ice: String,
+  elec: String, force: String, light: String, dark: String, hp: Int, strength: Int, magic: Int,
+  vitality: Int, agility: Int, luck: Int, skill1: String, skill2: String, skill3: String,
+  skillClear: String, skillRed: String, skillYellow: String, skillPurple: String, skillTeal: String,
+  skillRedGacha: String, skillYellowGacha: String, skillPurpleGacha: String, skillTealGacha: String,
+  ai: String, physAtk: Int, physDef: Int, magAtk: Int, magDef: Int
 )
 
 sealed trait Stat
@@ -30,7 +31,8 @@ object Color {
   case object Teal extends Color
 }
 
-case class Demon(name: String, stats: Map[Stat, Int], baseSkills: List[Skill], awakenSkills: Map[Color, Option[Skill]])
+case class Demon(name: String, stats: Map[Stat, Int], baseSkills: List[Skill],
+                 awakenSkills: Map[Color, Option[Skill]], gachaSkills: Map[Color, Option[Skill]])
 
 object Demon {
   private val demons = {
@@ -41,23 +43,16 @@ object Demon {
     }).toMap
   }
 
-  private def parseSkillName(skill: String) = {
-    skill.substring(0, skill.indexOf('|'))
-  }
-
   private def fromRow(row: DemonRow) = {
-    val stats = Map[Stat, String](
+    val stats = Map[Stat, Int](
       Stat.Strength -> row.strength,
       Stat.Vitality -> row.vitality,
       Stat.Magic -> row.magic,
       Stat.Agility -> row.agility,
       Stat.Luck -> row.luck,
-    ).mapValues(stat => {
-      // The stat values are of the format "actual_value (rank/number of demons)", which is unhelpful.
-      stat.split(" ")(0).toInt
-    })
+    )
 
-    val baseSkillOpts = List(row.skill1, row.skill2, row.skill3).map(skill => Skill.find(parseSkillName(skill)))
+    val baseSkillOpts = List(row.skill1, row.skill2, row.skill3).map(skill => Skill.find(skill))
     val baseSkills = baseSkillOpts.filter(!_.isEmpty).map(_.get)
     val awakenSkills = Map[Color, String](
       Color.Clear -> row.skillClear,
@@ -65,8 +60,16 @@ object Demon {
       Color.Yellow -> row.skillYellow,
       Color.Purple -> row.skillPurple,
       Color.Teal -> row.skillTeal,
-    ).mapValues(skill => Skill.find(parseSkillName(skill)))
-    Demon(row.name, stats, baseSkills, awakenSkills)
+    ).mapValues(skill => Skill.find(skill))
+
+    val gachaSkills = Map[Color, String](
+      Color.Red -> row.skillRedGacha,
+      Color.Yellow -> row.skillYellowGacha,
+      Color.Purple -> row.skillPurpleGacha,
+      Color.Teal -> row.skillTealGacha,
+    ).mapValues(skill => Skill.find(skill))
+
+    Demon(row.name, stats, baseSkills, awakenSkills, gachaSkills)
   }
 
   def find(name: String): Option[Demon] = {

@@ -15,8 +15,8 @@ libraryDependencies ++= Seq(
 )
 
 sourceGenerators in Compile += Def.task {
-  val demonsFile = (resourceDirectory in Compile).value / "dDemons.csv"
-  val skillsFile = (resourceDirectory in Compile).value / "dSkills.csv"
+  val demonsFile = (resourceDirectory in Compile).value / "demons.csv"
+  val skillsFile = (resourceDirectory in Compile).value / "skills.csv"
 
   val sourceDir = (sourceManaged in Compile).value
   val sourceFile = sourceDir / "Dx2Db.scala"
