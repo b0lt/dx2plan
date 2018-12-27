@@ -1,14 +1,15 @@
 package dx2plan
 
 import scala.collection.mutable.ListBuffer
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSExport
 
 import org.scalajs.dom
 import org.scalajs.dom.raw.{HTMLInputElement, HTMLSelectElement}
-import scalatags.JsDom.all._
 
+import scalatags.JsDom.all._
 import scalatags.JsDom.tags2.section
 import rx._
-import scala.scalajs.js.annotation.JSExport
 
 case class DemonSelection(demon: Var[Option[Demon]] = Var[Option[Demon]](None),
                           color: Var[Color] = Var[Color](Color.Clear),
@@ -59,24 +60,22 @@ object Dx2Plan {
         id := demonNameId,
         autofocus := idx == 0,
         tabindex := idx * 10 + 1,
-        oninput := { () => {
-          val elem = dom.document.getElementById(demonNameId)
-          selections(idx).demon() = Demon.find(elem.asInstanceOf[HTMLInputElement].value)
-        } }
+        oninput := ({(elem: HTMLInputElement) => {
+          selections(idx).demon() = Demon.find(elem.value)
+        }}: js.ThisFunction)
       ),
       select(
         id := demonArchetypeId,
         tabindex := idx * 10 + 2,
-        oninput := { () => {
-          val elem = dom.document.getElementById(demonArchetypeId)
-          selections(idx).color() = elem.asInstanceOf[HTMLSelectElement].value match {
+        oninput := ({(elem: HTMLSelectElement) => {
+          selections(idx).color() = elem.value match {
             case "clear" => Color.Clear
             case "red" => Color.Red
             case "yellow" => Color.Yellow
             case "purple" => Color.Purple
             case "teal" => Color.Teal
           }
-        } },
+        }}: js.ThisFunction),
         option(value := "clear", "Clear"),
         option(value := "red", "Red"),
         option(value := "yellow", "Yellow"),
@@ -87,19 +86,17 @@ object Dx2Plan {
         id := demonDivineId,
         tabindex := idx * 10 + 3,
         `type` := "checkbox",
-        onchange := { () => {
-          val elem = dom.document.getElementById(demonDivineId)
-          selections(idx).divine() = elem.asInstanceOf[HTMLInputElement].value == "on"
-        } }
+        onchange := ({(elem: HTMLInputElement) => {
+          selections(idx).divine() = elem.value == "on"
+        }}: js.ThisFunction)
       ),
       input(
         id := demonLeadId,
         tabindex := idx * 10 + 4,
         `type` := "checkbox",
-        onchange := { () => {
-          val elem = dom.document.getElementById(demonLeadId)
-          selections(idx).lead() = elem.asInstanceOf[HTMLInputElement].value == "on"
-        } }
+        onchange := ({(elem: HTMLInputElement) => {
+          selections(idx).lead() = elem.value == "on"
+        }}: js.ThisFunction)
       ),
       Rx { skillDescriptions(selections(idx).demon(), selections(idx).color()).map(p(_)) }
     )
