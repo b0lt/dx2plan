@@ -51,7 +51,7 @@ object Dx2Plan {
   def generateDemonSelection(idx: Int) = {
     import Ctx.Owner.Unsafe._
 
-    val demonNameId = s"demon${idx}Name";
+    val demonNameId = s"demon${idx}";
     val demonArchetypeId = s"demon${idx}Archetype";
     val demonDivineId = s"demon${idx}Divine";
     val demonLeadId = s"demon${idx}Lead";
@@ -60,6 +60,7 @@ object Dx2Plan {
         id := demonNameId,
         autofocus := idx == 0,
         tabindex := idx * 10 + 1,
+        autocomplete := "false",
         oninput := ({(elem: HTMLInputElement) => {
           selections(idx).demon() = Demon.find(elem.value)
         }}: js.ThisFunction)
@@ -112,7 +113,7 @@ object Dx2Plan {
       section(
         table(
           tr(
-            th("Name"),
+            th("Demon"),
             demonSelectionElements.map(elements => td(elements._1))
           ),
           tr(
