@@ -10,12 +10,14 @@ import scalatags.JsDom.tags2.section
 import rx._
 import scala.scalajs.js.annotation.JSExport
 
+case class DemonSelection(demon: Var[Option[Demon]] = Var[Option[Demon]](None),
+                          color: Var[Color] = Var[Color](Color.Clear))
+
 @JSExport
 object Dx2Plan {
   import Framework._
 
-  val selectedDemon = Var[Option[Demon]](None)
-  val selectedColor = Var[Color](Color.Clear)
+  var selections = (0 until 4).map { _ => DemonSelection() }
 
   def skillDescriptions(demon: Option[Demon], color: Color) = {
     var text = ListBuffer[String]()
@@ -43,53 +45,61 @@ object Dx2Plan {
     text.toList
   }
 
+  def generateDemonSelection(idx: Int) = {
+    import Ctx.Owner.Unsafe._
+
+    val demonNameId = s"demon${idx}Name";
+    val demonArchetypeId = s"demon${idx}Archetype";
+    (
+      input(
+        id := demonNameId,
+        autofocus := true,
+        oninput := { () => {
+          val elem = dom.document.getElementById(demonNameId)
+          selections(idx).demon() = Demon.find(elem.asInstanceOf[HTMLInputElement].value)
+        } }
+      ),
+      select(
+        id := demonArchetypeId,
+        oninput := { () => {
+          val elem = dom.document.getElementById(demonArchetypeId)
+          selections(idx).color() = elem.asInstanceOf[HTMLSelectElement].value match {
+            case "clear" => Color.Clear
+            case "red" => Color.Red
+            case "yellow" => Color.Yellow
+            case "purple" => Color.Purple
+            case "teal" => Color.Teal
+          }
+        } },
+        option(value := "clear", "Clear"),
+        option(value := "red", "Red"),
+        option(value := "yellow", "Yellow"),
+        option(value := "purple", "Purple"),
+        option(value := "teal", "Teal"),
+      ),
+      Rx { skillDescriptions(selections(idx).demon(), selections(idx).color()).map(p(_)) }
+    )
+  }
+
   @JSExport
   def main(): Unit = {
     import Ctx.Owner.Unsafe._
     dom.document.body.innerHTML = ""
+
+    val demonSelectionElements = (0 until 4) map generateDemonSelection
     dom.document.body.appendChild(
       table(
         tr(
           th("Name"),
-          td(
-            input(
-              id := "demonName",
-              autofocus := true,
-              oninput := { () => {
-                val elem = dom.document.getElementById("demonName")
-                selectedDemon() = Demon.find(elem.asInstanceOf[HTMLInputElement].value)
-              } }
-            )
-          )
+          demonSelectionElements.map(elements => td(elements._1))
         ),
         tr(
           th("Archetype"),
-          td(
-            select(
-              id := "archetype",
-              oninput := { () => {
-                val elem = dom.document.getElementById("archetype")
-                selectedColor() = elem.asInstanceOf[HTMLSelectElement].value match {
-                  case "clear" => Color.Clear
-                  case "red" => Color.Red
-                  case "yellow" => Color.Yellow
-                  case "purple" => Color.Purple
-                  case "teal" => Color.Teal
-                }
-              } },
-              option(value := "clear", "Clear"),
-              option(value := "red", "Red"),
-              option(value := "yellow", "Yellow"),
-              option(value := "purple", "Purple"),
-              option(value := "teal", "Teal"),
-            )
-          )
+          demonSelectionElements.map(elements => td(elements._2))
         ),
         tr(
           th("Skills"),
-          td(
-            Rx { skillDescriptions(selectedDemon(), selectedColor()).map(p(_)) }
-          )
+          demonSelectionElements.map(elements => td(elements._3))
         )
       ).render
     )
