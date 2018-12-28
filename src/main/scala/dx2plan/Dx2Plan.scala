@@ -88,7 +88,7 @@ object Dx2Plan {
         tabindex := idx * 10 + 3,
         `type` := "checkbox",
         onchange := ({(elem: HTMLInputElement) => {
-          selections(idx).divine() = elem.value == "on"
+          selections(idx).divine() = elem.checked
         }}: js.ThisFunction)
       ),
       input(
@@ -96,7 +96,7 @@ object Dx2Plan {
         tabindex := idx * 10 + 4,
         `type` := "checkbox",
         onchange := ({(elem: HTMLInputElement) => {
-          selections(idx).lead() = elem.value == "on"
+          selections(idx).lead() = elem.checked
         }}: js.ThisFunction)
       ),
       Rx { skillDescriptions(selections(idx).demon(), selections(idx).color()).map(p(_)) }
