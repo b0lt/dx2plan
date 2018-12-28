@@ -284,10 +284,12 @@ object Dx2Plan {
             th("Divine Brand"),
             demonSelectionElements.map(elements => td(elements._3))
           ),
+/*        TODO: Actually implement sorting that takes lead brands into account.
           tr(
             th("Lead Brand"),
             demonSelectionElements.map(elements => td(elements._4))
           ),
+ */
           tr(
             th("Skills"),
             demonSelectionElements.map(elements => td(elements._5))
