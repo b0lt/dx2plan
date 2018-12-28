@@ -11,73 +11,127 @@ import scalatags.JsDom.all._
 import scalatags.JsDom.tags2.section
 import rx._
 
+// Identifier of demon based on input box layout (i.e. 0 is left-most)
+case class DemonId(id: Int)
+
 case class DemonSelection(demon: Var[Option[Demon]] = Var[Option[Demon]](None),
                           color: Var[Color] = Var[Color](Color.Clear),
                           divine: Var[Boolean] = Var[Boolean](false),
                           lead: Var[Boolean] = Var[Boolean](false))
 
-sealed trait Move {
-  def mpCost: Int
-  def pressTurnCost: Double
-}
-
-case object Pass extends Move {
-  def mpCost = 0
-  def pressTurnCost = 0.5
-}
-
-case object Attack extends Move {
-  def mpCost = 0
-  def pressTurnCost = 0.5
-}
-
-
 @JSExport
 object Dx2Plan {
   import Framework._
-  import Ctx.Owner.Unsafe._
+  implicit val ctx: Ctx.Owner = Ctx.Owner.safe()
 
-  val selections = (0 until 4).map { _ => DemonSelection() }
-  val ordering = Rx {
-    val selectedDemons = selections.zipWithIndex.filter { case (selection, index) =>
+  val maxDemonCount = 4
+  val maxTurnsPerDemon = 4
+  val initialMp = 2
+
+  // Underlying reactive variables for demon selection.
+  val rxSelections: Seq[DemonSelection] = (0 until maxDemonCount).map { _ => DemonSelection() }
+
+  // Actions are stored by demon instead of order, so that if a demon is changed, only that demon's moves are changed.
+  val rxActions = (0 until maxDemonCount).map { id =>
+    DemonId(id) -> ((0 until maxTurnsPerDemon) map { _ => Var[Move](Pass) })
+  }.toMap
+
+  // Actually selected demons.
+  val rxDemons = Rx {
+    rxSelections.zipWithIndex.filter { case (selection, index) =>
         !selection.demon().isEmpty
-    }
-    println(selectedDemons)
-    val zipped = selectedDemons.map { case (selection, index) => {
+    }.map { case (selection, index) =>
+      DemonId(index) -> selection
+    }.toMap
+  }
+
+  // List of DemonIds ordered by turn order.
+  val rxOrdering = Rx {
+    val demonInfo = rxDemons().map { case (id, selection) => {
       val agi = selection.demon().get.stats(Stat.Agility)
       val lead = selection.lead()
-      (index, agi, lead)
+      (id, agi, lead)
     }}
-    val agiSorted = zipped.sortWith((left, right) => left._2 > right._2)
+    val agiSorted = demonInfo.toSeq.sortWith((left, right) => left._2 > right._2)
 
     // TODO: Handle lead brands.
     agiSorted.map { case (index, agi, lead) => index }
   }
 
-  def skillDescriptions(demon: Option[Demon], color: Color) = {
-    var text = ListBuffer[String]()
-    val skills = demon foreach { d =>
-      d.baseSkills.foreach { skill =>
-        val description = skill.cost match {
-          case Some(mp) => s"${skill.name}: ${mp} MP"
-          case None => s"${skill.name}: Passive"
-        }
-        text += description
-      }
-      var skills = d.baseSkills
-      d.awakenSkills(color) match {
-        case Some(skill) => {
-          val description = skill.cost match {
-            case Some(mp) => s"${skill.name}: ${mp - 1} MP"
-            case None => s"${skill.name}: Passive"
+  val rxGameStates: Seq[Rx[GameState]] = {
+    val lb = ListBuffer[Rx[GameState]]()
+    var lastState: Option[Rx[GameState]] = None
+    (0 until maxDemonCount * maxTurnsPerDemon).foreach { n =>
+      lastState match {
+        case None => {
+          val initialState = Rx {
+            val demons = rxDemons()
+            val mp = demons.map { case (index, selection) => (index, initialMp) }.toMap
+            val ordering = rxOrdering()
+            val firstDemonId = ordering(0)
+            val divine = demons(firstDemonId).divine()
+
+            GameState(n, demons.size, mp).regenMp(firstDemonId, divine)
           }
-          text += description
+          lb += initialState
+          lastState = Some(initialState)
         }
 
-        case None => {}
+        case Some(previousState) => {
+          require(n > 0)
+          val nextState = Rx {
+            val prev = previousState()
+
+            val demons = rxDemons()
+            val ordering = rxOrdering()
+            require(demons.size == ordering.size)
+
+            val demonId = ordering(n % demons.size)
+            val divine = demons(demonId).divine()
+
+            val previousDemonId = ordering((n - 1) % demons.size)
+            val previousDemonTurn = (n - 1) / demons.size
+            val rxPreviousDemonMove = rxActions(previousDemonId)(previousDemonTurn)
+            prev.evaluate(previousDemonId, rxPreviousDemonMove()).regenMp(demonId, divine)
+          }
+          lb += nextState
+          lastState = Some(nextState)
+        }
       }
     }
-    text.toList
+    lb.toSeq
+  }
+
+  val rxDemonSkills = ((0 until maxDemonCount) map { i: Int => {
+    (DemonId(i) -> Rx {
+      val selection = rxSelections(i)
+      val skills = ListBuffer[Move]()
+      selection.demon() foreach { demon =>
+        demon.baseSkills.foreach { skill =>
+          skills += Spell(skill.name, skill.cost.getOrElse(0))
+        }
+        demon.awakenSkills(selection.color()) match {
+          case Some(skill) => {
+            skills += Spell(skill.name, skill.cost.getOrElse(1) - 1)
+          }
+          case None => {}
+        }
+      }
+      skills.toList
+    })
+  }}).toMap
+
+  def skillDescriptions(id: DemonId) = Rx {
+    val rxSkills = rxDemonSkills(id)
+    rxSkills() map {
+      case Spell(name, cost) => {
+        if (cost == 0) {
+          span(s"$name: Passive", br)
+        } else {
+          span(s"$name: $cost MP", br)
+        }
+      }
+    }
   }
 
   def generateDemonSelection(idx: Int) = {
@@ -92,14 +146,14 @@ object Dx2Plan {
         tabindex := idx * 10 + 1,
         autocomplete := "false",
         oninput := ({(elem: HTMLInputElement) => {
-          selections(idx).demon() = Demon.find(elem.value)
+          rxSelections(idx).demon() = Demon.find(elem.value)
         }}: js.ThisFunction)
       ),
       select(
         id := demonArchetypeId,
         tabindex := idx * 10 + 2,
         oninput := ({(elem: HTMLSelectElement) => {
-          selections(idx).color() = elem.value match {
+          rxSelections(idx).color() = elem.value match {
             case "clear" => Color.Clear
             case "red" => Color.Red
             case "yellow" => Color.Yellow
@@ -118,7 +172,7 @@ object Dx2Plan {
         tabindex := idx * 10 + 3,
         `type` := "checkbox",
         onchange := ({(elem: HTMLInputElement) => {
-          selections(idx).divine() = elem.checked
+          rxSelections(idx).divine() = elem.checked
         }}: js.ThisFunction)
       ),
       input(
@@ -126,18 +180,95 @@ object Dx2Plan {
         tabindex := idx * 10 + 4,
         `type` := "checkbox",
         onchange := ({(elem: HTMLInputElement) => {
-          selections(idx).lead() = elem.checked
+          rxSelections(idx).lead() = elem.checked
         }}: js.ThisFunction)
       ),
-      Rx { skillDescriptions(selections(idx).demon(), selections(idx).color()).map(p(_)) }
+      skillDescriptions(DemonId(idx))
     )
+  }
+
+  val moveSelectionTable = Rx {
+    val demons = rxDemons()
+    val ordering = rxOrdering()
+    require(demons.size == ordering.size)
+    val turnCount = demons.size * maxTurnsPerDemon
+    val rows = (0 until turnCount) map { turn => {
+      val round = turn / ordering.size
+      val demonOrder = turn % ordering.size
+      val demonId = ordering(demonOrder)
+
+      val demon = demons(demonId).demon()
+      require(!demon.isEmpty)
+
+      val rxGameState = rxGameStates(turn)
+      val mp = rxGameState().demonMp(demonId)
+      val pressTurns = rxGameState().pressTurns
+      if (pressTurns > 0) {
+        val rxSelectedAction = rxActions(demonId)(round)
+        val rxSkills = rxDemonSkills(demonId)
+        val skills = rxSkills() filter { skill => skill.mpCost > 0 }
+        val moves: Seq[Move] = Seq(Pass, Attack) ++ skills
+        val selectedAction = rxSelectedAction()
+        val buttons = moves.zipWithIndex.map { case (move, index) => {
+          val buttonId = s"turn${turn}_${index}"
+          td(
+            div(
+              style := "text-align:center",
+              p(
+                input(
+                  name := s"turn${turn}",
+                  id := buttonId,
+                  `type` := "radio",
+                  value := Move.toString(move),
+                  if (selectedAction == move) checked := true,
+                  onchange := ({(elem: HTMLInputElement) => {
+                    val move = Move.fromString(elem.value)
+                    rxActions(demonId)(round)() = move
+                  }}: js.ThisFunction)
+                ),
+                label(
+                  `for` := buttonId,
+                  move.name
+                )
+              ),
+              if (move.mpCost != 0) {
+                val textStyle = if (move.mpCost > mp) {
+                  "color:red"
+                } else {
+                  ""
+                }
+                p(
+                  style := textStyle,
+                  s"${move.mpCost} MP"
+                )
+              }
+            )
+          )
+        }}
+
+        Some(
+          tr(
+            th(
+              p(demon.get.name),
+              p(s"$mp MP"),
+              p(s"$pressTurns press turns"),
+            ),
+            buttons,
+          )
+        )
+      } else {
+        None
+      }
+    }}
+
+    table(rows.filter(!_.isEmpty).map(_.get))
   }
 
   @JSExport
   def main(): Unit = {
     dom.document.body.innerHTML = ""
 
-    val demonSelectionElements = (0 until 4) map generateDemonSelection
+    val demonSelectionElements = (0 until maxDemonCount) map generateDemonSelection
     dom.document.body.appendChild(
       section(
         table(
@@ -161,15 +292,10 @@ object Dx2Plan {
             th("Skills"),
             demonSelectionElements.map(elements => td(elements._5))
           ),
-          tr(
-            th("Ordering"),
-            td(Rx {
-              val demonOrdering = ordering().map(idx => selections(idx).demon().get.name)
-              demonOrdering.mkString(", ")
-            })
-          )
         )
       ).render
     )
+
+    dom.document.body.appendChild(section(moveSelectionTable).render)
   }
 }
