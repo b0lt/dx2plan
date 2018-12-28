@@ -29,7 +29,10 @@ object Framework {
   implicit def rxMod[T <: html.Element](r: Rx[HtmlTag])(implicit ctx: Ctx.Owner): Frag = {
     def rSafe = r.toTry match {
       case Success(v) => v.render
-      case Failure(e) => span(e.toString, backgroundColor := "red").render
+      case Failure(e) => {
+        e.printStackTrace
+        span(e.toString, backgroundColor := "red").render
+      }
     }
     var last = rSafe
     r.trigger {
