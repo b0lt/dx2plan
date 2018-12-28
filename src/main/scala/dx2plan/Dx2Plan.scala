@@ -16,11 +16,43 @@ case class DemonSelection(demon: Var[Option[Demon]] = Var[Option[Demon]](None),
                           divine: Var[Boolean] = Var[Boolean](false),
                           lead: Var[Boolean] = Var[Boolean](false))
 
+sealed trait Move {
+  def mpCost: Int
+  def pressTurnCost: Double
+}
+
+case object Pass extends Move {
+  def mpCost = 0
+  def pressTurnCost = 0.5
+}
+
+case object Attack extends Move {
+  def mpCost = 0
+  def pressTurnCost = 0.5
+}
+
+
 @JSExport
 object Dx2Plan {
   import Framework._
+  import Ctx.Owner.Unsafe._
 
-  var selections = (0 until 4).map { _ => DemonSelection() }
+  val selections = (0 until 4).map { _ => DemonSelection() }
+  val ordering = Rx {
+    val selectedDemons = selections.zipWithIndex.filter { case (selection, index) =>
+        !selection.demon().isEmpty
+    }
+    println(selectedDemons)
+    val zipped = selectedDemons.map { case (selection, index) => {
+      val agi = selection.demon().get.stats(Stat.Agility)
+      val lead = selection.lead()
+      (index, agi, lead)
+    }}
+    val agiSorted = zipped.sortWith((left, right) => left._2 > right._2)
+
+    // TODO: Handle lead brands.
+    agiSorted.map { case (index, agi, lead) => index }
+  }
 
   def skillDescriptions(demon: Option[Demon], color: Color) = {
     var text = ListBuffer[String]()
@@ -49,8 +81,6 @@ object Dx2Plan {
   }
 
   def generateDemonSelection(idx: Int) = {
-    import Ctx.Owner.Unsafe._
-
     val demonNameId = s"demon${idx}";
     val demonArchetypeId = s"demon${idx}Archetype";
     val demonDivineId = s"demon${idx}Divine";
@@ -105,7 +135,6 @@ object Dx2Plan {
 
   @JSExport
   def main(): Unit = {
-    import Ctx.Owner.Unsafe._
     dom.document.body.innerHTML = ""
 
     val demonSelectionElements = (0 until 4) map generateDemonSelection
@@ -132,6 +161,13 @@ object Dx2Plan {
             th("Skills"),
             demonSelectionElements.map(elements => td(elements._5))
           ),
+          tr(
+            th("Ordering"),
+            td(Rx {
+              val demonOrdering = ordering().map(idx => selections(idx).demon().get.name)
+              demonOrdering.mkString(", ")
+            })
+          )
         )
       ).render
     )
