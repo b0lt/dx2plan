@@ -278,30 +278,62 @@ object Dx2Plan extends JSApp {
           ),
         ),
       ),
-      Rx {
-        rxDemonSkills(demonId)() map {
-          case Spell(name, cost) => {
-            div(
-              `class` := "row",
-              div(
-                `class` := "col",
-                name
-              ),
-              div(
-                `class` := "text-right",
-                if (cost == 0) {
-                  "Passive"
-                } else {
-                  s"$cost MP"
-                }
-              )
-            )
-          }
-
-          case x => {
-            div()
+      {
+        val baseSkills: Seq[Rx.Dynamic[Option[Skill]]] = (0 until 3) map {
+          i => Rx {
+            val demonOpt = demon.demon()
+            demonOpt flatMap { demon =>
+              if (demon.baseSkills.length > i) {
+                Some(demon.baseSkills(i))
+              } else {
+                None
+              }
+            }
           }
         }
+
+        val awakenSkill: Rx.Dynamic[Option[Skill]] = Rx {
+          val demonOpt = demon.demon()
+          val color = demon.color()
+          demonOpt flatMap { _.awakenSkills(color) }
+        }
+
+        val lockedSkills = baseSkills.map((_, false)) ++ Seq((awakenSkill, true))
+        val lockedSkillElements = lockedSkills map {
+          case (rxSkill, awakened) => Rx {
+            rxSkill() match {
+              case Some(skill) => {
+                div(
+                  `class` := "row",
+                  div(
+                    `class` := "col",
+                    skill.name
+                  ),
+                  div(
+                    `class` := "text-right",
+                    skill.cost match {
+                      case Some(cost) => {
+                        val adjustedCost = if (awakened) {
+                          cost - 1
+                        } else {
+                          cost
+                        }
+
+                        s"$adjustedCost MP"
+                      }
+
+                      case None => "Passive"
+                    }
+                  )
+                )
+              }
+
+              case None => div(`class` := "row", raw("&nbsp;"))
+            }
+          }
+        }
+
+        lockedSkillElements
       }
     )
   }
