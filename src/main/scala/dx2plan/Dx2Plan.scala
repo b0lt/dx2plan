@@ -338,12 +338,10 @@ object Dx2Plan extends JSApp {
           val buttonClass = s"btn$buttonSelection-$buttonColor"
 
           div(
-            `class` := "col-2 align-self-center",
-            style := "height: 80%",
+            `class` := "col-2 align-self-center h-75",
             button(
               name := s"turn${turn}",
-              style := "width: 100%; height: 100%",
-              `class` := s"btn $buttonClass",
+              `class` := s"btn $buttonClass h-100 w-100",
               id := buttonId,
               onclick := ({(elem: HTMLInputElement) => {
                 val rxAction = rxConfigurations(demonId).actions(round)
@@ -358,7 +356,8 @@ object Dx2Plan extends JSApp {
 
         val row = ListBuffer[Frag]()
         row += div(
-          `class` := "col-2",
+          `class` := "col-2 h-100",
+          style := "align-items: center",
           strong(demonName), br,
           s"$mp MP", br,
           s"$pressTurns press turns"
@@ -367,8 +366,7 @@ object Dx2Plan extends JSApp {
           `class` := "col-10",
           style := "align-items: center",
           div(
-            `class` := "row",
-            style := "height: 100%",
+            `class` := "row h-100",
             buttons
           )
         )
@@ -415,7 +413,7 @@ object Dx2Plan extends JSApp {
     val container = dom.document.body.appendChild(
       div(
         `class` := "container-fluid",
-        style := "width: 1100px",
+        style := "width: 1120px",
       ).render
     )
 
