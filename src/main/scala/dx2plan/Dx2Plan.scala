@@ -5,6 +5,7 @@ import java.util.Base64
 import scala.collection.mutable.ListBuffer
 import scala.scalajs.js
 import scala.scalajs.js.JSApp
+import scala.scalajs.js.JSConverters._
 
 import org.scalajs.dom
 import org.scalajs.dom.raw.{HTMLInputElement, HTMLSelectElement}
@@ -61,12 +62,14 @@ object DemonConfiguration {
 
   def serialize(config: Map[DemonId, DemonConfiguration])(implicit ctx: Ctx.Owner, data: Ctx.Data): String = {
     val bytes = writeBinary(config.map { case (key, value) => (key -> serialize(value)) }.toMap)
-    Base64.getUrlEncoder().encodeToString(bytes)
+    var compressedBytes: Array[Byte] = LZMA.compress(bytes.toJSArray, 1).toArray
+    Base64.getUrlEncoder().encodeToString(compressedBytes)
   }
 
   def deserialize(data: String, config: Map[DemonId, DemonConfiguration]) = {
     val bytes = Base64.getUrlDecoder().decode(data)
-    val serializedConfigs = readBinary[Map[DemonId, SerializedDemonConfiguration]](bytes)
+    var decompressedBytes: Array[Byte] = LZMA.decompress(bytes.toJSArray).toArray
+    val serializedConfigs = readBinary[Map[DemonId, SerializedDemonConfiguration]](decompressedBytes)
     serializedConfigs.foreach { case (id, serializedConfig) => {
       serializedConfig.applyToConfig(config(id))
     }}
