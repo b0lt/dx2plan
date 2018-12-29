@@ -67,10 +67,18 @@ object DemonConfiguration {
   }
 
   def deserialize(data: String) = {
-    val bytes = Base64.getUrlDecoder().decode(data)
-    var decompressedBytes: Array[Byte] = LZMA.decompress(bytes.toJSArray).toArray
-    val serializedConfigs = readBinary[Map[DemonId, SerializedDemonConfiguration]](decompressedBytes)
-    serializedConfigs
+    try {
+      val bytes = Base64.getUrlDecoder().decode(data)
+      var decompressedBytes: Array[Byte] = LZMA.decompress(bytes.toJSArray).toArray
+      val serializedConfigs = readBinary[Map[DemonId, SerializedDemonConfiguration]](decompressedBytes)
+      Some(serializedConfigs)
+    } catch {
+      case ex: Throwable => {
+        println(s"Failed to deserialize data: '$data'")
+        ex.printStackTrace()
+        None
+      }
+    }
   }
 }
 
@@ -403,16 +411,58 @@ object Dx2Plan extends JSApp {
   def main(): Unit = {
     dom.document.body.innerHTML = ""
 
-    val serializedConfigs = if (!dom.document.location.hash.isEmpty) {
-      val serializedData = dom.document.location.hash.substring(1)
-      Some(DemonConfiguration.deserialize(serializedData))
-    } else {
-      None
+    val serializedConfigs: Option[Map[DemonId, SerializedDemonConfiguration]] = dom.document.location.hash match {
+      case "#example" => {
+        val ishtar = SerializedDemonConfiguration(
+          "Ishtar",
+          "Yellow",
+          divine = true, lead = false,
+          List("Concentrate (5 MP)", "Attack", "Mesopotamian Star (8 MP)", "Attack")
+        )
+        val fenrir = SerializedDemonConfiguration(
+          "Fenrir",
+          "Purple",
+          divine = false, lead = false,
+          List("Pass", "Pass", "Pass", "Pass")
+        )
+        val pyro = SerializedDemonConfiguration(
+          "Pyro Jack",
+          "Yellow",
+          divine = false, lead = false,
+          List("Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)")
+        )
+        val jack = SerializedDemonConfiguration(
+          "Jack Frost",
+          "Yellow",
+          divine = false, lead = false,
+          List("Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)")
+        )
+
+        Some(
+          Map(
+            (DemonId(0) -> ishtar),
+            (DemonId(1) -> fenrir),
+            (DemonId(2) -> pyro),
+            (DemonId(3) -> jack)
+          )
+        )
+      }
+
+      case "" => None
+      case "#" => None
+
+      case _ => {
+        DemonConfiguration.deserialize(dom.document.location.hash.substring(1))
+      }
     }
 
-    serializedConfigs.map { config => config.foreach { case (id, serializedConfig) => {
-      serializedConfig.applyToConfig(rxConfigurations(id))
-    }}}
+    serializedConfigs foreach { configs =>
+      configs map {
+        case (id, serializedConfig) => {
+          serializedConfig.applyToConfig(rxConfigurations(id))
+        }
+      }
+    }
 
     val demonConfigurationElements = (0 until maxDemonCount) map {
       i => generateDemonConfiguration(DemonId(i), serializedConfigs.map(config => config(DemonId(i))))
