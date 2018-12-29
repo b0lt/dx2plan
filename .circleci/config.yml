@@ -1,0 +1,45 @@
+version: 2
+jobs:
+  build:
+    branches:
+      ignore:
+        - gh-pages
+    docker:
+      - image: openjdk:8
+    working_directory: /src
+    environment:
+      - SBT_VERSION: 1.2.6
+      - SOURCE_BRANCH: master
+      - TARGET_BRANCH: gh-pages
+    steps:
+      - run:
+          name: Get sbt binary
+          command: |
+                    apt update && apt install -y curl
+                    curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
+                    dpkg -i sbt-$SBT_VERSION.deb
+                    rm sbt-$SBT_VERSION.deb
+                    apt-get update
+                    apt-get install -y sbt python-pip git
+                    pip install awscli
+                    apt-get clean && apt-get autoclean
+      - checkout
+      - run:
+          name: Build
+          command: cat /dev/null | sbt clean fullOptJS
+      - deploy:
+          name: Deploy
+          command: |
+            if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
+              git config --global user.email "3079085+b0lt@users.noreply.github.com"
+              git config --global user.name b0lt
+
+              mkdir -p /tmp
+              git clone $CIRCLE_REPOSITORY_URL /tmp/gh-pages -b gh-pages
+
+              cp /src/target/scala-2.12/dx2plan-opt.js /src/target/scala-2.12/dx2plan-opt.js.map /tmp/gh-pages
+              cd /tmp/gh-pages
+              git add -A
+              git commit -m "Automated deployment to GitHub Pages: ${CIRCLE_SHA1}" --allow-empty
+              git push origin $TARGET_BRANCH
+            fi
