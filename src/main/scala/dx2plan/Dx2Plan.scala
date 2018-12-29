@@ -183,6 +183,23 @@ object Dx2Plan extends JSApp {
     })
   }}).toMap
 
+  val rxUsableDemonSkills = rxDemonSkills.map {
+    case (demonId, demonSkills) => {
+      (demonId -> Rx {
+        val spells = demonSkills()
+        spells.filter(spell => {
+          // Filter out healing spells.
+          if (spell.skill.element == "recovery") {
+            // Except the ones that are useful for combat.
+            spell.name == "Silent Prayer" && spell.name == "Orleans Prayer"
+          } else {
+            true
+          }
+        })
+      })
+    }
+  }.toMap
+
   def generateDemonConfiguration(demonId: DemonId, serializedConfig: Option[SerializedDemonConfiguration]) = {
     val idx = demonId.id
     val demonNameId = s"demon${idx}";
@@ -364,7 +381,7 @@ object Dx2Plan extends JSApp {
       val pressTurns = rxGameState().pressTurns
       if (pressTurns > 0) {
         val rxSelectedAction = demon.actions(round)
-        val rxSkills = rxDemonSkills(demonId)
+        val rxSkills = rxUsableDemonSkills(demonId)
         val skills = rxSkills() filter { skill => skill.mpCost > 0 }
         val moves: Seq[Move] = Seq(Pass, Attack) ++ skills
         val selectedAction = rxSelectedAction()

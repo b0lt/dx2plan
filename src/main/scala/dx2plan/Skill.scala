@@ -9,7 +9,7 @@ final case class SkillRow(
   learnedBy: String, transferableFrom: String
 )
 
-case class Skill(name: String, cost: Option[Int])
+case class Skill(name: String, element: String, cost: Option[Int])
 object Skill {
   val skills = {
     val parsed = Dx2Db.skills.asCsvReader[SkillRow](rfc.withHeader)
@@ -26,7 +26,7 @@ object Skill {
       None
     }
 
-    Skill(row.name, cost)
+    Skill(row.name, row.element, cost)
   }
 
   def find(name: String): Option[Skill] = {
