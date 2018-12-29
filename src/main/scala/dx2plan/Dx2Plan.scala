@@ -167,14 +167,14 @@ object Dx2Plan extends JSApp {
     val demonId = DemonId(i)
     (demonId -> Rx {
       val configuration = rxConfigurations(demonId)
-      val skills = ListBuffer[Move]()
+      val skills = ListBuffer[Spell]()
       configuration.demon() foreach { demon =>
         demon.baseSkills.foreach { skill =>
-          skills += Spell(skill.name, skill.cost.getOrElse(0))
+          skills += Spell(skill, false)
         }
         demon.awakenSkills(configuration.color()) match {
           case Some(skill) => {
-            skills += Spell(skill.name, skill.cost.getOrElse(1) - 1)
+            skills += Spell(skill, true)
           }
           case None => {}
         }
@@ -455,8 +455,8 @@ object Dx2Plan extends JSApp {
           "Ishtar",
           "Yellow",
           divine = true, lead = false,
-          "Megido", "",
-          List("Concentrate (5 MP)", "Attack", "Mesopotamian Star (8 MP)", "Attack")
+          "", "",
+          List("Concentrate (awakened)", "Attack", "Mesopotamian Star", "Attack")
         )
         val fenrir = SerializedDemonConfiguration(
           "Fenrir",
@@ -470,14 +470,14 @@ object Dx2Plan extends JSApp {
           "Yellow",
           divine = false, lead = false,
           "", "",
-          List("Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)")
+          List("Tag (awakened)", "Tag (awakened)", "Tag (awakened)", "Tag (awakened)")
         )
         val jack = SerializedDemonConfiguration(
           "Jack Frost",
           "Yellow",
           divine = false, lead = false,
           "", "",
-          List("Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)")
+          List("Tag (awakened)", "Tag (awakened)", "Tag (awakened)", "Tag (awakened)")
         )
 
         Some(

@@ -9,7 +9,13 @@ sealed trait Move {
     this match {
       case Pass => "Pass"
       case Attack => "Attack"
-      case Spell(name, cost) => s"$name ($cost MP)"
+      case Spell(skill, awakened) => {
+        if (awakened) {
+          s"${skill.name} (awakened)"
+        } else {
+          skill.name
+        }
+      }
     }
   }
 }
@@ -26,9 +32,16 @@ case object Attack extends Move {
   def pressTurnCost = 1
 }
 
-case class Spell(_name: String, cost: Int) extends Move {
-  def name = _name
-  def mpCost = cost
+case class Spell(skill: Skill, awakened: Boolean) extends Move {
+  def name = skill.name
+  def mpCost = {
+    if (awakened) {
+      skill.cost.getOrElse(1) - 1
+    } else {
+      skill.cost.getOrElse(0)
+    }
+  }
+
   def pressTurnCost = {
     name match {
       case "Tag" => 0
@@ -39,11 +52,18 @@ case class Spell(_name: String, cost: Int) extends Move {
 
 object Move {
   def deserialize(string: String): Move = {
-    val pattern = raw"(.+) \(([0-9]+) MP\)".r
+    val awakened = raw"(.+) \(awakened\)".r
     string match {
       case "Pass" => Pass
       case "Attack" => Attack
-      case pattern(name, cost) => Spell(name, cost.toInt)
+      case awakened(name) => Skill.find(name) match {
+        case Some(skill) => Spell(skill, true)
+        case None => Pass
+      }
+      case unawakened => Skill.find(unawakened) match {
+        case Some(skill) => Spell(skill, false)
+        case None => Pass
+      }
     }
   }
 }
