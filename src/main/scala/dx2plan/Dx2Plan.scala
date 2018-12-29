@@ -182,6 +182,7 @@ object Dx2Plan extends JSApp {
 
     (
       input(
+        `class` := "form-control",
         id := demonNameId,
         autofocus := idx == 0,
         tabindex := idx * 10 + 1,
@@ -192,6 +193,7 @@ object Dx2Plan extends JSApp {
         }}: js.ThisFunction)
       ),
       select(
+        `class` := "form-control",
         id := demonArchetypeId,
         tabindex := idx * 10 + 2,
         oninput := ({(elem: HTMLSelectElement) => {
@@ -228,37 +230,67 @@ object Dx2Plan extends JSApp {
           "Teal"
         ),
       ),
-      input(
-        id := demonDivineId,
-        tabindex := idx * 10 + 3,
-        `type` := "checkbox",
-        if (divine) checked := true,
-        onchange := ({(elem: HTMLInputElement) => {
-          rxConfigurations(demonId).divine() = elem.checked
-        }}: js.ThisFunction)
-      ),
-      input(
-        id := demonLeadId,
-        tabindex := idx * 10 + 4,
-        `type` := "checkbox",
-        if (lead) checked := true,
-        onchange := ({(elem: HTMLInputElement) => {
-          rxConfigurations(demonId).lead() = elem.checked
-        }}: js.ThisFunction)
+      div(
+        div(
+          `class` := "form-check form-check-inline",
+          input(
+            `class` := "form-check-input",
+            id := demonDivineId,
+            tabindex := idx * 10 + 3,
+            `type` := "checkbox",
+            if (divine) checked := true,
+            onchange := ({(elem: HTMLInputElement) => {
+              rxConfigurations(demonId).divine() = elem.checked
+            }}: js.ThisFunction)
+          ),
+          label(
+            `class` := "form-check-label",
+            `for` := demonDivineId,
+            "Divine"
+          ),
+        ),
+        // TODO: Actually implement sorting that takes lead brands into account.*/
+        div(
+          `class` := "form-check form-check-inline",
+          input(
+            `class` := "form-check-input",
+            id := demonLeadId,
+            tabindex := idx * 10 + 4,
+            `type` := "checkbox",
+            if (lead) checked := true,
+            onchange := ({(elem: HTMLInputElement) => {
+              rxConfigurations(demonId).lead() = elem.checked
+            }}: js.ThisFunction)
+          ),
+          label(
+            `class` := "form-check-label",
+            `for` := demonLeadId,
+            "Lead"
+          ),
+        ),
       ),
       Rx {
         rxDemonSkills(demonId)() map {
           case Spell(name, cost) => {
-            if (cost == 0) {
-              span(s"$name: Passive", br)
-            } else {
-              span(s"$name: $cost MP", br)
-            }
+            div(
+              `class` := "row",
+              div(
+                `class` := "col",
+                name
+              ),
+              div(
+                `class` := "text-right",
+                if (cost == 0) {
+                  "Passive"
+                } else {
+                  s"$cost MP"
+                }
+              )
+            )
           }
 
           case x => {
-            println(s"Unexpected demon skill: $x")
-            span()
+            div()
           }
         }
       }
@@ -291,58 +323,66 @@ object Dx2Plan extends JSApp {
         val selectedAction = rxSelectedAction()
         val buttons = moves.zipWithIndex.map { case (move, index) => {
           val buttonId = s"turn${turn}_${index}"
-          td(
-            div(
-              style := "text-align:center",
-              p(
-                input(
-                  name := s"turn${turn}",
-                  id := buttonId,
-                  `type` := "radio",
-                  value := move.serialize(),
-                  if (selectedAction == move) checked := true,
-                  onchange := ({(elem: HTMLInputElement) => {
-                    val move = Move.deserialize(elem.value)
-                    val demon = rxConfigurations(demonId)
-                    demon.actions(round)() = move
-                  }}: js.ThisFunction)
-                ),
-                label(
-                  `for` := buttonId,
-                  move.name
-                )
-              ),
-              if (move.mpCost != 0) {
-                val textStyle = if (move.mpCost > mp) {
-                  "color:red"
-                } else {
-                  ""
-                }
-                p(
-                  style := textStyle,
-                  s"${move.mpCost} MP"
-                )
-              }
-            )
-          )
-        }}
+          val enoughMp = mp >= move.mpCost
+          val selected = selectedAction == move
 
-        Some(
-          tr(
-            th(
-              p(demonName),
-              p(s"$mp MP"),
-              p(s"$pressTurns press turns"),
+          val buttonColor = (move.name, enoughMp) match {
+            case ("Pass", _) => "secondary"
+            case ("Attack", _) => "info"
+            case ("Tag", _) => "warning"
+            case (_, true) => "primary"
+            case (_, false) => "danger"
+          }
+
+          val buttonSelection = if (selected) "" else "-outline"
+          val buttonClass = s"btn$buttonSelection-$buttonColor"
+
+          div(
+            `class` := "col-2 align-self-center",
+            style := "height: 80%",
+            button(
+              name := s"turn${turn}",
+              style := "width: 100%; height: 100%",
+              `class` := s"btn $buttonClass",
+              id := buttonId,
+              onclick := ({(elem: HTMLInputElement) => {
+                val rxAction = rxConfigurations(demonId).actions(round)
+                rxAction() = move
+              }}: js.ThisFunction),
+              move.name,
+              if (move.mpCost != 0) { br },
+              if (move.mpCost != 0) { s"${move.mpCost} MP" },
             ),
-            buttons,
+          )
+        }}.toList
+
+        val row = ListBuffer[Frag]()
+        row += div(
+          `class` := "col-2",
+          strong(demonName), br,
+          s"$mp MP", br,
+          s"$pressTurns press turns"
+        )
+        row += div(
+          `class` := "col-10",
+          style := "align-items: center",
+          div(
+            `class` := "row",
+            style := "height: 100%",
+            buttons
           )
         )
+        row += div(`class` := "w-100")
+        Some(row.toList)
       } else {
         None
       }
     }}
 
-    table(rows.filter(!_.isEmpty).map(_.get))
+    div(
+      `class` := "row",
+      rows.filterNot(_.isEmpty).map(_.get)
+    )
   }
 
   val permalink = Rx {
@@ -372,36 +412,51 @@ object Dx2Plan extends JSApp {
       i => generateDemonConfiguration(DemonId(i), serializedConfigs.map(config => config(DemonId(i))))
     }
 
-    dom.document.body.appendChild(
-      section(
-        table(
-          tr(
-            th("Demon"),
-            demonConfigurationElements.map(elements => td(elements._1))
+    val container = dom.document.body.appendChild(
+      div(
+        `class` := "container-fluid",
+        style := "width: 1100px",
+      ).render
+    )
+
+    val col = `class` := "col"
+    val colSmall = `class` := "col-2"
+    val rowBreak = div(`class` := "w-100")
+    container.appendChild(
+      div(
+        div(
+          `class` := "row",
+          div(
+            `class` := "col",
+            h1("dx2plan"),
           ),
-          tr(
-            th("Archetype"),
-            demonConfigurationElements.map(elements => td(elements._2))
-          ),
-          tr(
-            th("Divine Brand"),
-            demonConfigurationElements.map(elements => td(elements._3))
-          ),
-/*        TODO: Actually implement sorting that takes lead brands into account.
-          tr(
-            th("Lead Brand"),
-            demonConfigurationElements.map(elements => td(elements._4))
-          ),
- */
-          tr(
-            th("Skills"),
-            demonConfigurationElements.map(elements => td(elements._5))
-          ),
+          div(
+            `class` := "text-right align-self-center",
+            permalink
+          )
+        ),
+
+        div(
+          `class` := "row",
+
+          div(colSmall, strong("Demon")),
+          demonConfigurationElements.map(elements => div(col, elements._1)),
+
+          rowBreak,
+          div(colSmall, strong("Archetype")),
+          demonConfigurationElements.map(elements => div(col, elements._2)),
+
+          rowBreak,
+          div(colSmall, strong("Brands")),
+          demonConfigurationElements.map(elements => div(col, elements._3)),
+
+          rowBreak,
+          div(colSmall, strong("Skills")),
+          demonConfigurationElements.map(elements => div(col, elements._4)),
         )
       ).render
     )
 
-    dom.document.body.appendChild(section(moveConfigurationTable).render)
-    dom.document.body.appendChild(section(permalink).render)
+    container.appendChild(moveConfigurationTable.render)
   }
 }
