@@ -112,6 +112,26 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[DemonId, 
       pressTurnCost = 0.5
     }
 
+    val newDemonMp = {
+      val mp = demonMp(demonId) - move.mpCost
+      if (mp < 0 && mp >= -3 && globalModifiers.contains(OrleansPrayer)) {
+        newGlobalModifiers -= OrleansPrayer
+        mp + 3
+      } else {
+        mp
+      }
+    }
+
+    val newPressTurns = {
+      if (pressTurnCost == 0) {
+        pressTurns
+      } else if (pressTurns % 1 == 0) {
+        pressTurns - pressTurnCost
+      } else {
+        pressTurns - 0.5
+      }
+    }
+
     move.name match {
       case "Charge" => {
         newDemonModifiers += (demonId -> (demonModifiers(demonId) + Charge - Concentrate))
@@ -150,26 +170,6 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[DemonId, 
     newDemonModifiers =
       newDemonModifiers +
       (demonId -> newDemonModifiers(demonId).filterNot(_.consumedBy(move.element)))
-
-    val newPressTurns = {
-      if (pressTurnCost == 0) {
-        pressTurns
-      } else if (pressTurns % 1 == 0) {
-        pressTurns - pressTurnCost
-      } else {
-        pressTurns - 0.5
-      }
-    }
-
-    val newDemonMp = {
-      val mp = demonMp(demonId) - move.mpCost
-      if (mp < 0 && mp >= -3 && globalModifiers.contains(OrleansPrayer)) {
-        newGlobalModifiers -= OrleansPrayer
-        mp + 3
-      } else {
-        mp
-      }
-    }
 
     GameState(
       turnNumber + 1,
