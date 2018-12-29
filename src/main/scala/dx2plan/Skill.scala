@@ -15,7 +15,7 @@ object Skill {
     val parsed = Dx2Db.skills.asCsvReader[SkillRow](rfc.withHeader)
     parsed.map(row => {
       val skill = Skill.fromRow(row.toOption.get)
-      (skill.name, skill)
+      (skill.name.toLowerCase, skill)
     }).toMap
   }
 
@@ -30,10 +30,10 @@ object Skill {
   }
 
   def find(name: String): Option[Skill] = {
-    if (name == "N/A") {
+    if (name.isEmpty) {
       None
     } else {
-      skills.get(name) match {
+      skills.get(name.toLowerCase) match {
         case Some(skill) => Some(skill)
         case None => {
           println(s"Failed to find skill '$name'")
