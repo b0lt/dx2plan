@@ -27,19 +27,19 @@ case class DemonConfiguration(demon: Var[Option[Demon]] = Var[Option[Demon]](Non
                               color: Var[Color] = Var[Color](Color.Clear),
                               divine: Var[Boolean] = Var[Boolean](false),
                               lead: Var[Boolean] = Var[Boolean](false),
+                              transferSkill0: Var[Option[Skill]] = Var(None),
                               transferSkill1: Var[Option[Skill]] = Var(None),
-                              transferSkill2: Var[Option[Skill]] = Var(None),
                               actions: List[Var[Move]] = List.tabulate(Dx2Plan.maxTurnsPerDemon)(_ => Var[Move](Pass)))
 
 case class SerializedDemonConfiguration(demon: String, color: String, divine: Boolean, lead: Boolean,
-                                        transferSkill1: String, transferSkill2: String, actions: List[String]) {
+                                        transferSkill0: String, transferSkill1: String, actions: List[String]) {
   def applyToConfig(config: DemonConfiguration) {
     config.demon() = Demon.find(demon)
     config.color() = Color.deserialize(color)
     config.divine() = divine
     config.lead() = lead
+    config.transferSkill0() = Skill.find(transferSkill0)
     config.transferSkill1() = Skill.find(transferSkill1)
-    config.transferSkill2() = Skill.find(transferSkill2)
     actions.zipWithIndex.foreach { case (action, index) => {
       config.actions(index)() = Move.deserialize(action)
     }}
@@ -54,10 +54,10 @@ object SerializedDemonConfiguration {
     val color = config.color().serialize()
     val divine = config.divine()
     val lead = config.lead()
+    val transferSkill0 = config.transferSkill0().map(_.name).getOrElse("")
     val transferSkill1 = config.transferSkill1().map(_.name).getOrElse("")
-    val transferSkill2 = config.transferSkill2().map(_.name).getOrElse("")
     val actions = config.actions.map { action => action().serialize() }
-    SerializedDemonConfiguration(demon, color, divine, lead, transferSkill1, transferSkill2, actions)
+    SerializedDemonConfiguration(demon, color, divine, lead, transferSkill0, transferSkill1, actions)
   }
 }
 
@@ -178,6 +178,14 @@ object Dx2Plan extends JSApp {
           }
           case None => {}
         }
+        Seq(configuration.transferSkill0, configuration.transferSkill1) foreach {
+          rxTransferSkill => {
+            val transferSkill = rxTransferSkill()
+            transferSkill foreach { skill =>
+              skills += Spell(skill, false)
+            }
+          }
+        }
       }
       skills.toList
     })
@@ -208,8 +216,12 @@ object Dx2Plan extends JSApp {
     val demonLeadId = s"demon${idx}Lead";
     val demon = rxConfigurations(demonId)
     val (color, divine, lead): Tuple3[Color, Boolean, Boolean] = serializedConfig.map {
-      (config: SerializedDemonConfiguration) => (Color.deserialize(config.color), config.divine, config.lead)
+      config => (Color.deserialize(config.color), config.divine, config.lead)
     }.getOrElse((Color.Clear, false, false))
+
+    val transferSkills = serializedConfig.map {
+      config => Seq(config.transferSkill0, config.transferSkill1)
+    }.getOrElse(Seq("", ""))
 
     (
       input(
@@ -329,34 +341,97 @@ object Dx2Plan extends JSApp {
                 div(
                   `class` := "row",
                   div(
-                    `class` := "col",
-                    skill.name
-                  ),
-                  div(
-                    `class` := "text-right",
-                    skill.cost match {
-                      case Some(cost) => {
-                        val adjustedCost = if (awakened) {
-                          cost - 1
-                        } else {
-                          cost
+                    `class` := "input-group",
+                    input(
+                      `type` := "text",
+                      `class` := "form-control",
+                      style := "background-color: #fff",
+                      placeholder := skill.name,
+                      disabled := true,
+                    ),
+                    div(
+                      `class` := "input-group-append",
+                      span(
+                        `class` := "input-group-text",
+                        skill.cost match {
+                          case Some(cost) => {
+                            val adjustedCost = if (awakened) {
+                              cost - 1
+                            } else {
+                              cost
+                            }
+                            s"$adjustedCost MP"
+                          }
+
+                          case None => "0 MP"
                         }
-
-                        s"$adjustedCost MP"
-                      }
-
-                      case None => "Passive"
-                    }
+                      )
+                    )
                   )
                 )
               }
 
-              case None => div(`class` := "row", raw("&nbsp;"))
+              case None => {
+                div(
+                  `class` := "row",
+                  div(
+                    `class` := "input-group",
+                    input(
+                      `type` := "text",
+                      `class` := "form-control",
+                      style := "background-color: #fff; border: 0px",
+                      placeholder := "",
+                      disabled := true,
+                    ),
+                  )
+                )
+              }
             }
           }
         }
 
-        lockedSkillElements
+        val transferSkillElements = (0 until 2).map {
+          i => Rx {
+            val rxTransferSkill = if (i == 0) {
+              demon.transferSkill0
+            } else {
+              demon.transferSkill1
+            }
+
+            div(
+              `class` := "row",
+              div(
+                `class` := "input-group",
+                input(
+                  `type` := "text",
+                  `class` := "form-control",
+                  value := transferSkills(i),
+                  oninput := ({(elem: HTMLInputElement) => {
+                    rxTransferSkill() = Skill.find(elem.value)
+                  }}: js.ThisFunction)
+                ),
+                div(
+                  `class` := "input-group-append",
+                  span(
+                    `class` := "input-group-text",
+                    Rx {
+
+                      rxTransferSkill() match {
+                        case Some(skill) => {
+                          s"${skill.cost.getOrElse(0)} MP"
+                        }
+
+                        case None => "0 MP"
+                      }
+                    }
+                  )
+                )
+              )
+            )
+          }
+        }
+
+        lockedSkillElements ++ transferSkillElements
       }
     )
   }
@@ -479,14 +554,14 @@ object Dx2Plan extends JSApp {
           "Fenrir",
           "Purple",
           divine = false, lead = false,
-          "", "",
+          "Rakunda", "Makarakarn",
           List("Pass", "Pass", "Pass", "Pass")
         )
         val pyro = SerializedDemonConfiguration(
           "Pyro Jack",
           "Yellow",
           divine = false, lead = false,
-          "", "",
+          "Megido", "",
           List("Tag (awakened)", "Tag (awakened)", "Tag (awakened)", "Tag (awakened)")
         )
         val jack = SerializedDemonConfiguration(
