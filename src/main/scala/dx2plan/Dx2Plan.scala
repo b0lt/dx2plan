@@ -27,15 +27,19 @@ case class DemonConfiguration(demon: Var[Option[Demon]] = Var[Option[Demon]](Non
                               color: Var[Color] = Var[Color](Color.Clear),
                               divine: Var[Boolean] = Var[Boolean](false),
                               lead: Var[Boolean] = Var[Boolean](false),
+                              transferSkill1: Var[Option[Skill]] = Var(None),
+                              transferSkill2: Var[Option[Skill]] = Var(None),
                               actions: List[Var[Move]] = List.tabulate(Dx2Plan.maxTurnsPerDemon)(_ => Var[Move](Pass)))
 
 case class SerializedDemonConfiguration(demon: String, color: String, divine: Boolean, lead: Boolean,
-                                        actions: List[String]) {
+                                        transferSkill1: String, transferSkill2: String, actions: List[String]) {
   def applyToConfig(config: DemonConfiguration) {
     config.demon() = Demon.find(demon)
     config.color() = Color.deserialize(color)
     config.divine() = divine
     config.lead() = lead
+    config.transferSkill1() = Skill.find(transferSkill1)
+    config.transferSkill2() = Skill.find(transferSkill2)
     actions.zipWithIndex.foreach { case (action, index) => {
       config.actions(index)() = Move.deserialize(action)
     }}
@@ -50,8 +54,10 @@ object SerializedDemonConfiguration {
     val color = config.color().serialize()
     val divine = config.divine()
     val lead = config.lead()
+    val transferSkill1 = config.transferSkill1().map(_.name).getOrElse("")
+    val transferSkill2 = config.transferSkill2().map(_.name).getOrElse("")
     val actions = config.actions.map { action => action().serialize() }
-    SerializedDemonConfiguration(demon, color, divine, lead, actions)
+    SerializedDemonConfiguration(demon, color, divine, lead, transferSkill1, transferSkill2, actions)
   }
 }
 
@@ -449,24 +455,28 @@ object Dx2Plan extends JSApp {
           "Ishtar",
           "Yellow",
           divine = true, lead = false,
+          "Megido", "",
           List("Concentrate (5 MP)", "Attack", "Mesopotamian Star (8 MP)", "Attack")
         )
         val fenrir = SerializedDemonConfiguration(
           "Fenrir",
           "Purple",
           divine = false, lead = false,
+          "", "",
           List("Pass", "Pass", "Pass", "Pass")
         )
         val pyro = SerializedDemonConfiguration(
           "Pyro Jack",
           "Yellow",
           divine = false, lead = false,
+          "", "",
           List("Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)")
         )
         val jack = SerializedDemonConfiguration(
           "Jack Frost",
           "Yellow",
           divine = false, lead = false,
+          "", "",
           List("Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)", "Tag (2 MP)")
         )
 
