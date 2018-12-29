@@ -180,13 +180,10 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[DemonId, 
     )
   }
 
-  def regenMp(demonId: DemonId, divine: Boolean) = {
-    // TODO: Infinite Chakra
+  def regenMp(demonId: DemonId, mpRegenBonus: Int, maxMpBonus: Int) = {
     val previousMp = demonMp(demonId)
-    var regen = if (divine) 4 else 3
-
-    // TODO: Mana Bonus/Mana Gain
-    val newMp = Math.min(10, previousMp + regen)
+    var regen = 3 + mpRegenBonus
+    val newMp = Math.min(10 + maxMpBonus, previousMp + regen)
     GameState(turnNumber, pressTurns, demonMp + (demonId -> newMp), globalModifiers, demonModifiers)
   }
 }

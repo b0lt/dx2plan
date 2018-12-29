@@ -119,6 +119,16 @@ object Dx2Plan extends JSApp {
     agiSorted.map { case (index, agi, lead) => index }
   }
 
+  def hasSkill(demonId: DemonId, skillName: String)(implicit ctx: Ctx.Owner, data: Ctx.Data): Boolean = {
+    val rxSkills = rxDemonSkills(demonId)
+    rxSkills().find((skill: Spell) => {
+      skill.skill.name == skillName
+    }) match {
+      case Some(skill) => true
+      case None => false
+    }
+  }
+
   val rxGameStates: Seq[Rx[GameState]] = {
     val lb = ListBuffer[Rx[GameState]]()
     var lastState: Option[Rx[GameState]] = None
@@ -128,10 +138,18 @@ object Dx2Plan extends JSApp {
           val initialState = Rx {
             val demons = rxDemons()
             val ordering = rxOrdering()
-            val firstDemonId = ordering(0)
-            val divine = demons(firstDemonId).divine()
+            val demonId = ordering(0)
 
-            GameState.initial(demons.keys.toSeq).regenMp(firstDemonId, divine)
+            var mpRegenBonus = 0
+            if (demons(demonId).divine()) mpRegenBonus += 1
+            if (hasSkill(demonId, "Infinite Chakra")) mpRegenBonus += 1
+
+            var maxMpBonus = 0
+            if (hasSkill(demonId, "Mana Bonus")) maxMpBonus += 1
+            if (hasSkill(demonId, "Mana Gain")) maxMpBonus += 2
+            if (hasSkill(demonId, "Mana Surge")) maxMpBonus += 3
+
+            GameState.initial(demons.keys.toSeq).regenMp(demonId, mpRegenBonus, maxMpBonus)
           }
           lb += initialState
           lastState = Some(initialState)
@@ -147,12 +165,22 @@ object Dx2Plan extends JSApp {
             require(demons.size == ordering.size)
 
             val demonId = ordering(n % demons.size)
-            val divine = demons(demonId).divine()
+
+            var mpRegenBonus = 0
+            if (demons(demonId).divine()) mpRegenBonus += 1
+            if (hasSkill(demonId, "Infinite Chakra")) mpRegenBonus += 1
+
+            var maxMpBonus = 0
+            if (hasSkill(demonId, "Mana Bonus")) maxMpBonus += 1
+            if (hasSkill(demonId, "Mana Gain")) maxMpBonus += 1
+            if (hasSkill(demonId, "Mana Surge")) maxMpBonus += 1
 
             val previousDemonId = ordering((n - 1) % demons.size)
             val previousDemonTurn = (n - 1) / demons.size
             val rxPreviousDemonMove = demons(previousDemonId).actions(previousDemonTurn)
-            prev.evaluate(previousDemonId, rxPreviousDemonMove()).regenMp(demonId, divine)
+
+            // TODO: Lunar Blessing (should it happen on evaluation, or on spell creation?)
+            prev.evaluate(previousDemonId, rxPreviousDemonMove()).regenMp(demonId, mpRegenBonus, maxMpBonus)
           }
           lb += nextState
           lastState = Some(nextState)
