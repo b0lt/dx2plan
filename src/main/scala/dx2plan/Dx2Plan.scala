@@ -259,6 +259,11 @@ object Dx2Plan {
               span(s"$name: $cost MP", br)
             }
           }
+
+          case x => {
+            println(s"Unexpected demon skill: $x")
+            span()
+          }
         }
       }
     )
