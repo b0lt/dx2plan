@@ -10,6 +10,7 @@ libraryDependencies ++= Seq(
   "org.scala-js" %%% "scalajs-dom" % "0.9.6",
   "com.lihaoyi" %%% "scalatags" % "0.6.7",
   "com.lihaoyi" %%% "scalarx" % "0.4.0",
+  "com.lihaoyi" %%% "upickle" % "0.7.1",
   "com.nrinaudo" %%% "kantan.csv" % "0.5.0",
   "com.nrinaudo" %%% "kantan.csv-generic" % "0.5.0"
 )

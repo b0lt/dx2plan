@@ -22,8 +22,33 @@ object Stat {
   case object Luck extends Stat
 }
 
-sealed trait Color
+sealed trait Color {
+  def serialize() = {
+    this match {
+      case Color.Clear => "Clear"
+      case Color.Red => "Red"
+      case Color.Yellow => "Yellow"
+      case Color.Purple => "Purple"
+      case Color.Teal => "Teal"
+    }
+  }
+}
+
 object Color {
+  def deserialize(str: String) = {
+    str match {
+      case "Clear" => Color.Clear
+      case "Red" => Color.Red
+      case "Yellow" => Color.Yellow
+      case "Purple" => Color.Purple
+      case "Teal" => Color.Teal
+      case _ => {
+        println(s"Unknown color '$str'")
+        Color.Clear
+      }
+    }
+  }
+
   case object Clear extends Color
   case object Red extends Color
   case object Yellow extends Color

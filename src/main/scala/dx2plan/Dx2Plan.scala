@@ -1,5 +1,7 @@
 package dx2plan
 
+import java.util.Base64
+
 import scala.collection.mutable.ListBuffer
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExport
@@ -11,14 +13,65 @@ import scalatags.JsDom.all._
 import scalatags.JsDom.tags2.section
 import rx._
 
+import upickle.default._
+import upickle.default.{ReadWriter => RW, macroRW}
+
 // Identifier of demon based on input box layout (i.e. 0 is left-most)
 case class DemonId(id: Int)
+object DemonId {
+  implicit val rw: RW[DemonId] = macroRW
+}
 
 case class DemonConfiguration(demon: Var[Option[Demon]] = Var[Option[Demon]](None),
                               color: Var[Color] = Var[Color](Color.Clear),
                               divine: Var[Boolean] = Var[Boolean](false),
                               lead: Var[Boolean] = Var[Boolean](false),
                               actions: List[Var[Move]] = List.tabulate(Dx2Plan.maxTurnsPerDemon)(_ => Var[Move](Pass)))
+
+case class SerializedDemonConfiguration(demon: String, color: String, divine: Boolean, lead: Boolean,
+                                        actions: List[String]) {
+  def applyToConfig(config: DemonConfiguration) {
+    config.demon() = Demon.find(demon)
+    config.color() = Color.deserialize(color)
+    config.divine() = divine
+    config.lead() = lead
+    actions.zipWithIndex.foreach { case (action, index) => {
+      config.actions(index)() = Move.deserialize(action)
+    }}
+  }
+}
+
+object SerializedDemonConfiguration {
+  implicit val rw: RW[SerializedDemonConfiguration] = macroRW
+
+  def fromConfig(config: DemonConfiguration)(implicit ctx: Ctx.Owner, data: Ctx.Data) = {
+    val demon = config.demon().map(_.name).getOrElse("")
+    val color = config.color().serialize()
+    val divine = config.divine()
+    val lead = config.lead()
+    val actions = config.actions.map { action => action().serialize() }
+    SerializedDemonConfiguration(demon, color, divine, lead, actions)
+  }
+}
+
+object DemonConfiguration {
+  def serialize(config: DemonConfiguration)(implicit ctx: Ctx.Owner, data: Ctx.Data): SerializedDemonConfiguration = {
+    SerializedDemonConfiguration.fromConfig(config)
+  }
+
+  def serialize(config: Map[DemonId, DemonConfiguration])(implicit ctx: Ctx.Owner, data: Ctx.Data): String = {
+    val bytes = writeBinary(config.map { case (key, value) => (key -> serialize(value)) }.toMap)
+    Base64.getUrlEncoder().encodeToString(bytes)
+  }
+
+  def deserialize(data: String, config: Map[DemonId, DemonConfiguration]) = {
+    val bytes = Base64.getUrlDecoder().decode(data)
+    val serializedConfigs = readBinary[Map[DemonId, SerializedDemonConfiguration]](bytes)
+    serializedConfigs.foreach { case (id, serializedConfig) => {
+      serializedConfig.applyToConfig(config(id))
+    }}
+  }
+}
 
 @JSExport
 object Dx2Plan {
@@ -116,70 +169,98 @@ object Dx2Plan {
     })
   }}).toMap
 
-  def skillDescriptions(id: DemonId) = Rx {
-    val rxSkills = rxDemonSkills(id)
-    rxSkills() map {
-      case Spell(name, cost) => {
-        if (cost == 0) {
-          span(s"$name: Passive", br)
-        } else {
-          span(s"$name: $cost MP", br)
-        }
-      }
-    }
-  }
-
   def generateDemonConfiguration(demonId: DemonId) = {
     val idx = demonId.id
     val demonNameId = s"demon${idx}";
     val demonArchetypeId = s"demon${idx}Archetype";
     val demonDivineId = s"demon${idx}Divine";
     val demonLeadId = s"demon${idx}Lead";
+    val demon = rxConfigurations(demonId)
     (
-      input(
-        id := demonNameId,
-        autofocus := idx == 0,
-        tabindex := idx * 10 + 1,
-        autocomplete := "false",
-        oninput := ({(elem: HTMLInputElement) => {
-          rxConfigurations(demonId).demon() = Demon.find(elem.value)
-        }}: js.ThisFunction)
-      ),
-      select(
-        id := demonArchetypeId,
-        tabindex := idx * 10 + 2,
-        oninput := ({(elem: HTMLSelectElement) => {
-          rxConfigurations(demonId).color() = elem.value match {
-            case "clear" => Color.Clear
-            case "red" => Color.Red
-            case "yellow" => Color.Yellow
-            case "purple" => Color.Purple
-            case "teal" => Color.Teal
+      Rx {
+        input(
+          id := demonNameId,
+          autofocus := idx == 0,
+          tabindex := idx * 10 + 1,
+          autocomplete := "false",
+          value := demon.demon().map(_.name).getOrElse(""),
+          oninput := ({(elem: HTMLInputElement) => {
+            rxConfigurations(demonId).demon() = Demon.find(elem.value)
+          }}: js.ThisFunction)
+        )
+      },
+      Rx {
+        select(
+          id := demonArchetypeId,
+          tabindex := idx * 10 + 2,
+          oninput := ({(elem: HTMLSelectElement) => {
+            rxConfigurations(demonId).color() = elem.value match {
+              case "clear" => Color.Clear
+              case "red" => Color.Red
+              case "yellow" => Color.Yellow
+              case "purple" => Color.Purple
+              case "teal" => Color.Teal
+            }
+          }}: js.ThisFunction),
+          option(
+            value := "clear",
+            if (demon.color() == Color.Clear) selected := true,
+            "Clear"),
+          option(
+            value := "red",
+            if (demon.color() == Color.Red) selected := true,
+            "Red"
+          ),
+          option(
+            value := "yellow",
+            if (demon.color() == Color.Yellow) selected := true,
+            "Yellow"
+          ),
+          option(
+            value := "purple",
+            if (demon.color() == Color.Purple) selected := true,
+            "Purple"
+          ),
+          option(
+            value := "teal",
+            if (demon.color() == Color.Teal) selected := true,
+            "Teal"
+          ),
+        )
+      },
+      Rx {
+        input(
+          id := demonDivineId,
+          tabindex := idx * 10 + 3,
+          `type` := "checkbox",
+          if (demon.divine()) checked := true,
+          onchange := ({(elem: HTMLInputElement) => {
+            rxConfigurations(demonId).divine() = elem.checked
+          }}: js.ThisFunction)
+        )
+      },
+      Rx {
+        input(
+          id := demonLeadId,
+          tabindex := idx * 10 + 4,
+          `type` := "checkbox",
+          if (demon.lead()) checked := true,
+          onchange := ({(elem: HTMLInputElement) => {
+            rxConfigurations(demonId).lead() = elem.checked
+          }}: js.ThisFunction)
+        ),
+      },
+      Rx {
+        rxDemonSkills(demonId)() map {
+          case Spell(name, cost) => {
+            if (cost == 0) {
+              span(s"$name: Passive", br)
+            } else {
+              span(s"$name: $cost MP", br)
+            }
           }
-        }}: js.ThisFunction),
-        option(value := "clear", "Clear"),
-        option(value := "red", "Red"),
-        option(value := "yellow", "Yellow"),
-        option(value := "purple", "Purple"),
-        option(value := "teal", "Teal"),
-      ),
-      input(
-        id := demonDivineId,
-        tabindex := idx * 10 + 3,
-        `type` := "checkbox",
-        onchange := ({(elem: HTMLInputElement) => {
-          rxConfigurations(demonId).divine() = elem.checked
-        }}: js.ThisFunction)
-      ),
-      input(
-        id := demonLeadId,
-        tabindex := idx * 10 + 4,
-        `type` := "checkbox",
-        onchange := ({(elem: HTMLInputElement) => {
-          rxConfigurations(demonId).lead() = elem.checked
-        }}: js.ThisFunction)
-      ),
-      skillDescriptions(demonId)
+        }
+      }
     )
   }
 
@@ -217,10 +298,10 @@ object Dx2Plan {
                   name := s"turn${turn}",
                   id := buttonId,
                   `type` := "radio",
-                  value := Move.toString(move),
+                  value := move.serialize(),
                   if (selectedAction == move) checked := true,
                   onchange := ({(elem: HTMLInputElement) => {
-                    val move = Move.fromString(elem.value)
+                    val move = Move.deserialize(elem.value)
                     val demon = rxConfigurations(demonId)
                     demon.actions(round)() = move
                   }}: js.ThisFunction)
@@ -263,9 +344,23 @@ object Dx2Plan {
     table(rows.filter(!_.isEmpty).map(_.get))
   }
 
+  val permalink = Rx {
+    div(
+      a(
+        href := s"#${DemonConfiguration.serialize(rxConfigurations)}",
+        s"Permalink"
+      ),
+    )
+  }
+
   @JSExport
   def main(): Unit = {
     dom.document.body.innerHTML = ""
+
+    if (!dom.document.location.hash.isEmpty) {
+      val serializedData = dom.document.location.hash.substring(1)
+      DemonConfiguration.deserialize(serializedData, rxConfigurations)
+    }
 
     val demonConfigurationElements = (0 until maxDemonCount) map { i => generateDemonConfiguration(DemonId(i)) }
     dom.document.body.appendChild(
@@ -298,5 +393,6 @@ object Dx2Plan {
     )
 
     dom.document.body.appendChild(section(moveConfigurationTable).render)
+    dom.document.body.appendChild(section(permalink).render)
   }
 }

@@ -4,6 +4,14 @@ sealed trait Move {
   def name: String
   def mpCost: Int
   def pressTurnCost: Double
+
+  final def serialize() = {
+    this match {
+      case Pass => "Pass"
+      case Attack => "Attack"
+      case Spell(name, cost) => s"$name ($cost MP)"
+    }
+  }
 }
 
 case object Pass extends Move {
@@ -30,15 +38,7 @@ case class Spell(_name: String, cost: Int) extends Move {
 }
 
 object Move {
-  def toString(move: Move) = {
-    move match {
-      case Pass => "Pass"
-      case Attack => "Attack"
-      case Spell(name, cost) => s"$name ($cost MP)"
-    }
-  }
-
-  def fromString(string: String): Move = {
+  def deserialize(string: String): Move = {
     val pattern = raw"(.+) \(([0-9]+) MP\)".r
     string match {
       case "Pass" => Pass
