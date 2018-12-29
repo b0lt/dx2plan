@@ -199,7 +199,7 @@ object Dx2Plan extends JSApp {
           // Filter out healing spells.
           if (spell.skill.element == "recovery") {
             // Except the ones that are useful for combat.
-            spell.name == "Silent Prayer" && spell.name == "Orleans Prayer"
+            spell.name == "Silent Prayer" || spell.name == "Orleans Prayer"
           } else {
             true
           }
