@@ -477,12 +477,19 @@ object Dx2Plan extends JSApp {
           val enoughMp = mp >= move.mpCost
           val selected = selectedAction == move
 
-          val buttonColor = (move.name, enoughMp) match {
-            case ("Pass", _) => "secondary"
-            case ("Attack", _) => "info"
-            case ("Tag", _) => "warning"
-            case (_, true) => "primary"
-            case (_, false) => "danger"
+          val buttonColor = (move.name) match {
+            case "Pass" => "secondary"
+            case "Attack" => "info"
+            case "Tag" => "warning"
+            case _ => {
+              if (mp >= move.mpCost) {
+                "primary"
+              } else if (mp + 3 >= move.mpCost && orleans) {
+                "success"
+              } else {
+                "danger"
+              }
+            }
           }
 
           val buttonSelection = if (selected) "" else "-outline"
