@@ -4,7 +4,7 @@ import java.util.Base64
 
 import scala.collection.mutable.ListBuffer
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSExport
+import scala.scalajs.js.JSApp
 
 import org.scalajs.dom
 import org.scalajs.dom.raw.{HTMLInputElement, HTMLSelectElement}
@@ -73,8 +73,7 @@ object DemonConfiguration {
   }
 }
 
-@JSExport
-object Dx2Plan {
+object Dx2Plan extends JSApp {
   import Framework._
   implicit val ctx: Ctx.Owner = Ctx.Owner.safe()
 
@@ -358,7 +357,6 @@ object Dx2Plan {
     )
   }
 
-  @JSExport
   def main(): Unit = {
     dom.document.body.innerHTML = ""
 

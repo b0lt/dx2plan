@@ -6,6 +6,8 @@ name := "dx2plan"
 
 version := "0.1-SNAPSHOT"
 
+scalaJSUseMainModuleInitializer := true
+
 libraryDependencies ++= Seq(
   "org.scala-js" %%% "scalajs-dom" % "0.9.6",
   "com.lihaoyi" %%% "scalatags" % "0.6.7",
