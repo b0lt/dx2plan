@@ -127,12 +127,11 @@ object Dx2Plan extends JSApp {
         case None => {
           val initialState = Rx {
             val demons = rxDemons()
-            val mp = demons.map { case (index, configuration) => (index, initialMp) }.toMap
             val ordering = rxOrdering()
             val firstDemonId = ordering(0)
             val divine = demons(firstDemonId).divine()
 
-            GameState(n, demons.size, mp).regenMp(firstDemonId, divine)
+            GameState.initial(demons.keys.toSeq).regenMp(firstDemonId, divine)
           }
           lb += initialState
           lastState = Some(initialState)
@@ -453,6 +452,7 @@ object Dx2Plan extends JSApp {
 
       val rxGameState = rxGameStates(turn)
       val mp = rxGameState().demonMp(demonId)
+      val orleans = rxGameState().globalModifiers.contains(OrleansPrayer)
       val pressTurns = rxGameState().pressTurns
       if (pressTurns > 0) {
         val rxSelectedAction = demon.actions(round)
@@ -502,8 +502,20 @@ object Dx2Plan extends JSApp {
             style := "height: 100%; display: table-cell; vertical-align: middle",
             div(
               div(`class` := "row", strong(demonName)),
-              div(`class` := "row", s"$mp MP"),
-              div(`class` := "row", s"$pressTurns press turns")
+              div(
+                `class` := "row",
+                if (orleans) {
+                  s"$mp [${mp + 3}] MP"
+                } else {
+                  s"$mp MP"
+                }
+              ),
+              div(`class` := "row", s"$pressTurns press turns"),
+              div(`class` := "row", {
+                em {
+                  rxGameState().demonModifiers(demonId).mkString(", ")
+                }
+              }),
             )
           )
         )
