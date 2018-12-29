@@ -190,23 +190,6 @@ object Dx2Plan extends JSApp {
     })
   }}).toMap
 
-  val rxUsableDemonSkills = rxDemonSkills.map {
-    case (demonId, demonSkills) => {
-      (demonId -> Rx {
-        val spells = demonSkills()
-        spells.filter(spell => {
-          // Filter out healing spells.
-          if (spell.skill.element == "recovery") {
-            // Except the ones that are useful for combat.
-            spell.name == "Silent Prayer" || spell.name == "Orleans Prayer"
-          } else {
-            true
-          }
-        })
-      })
-    }
-  }.toMap
-
   def generateDemonConfiguration(demonId: DemonId, serializedConfig: Option[SerializedDemonConfiguration]) = {
     val idx = demonId.id
     val demonNameId = s"demon${idx}";
@@ -440,6 +423,7 @@ object Dx2Plan extends JSApp {
     val ordering = rxOrdering()
     require(demons.size == ordering.size)
     val turnCount = demons.size * maxTurnsPerDemon
+    val colEighth = "flex: 0 0 12.5%; max-width: 12.5%; "
     val rows = (0 until turnCount) map { turn => {
       val round = turn / ordering.size
       val demonOrder = turn % ordering.size
@@ -456,7 +440,7 @@ object Dx2Plan extends JSApp {
       val pressTurns = rxGameState().pressTurns
       if (pressTurns > 0) {
         val rxSelectedAction = demon.actions(round)
-        val rxSkills = rxUsableDemonSkills(demonId)
+        val rxSkills = rxDemonSkills(demonId)
         val skills = rxSkills() filter { skill => skill.mpCost > 0 }
         val moves: Seq[Move] = Seq(Pass, Attack) ++ skills
         val selectedAction = rxSelectedAction()
@@ -478,10 +462,11 @@ object Dx2Plan extends JSApp {
 
           div(
             `class` := "col-2 align-self-center",
-            style := "padding-left: 10px; padding-right: 10px; height: 80%",
+            style := colEighth + "height: 80%",
             button(
               name := s"turn${turn}",
               `class` := s"btn $buttonClass h-100 w-100",
+              style := "padding-left: 0px; padding-right: 0px; font-size: 0.75rem; font-weight: bold",
               id := buttonId,
               onclick := ({(elem: HTMLInputElement) => {
                 val rxAction = rxConfigurations(demonId).actions(round)
@@ -497,7 +482,7 @@ object Dx2Plan extends JSApp {
         val row = ListBuffer[Frag]()
         row += div(
           `class` := "col-2 h-100",
-          style := "display: table",
+          style := colEighth + "display: table",
           div(
             style := "height: 100%; display: table-cell; vertical-align: middle",
             div(
