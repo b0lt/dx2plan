@@ -257,6 +257,7 @@ object Dx2Plan extends JSApp {
             id := demonLeadId,
             tabindex := idx * 10 + 4,
             `type` := "checkbox",
+            disabled := true,
             if (lead) checked := true,
             onchange := ({(elem: HTMLInputElement) => {
               rxConfigurations(demonId).lead() = elem.checked
@@ -338,7 +339,8 @@ object Dx2Plan extends JSApp {
           val buttonClass = s"btn$buttonSelection-$buttonColor"
 
           div(
-            `class` := "col-2 align-self-center h-75",
+            `class` := "col-2 align-self-center",
+            style := "padding-left: 10px; padding-right: 10px; height: 80%",
             button(
               name := s"turn${turn}",
               `class` := s"btn $buttonClass h-100 w-100",
@@ -357,10 +359,15 @@ object Dx2Plan extends JSApp {
         val row = ListBuffer[Frag]()
         row += div(
           `class` := "col-2 h-100",
-          style := "align-items: center",
-          strong(demonName), br,
-          s"$mp MP", br,
-          s"$pressTurns press turns"
+          style := "display: table",
+          div(
+            style := "height: 100%; display: table-cell; vertical-align: middle",
+            div(
+              div(`class` := "row", strong(demonName)),
+              div(`class` := "row", s"$mp MP"),
+              div(`class` := "row", s"$pressTurns press turns")
+            )
+          )
         )
         row += div(
           `class` := "col-10",
@@ -379,6 +386,7 @@ object Dx2Plan extends JSApp {
 
     div(
       `class` := "row",
+      style := "height: 100px",
       rows.filterNot(_.isEmpty).map(_.get)
     )
   }
@@ -413,7 +421,7 @@ object Dx2Plan extends JSApp {
     val container = dom.document.body.appendChild(
       div(
         `class` := "container-fluid",
-        style := "width: 1120px",
+        style := "width: 1100px",
       ).render
     )
 
