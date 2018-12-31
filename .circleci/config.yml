@@ -26,7 +26,7 @@ jobs:
       - checkout
       - run:
           name: Build
-          command: cat /dev/null | sbt clean fullOptJS
+          command: cat /dev/null | sbt clean dx2plan/fullOptJS
       - deploy:
           name: Deploy
           command: |
