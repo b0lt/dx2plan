@@ -352,6 +352,7 @@ object Dx2Plan extends JSApp {
                   `class` := "row",
                   div(
                     `class` := "input-group",
+                    style := "padding-left: 0.75rem; padding-right: 0.75rem",
                     input(
                       `type` := "text",
                       `class` := "form-control",
@@ -386,6 +387,7 @@ object Dx2Plan extends JSApp {
                   `class` := "row",
                   div(
                     `class` := "input-group",
+                    style := "padding-left: 0.75rem; padding-right: 0.75rem",
                     input(
                       `type` := "text",
                       `class` := "form-control",
@@ -412,6 +414,7 @@ object Dx2Plan extends JSApp {
               `class` := "row",
               div(
                 `class` := "input-group",
+                style := "padding-left: 0.75rem; padding-right: 0.75rem",
                 input(
                   `type` := "text",
                   `class` := "form-control",
