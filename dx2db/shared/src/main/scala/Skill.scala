@@ -4,7 +4,7 @@ import scala.io.Source
 
 case class SkillId(value: Int)
 
-sealed trait Skill {
+sealed trait Skill extends StringableKey {
   def id: SkillId
   def name: String
   def description: String
@@ -17,6 +17,7 @@ sealed trait Skill {
   def asPassive = this.asInstanceOf[Skill.Passive]
 
   override def toString() = name
+  override def asStringKey = name
 }
 
 object Skill {
@@ -32,23 +33,12 @@ object Skill {
   }
 }
 
-case class SkillDb(skills: Map[SkillId, Skill]) {
-  lazy val nameToId: Map[String, SkillId] = {
-    skills.map {
-      case (id, skill) => (skill.name, id)
-    }.toMap
-  }
+case class SkillDb(
+    skills: Map[SkillId, Skill]
+) extends TypedMap[SkillDb, SkillId, Skill] with StringMap[SkillId, Skill] {
+  override def backing = skills
+  override def construct(map: Map[SkillId, Skill]) = SkillDb(map)
 
   def actives: Iterable[Skill.Active] = filterValues(_.isActive).map(_.asInstanceOf[Skill.Active])
   def passives: Iterable[Skill.Passive] = filterValues(_.isPassive).map(_.asInstanceOf[Skill.Passive])
-
-  def apply(skillName: String) = skills(nameToId(skillName))
-  def apply(id: SkillId) = skills(id)
-
-  def filter(f: (Tuple2[SkillId, Skill]) => Boolean): SkillDb = SkillDb(skills.filter(f).toMap)
-  def filterKeys(f: SkillId => Boolean): SkillDb = SkillDb(skills.filterKeys(f))
-  def filterValues(f: Skill => Boolean): Iterable[Skill] = skills.values.filter(f)
-  def groupBy[T](f: Skill => T): Map[T, Iterable[Skill]] = skills.values.groupBy(f)
-  def map[T](f: Skill => T): Iterable[T] = skills.values.map(f)
-  def flatMap[T](f: Skill => Iterable[T]): Iterable[T] = skills.values.flatMap(f)
 }

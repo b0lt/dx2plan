@@ -5,9 +5,11 @@ object Dx2Db extends App {
   lazy val fullSkills = SkillParser.parse(dataFiles)
   lazy val demons = DemonParser.parse(dataFiles)
   lazy val skills = {
-    val usedSkills = demons.flatMap(demon => {
-      demon.baseSkills ++ demon.archetypeSkills.values
-    }).toSet
+    val usedSkills = demons.flatMap {
+      case (_, demon) => {
+        demon.baseSkills ++ demon.archetypeSkills.values
+      }
+    }.toSet
 
     val filtered = fullSkills.filter {
       case (skillId, skill) => {
