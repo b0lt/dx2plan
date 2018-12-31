@@ -43,3 +43,17 @@ lazy val dx2plan = crossProject(JSPlatform).withoutSuffixFor(JSPlatform).crossTy
       Seq(sourceFile)
     }.taskValue,
   )
+
+lazy val dx2db = crossProject(JSPlatform, JVMPlatform).crossType(CrossType.Full)
+  .in(file("dx2db"))
+  .settings(
+    name := "dx2db",
+    version := "0.1-SNAPSHOT",
+    scalaJSUseMainModuleInitializer := true,
+    libraryDependencies ++= Seq(
+      "com.lihaoyi" %%% "upickle" % "0.7.1",
+      "com.nrinaudo" %%% "kantan.csv" % "0.5.0",
+      "com.nrinaudo" %%% "kantan.csv-generic" % "0.5.0",
+    ),
+    unmanagedResourceDirectories in Compile += baseDirectory.value / "../shared/src/main/resources",
+  )
