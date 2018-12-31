@@ -356,7 +356,7 @@ object Dx2Plan extends JSApp {
                     input(
                       `type` := "text",
                       `class` := "form-control",
-                      style := "background-color: #fff",
+                      style := "background-color: #fff; text-overflow: ellipsis",
                       placeholder := skill.name,
                       disabled := true,
                     ),
