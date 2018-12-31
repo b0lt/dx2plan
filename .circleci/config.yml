@@ -37,7 +37,8 @@ jobs:
               mkdir -p /tmp
               git clone $CIRCLE_REPOSITORY_URL /tmp/gh-pages -b gh-pages
 
-              cp /src/target/scala-2.12/dx2plan-opt.js /src/target/scala-2.12/dx2plan-opt.js.map /tmp/gh-pages
+              JS_OUTPUT_DIR=/src/dx2plan/.js/target/scala-2.12
+              cp $JS_OUTPUT_DIR/dx2plan-opt.js $JS_OUTPUT_DIR/dx2plan-opt.js.map /tmp/gh-pages
               cd /tmp/gh-pages
               git add -A
               git commit -m "Automated deployment to GitHub Pages: ${CIRCLE_SHA1}" --allow-empty
