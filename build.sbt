@@ -57,3 +57,16 @@ lazy val dx2db = crossProject(JSPlatform, JVMPlatform).crossType(CrossType.Full)
     ),
     unmanagedResourceDirectories in Compile += baseDirectory.value / "../shared/src/main/resources",
   )
+
+lazy val altemascraper = crossProject(JVMPlatform).withoutSuffixFor(JVMPlatform).crossType(CrossType.Pure)
+  .in(file("altemascraper"))
+  .settings(
+    name := "altemascraper",
+    version := "0.1-SNAPSHOT",
+    libraryDependencies ++= Seq(
+      "com.lihaoyi" %%% "upickle" % "0.7.1",
+      "net.ruippeixotog" %%% "scala-scraper" % "2.1.0",
+    ),
+    fork in run := true,
+    baseDirectory in run := baseDirectory.value / "../../dx2db/shared/src/main/resources",
+  )
