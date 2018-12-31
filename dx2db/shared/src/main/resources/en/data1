@@ -1,0 +1,6307 @@
+{
+    "archetype_item": [
+        {
+            "arc": 0,
+            "grade_lower": 1,
+            "grade_upper": 59,
+            "id": 33001
+        },
+        {
+            "arc": 0,
+            "grade_lower": 60,
+            "grade_upper": 79,
+            "id": 33002
+        },
+        {
+            "arc": 0,
+            "grade_lower": 80,
+            "grade_upper": 99,
+            "id": 33003
+        },
+        {
+            "arc": 9999,
+            "grade_lower": 1,
+            "grade_upper": 59,
+            "id": 33004
+        },
+        {
+            "arc": 9999,
+            "grade_lower": 60,
+            "grade_upper": 79,
+            "id": 33005
+        },
+        {
+            "arc": 9999,
+            "grade_lower": 80,
+            "grade_upper": 99,
+            "id": 33006
+        }
+    ],
+    "consts": {
+        "ai_auto_repeat_count": 3,
+        "assist_bonus_base": 8,
+        "assist_receive_rate": 40,
+        "avoid_turn_dmg": 1,
+        "barrier_turn_num": 3,
+        "battle_continue_cost": 20,
+        "bufdebuf_agi": [
+            {
+                "border": -1,
+                "val": 0.8
+            },
+            {
+                "border": 0,
+                "val": 1
+            },
+            {
+                "border": 1,
+                "val": 1.2
+            }
+        ],
+        "bufdebuf_atk": [
+            {
+                "border": -1,
+                "val": 0.8
+            },
+            {
+                "border": 0,
+                "val": 1
+            },
+            {
+                "border": 1,
+                "val": 1.2
+            }
+        ],
+        "bufdebuf_def": [
+            {
+                "border": -1,
+                "val": 0.8
+            },
+            {
+                "border": 0,
+                "val": 1
+            },
+            {
+                "border": 1,
+                "val": 1.2
+            }
+        ],
+        "calc_aiauto_chainskill": 0.4,
+        "calc_bad_luck_base": 0.3,
+        "calc_bad_min": 0.3,
+        "calc_cri_luk": [
+            {
+                "border": -256,
+                "val": -10
+            },
+            {
+                "border": 0,
+                "val": 0
+            },
+            {
+                "border": 10,
+                "val": 10
+            },
+            {
+                "border": 20,
+                "val": 15
+            },
+            {
+                "border": 30,
+                "val": 20
+            },
+            {
+                "border": 256,
+                "val": 20
+            }
+        ],
+        "calc_dmg_cri": 1.5,
+        "calc_dmg_res_none": 1,
+        "calc_dmg_res_strong": 0.7,
+        "calc_dmg_res_weak": 1.5,
+        "calc_dmg_sub_correct": 0.8,
+        "calc_heal_min": 250,
+        "calc_heal_rand_max": 1.03,
+        "calc_heal_rand_min": 0.97,
+        "calc_heal_scale": 0.3,
+        "calc_heal_sub_correct": 1,
+        "calc_hit_agi": [
+            {
+                "border": -256,
+                "val": 76
+            },
+            {
+                "border": -60,
+                "val": 80
+            },
+            {
+                "border": -40,
+                "val": 84
+            },
+            {
+                "border": -20,
+                "val": 88
+            },
+            {
+                "border": 0,
+                "val": 92
+            },
+            {
+                "border": 10,
+                "val": 94
+            },
+            {
+                "border": 20,
+                "val": 96
+            },
+            {
+                "border": 30,
+                "val": 98
+            },
+            {
+                "border": 40,
+                "val": 100
+            },
+            {
+                "border": 256,
+                "val": 102
+            }
+        ],
+        "calc_hit_luk": [
+            {
+                "border": -256,
+                "val": -5
+            },
+            {
+                "border": -30,
+                "val": 0
+            },
+            {
+                "border": 0,
+                "val": 5
+            },
+            {
+                "border": 10,
+                "val": 7
+            },
+            {
+                "border": 20,
+                "val": 9
+            },
+            {
+                "border": 30,
+                "val": 11
+            },
+            {
+                "border": 256,
+                "val": 13
+            }
+        ],
+        "calc_magatk_base": 50,
+        "calc_magatk_level": 0.112,
+        "calc_magatk_param": 2.1,
+        "calc_magdef_base": 50,
+        "calc_magdef_level": 0.112,
+        "calc_magdef_param": 1.1,
+        "calc_magdef_subparam": 0.5,
+        "calc_magdmg_base": 0.5,
+        "calc_magdmg_min": 0.25,
+        "calc_magdmg_rand_max": 1.05,
+        "calc_magdmg_rand_min": 0.95,
+        "calc_magdmg_scale": 0.4,
+        "calc_phyatk_base": 50,
+        "calc_phyatk_level": 0.112,
+        "calc_phyatk_param": 2.1,
+        "calc_phydef_base": 50,
+        "calc_phydef_level": 0.112,
+        "calc_phydef_param": 1.1,
+        "calc_phydef_subparam": 0.5,
+        "calc_phydmg_base": 0.5,
+        "calc_phydmg_min": 0.25,
+        "calc_phydmg_rand_max": 1.05,
+        "calc_phydmg_rand_min": 0.95,
+        "calc_phydmg_scale": 0.4,
+        "calc_physical_hit_min": 0.2,
+        "curse_decrease_rate": 75,
+        "curse_turn_num": 4,
+        "devil_max_lv": [
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+        ],
+        "drain_turn_dmg": 1,
+        "dungeon_withdraw_cost": 10,
+        "enemy_ai_prio": [
+            0,
+            10,
+            20,
+            30,
+            40,
+            50,
+            100
+        ],
+        "gk_hp_gauge_value": 10000,
+        "gk_limit_time": 300,
+        "gk_limit_turn": 5,
+        "infirmity_turn_num": 3,
+        "mp_min_value": 1,
+        "poison_dmg": 5,
+        "pvp_mp_first": 2,
+        "pvp_mp_second": 5,
+        "recover_ap_cost": 30,
+        "recover_pp_cost": 30,
+        "redia_heal_id": 3035,
+        "redia_heal_rate": 15,
+        "redia_turn_num": 3,
+        "repel_turn_dmg": 1,
+        "secret_enemy_max": 40,
+        "smn_support_rate": 20,
+        "user_max_lv": 150
+    },
+    "devil_sale_data": {
+        "prem_rate_money": 10,
+        "prem_rate_ticket": 10,
+        "price_tbl": [
+            {
+                "grade_from": 0,
+                "grade_to": 19,
+                "money_price": 150,
+                "ticket_num": 0
+            },
+            {
+                "grade_from": 20,
+                "grade_to": 39,
+                "money_price": 300,
+                "ticket_num": 0
+            },
+            {
+                "grade_from": 40,
+                "grade_to": 59,
+                "money_price": 0,
+                "ticket_num": 1
+            },
+            {
+                "grade_from": 60,
+                "grade_to": 79,
+                "money_price": 0,
+                "ticket_num": 30
+            },
+            {
+                "grade_from": 80,
+                "grade_to": 99,
+                "money_price": 0,
+                "ticket_num": 250
+            }
+        ]
+    },
+    "item": [
+        {
+            "desc": "Currency of demons, also used by Dx2s.",
+            "effect_type": 1,
+            "id": 100,
+            "img": "gold",
+            "name": "Macca",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Currency of demons, also used by Dx2s.",
+            "effect_type": 1,
+            "id": 101,
+            "img": "gold",
+            "name": "Macca (Paid)",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "The source of a Demons power, required for Fusion. ",
+            "effect_type": 1,
+            "id": 200,
+            "img": "magnetite",
+            "name": "Magnetite",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Fame obtainable from other Dx2 members based on performance. Trade it in for useful items at HQ.",
+            "effect_type": 1,
+            "id": 300,
+            "img": "fame",
+            "name": "Fame",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "The Dx2 Duel Battle Points you receive. Trade them in for useful items at the Exchange.",
+            "effect_type": 1,
+            "id": 400,
+            "img": "warresult",
+            "name": "Battle Points",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Fully recovers Stamina.",
+            "effect_type": 2,
+            "id": 1100,
+            "img": "ap_recover",
+            "name": "Monster Dew",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Fully recovers Duel Stamina.",
+            "effect_type": 3,
+            "id": 1200,
+            "img": "pp_recover",
+            "name": "Hell Bull",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Fully recovers Aura Gate Action Points.",
+            "effect_type": 4,
+            "id": 1300,
+            "img": "dp_recover",
+            "name": "Gate-Aid",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Increases Dx2 and demon Exp by 100%. (12h)",
+            "effect_type": 10,
+            "id": 2100,
+            "img": "exp_boost_12h",
+            "name": "Tome of EXP (12h)",
+            "param": 100,
+            "skill": 0
+        },
+        {
+            "desc": "Increases Dx2 and demon Exp by 100%. (24h)",
+            "effect_type": 10,
+            "id": 2200,
+            "img": "exp_boost_1d",
+            "name": "Tome of EXP (1d)",
+            "param": 100,
+            "skill": 0
+        },
+        {
+            "desc": "Increases Dx2 and demon Exp by 100%. (72h)",
+            "effect_type": 10,
+            "id": 2300,
+            "img": "exp_boost_3d",
+            "name": "Tome of EXP (3d)",
+            "param": 100,
+            "skill": 0
+        },
+        {
+            "desc": "Increases Macca obtained by 100%. (12h)",
+            "effect_type": 11,
+            "id": 2500,
+            "img": "gold_boost_12h",
+            "name": "Tome of Macca (12h)",
+            "param": 100,
+            "skill": 0
+        },
+        {
+            "desc": "Increases Macca obtained by 100%. (24h)",
+            "effect_type": 11,
+            "id": 2600,
+            "img": "gold_boost_1d",
+            "name": "Tome of Macca (1d)",
+            "param": 100,
+            "skill": 0
+        },
+        {
+            "desc": "Increases Macca obtained by 100%. (72h)",
+            "effect_type": 11,
+            "id": 2700,
+            "img": "gold_boost_3d",
+            "name": "Tome of Macca (3d)",
+            "param": 100,
+            "skill": 0
+        },
+        {
+            "desc": "Remove Brands for free. (24h)",
+            "effect_type": 12,
+            "id": 3000,
+            "img": "mgtm_release_1d",
+            "name": "Tome of Brand Removal (1d)",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Increases the Enhance + probability of a Brand by 20%. (24h)",
+            "effect_type": 13,
+            "id": 3100,
+            "img": "mgtm_support_1d",
+            "name": "Tome of Brand Enhancement (1d)",
+            "param": 20,
+            "skill": 0
+        },
+        {
+            "desc": "Unlocks all Strange Signals. (24h)",
+            "effect_type": 15,
+            "id": 3200,
+            "img": "awaken_command_1d",
+            "name": "Signal Scanner (1d)",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Increases the chance to Talk to demons by 100%. (12h)",
+            "effect_type": 21,
+            "id": 3500,
+            "img": "devil_talk_boost_12h",
+            "name": "Tome of Talk (12h)",
+            "param": 100,
+            "skill": 0
+        },
+        {
+            "desc": "Increases the chance to Talk to demons by 100%. (24h)",
+            "effect_type": 21,
+            "id": 3600,
+            "img": "devil_talk_boost_1d",
+            "name": "Tome of Talk (1d)",
+            "param": 100,
+            "skill": 0
+        },
+        {
+            "desc": "Increases the chance to Talk to demons by 100%. (72h)",
+            "effect_type": 21,
+            "id": 3700,
+            "img": "devil_talk_boost_3d",
+            "name": "Tome of Talk (3d)",
+            "param": 100,
+            "skill": 0
+        },
+        {
+            "desc": "Resets a Dx2s' skills to default state.",
+            "effect_type": 14,
+            "id": 4100,
+            "img": "skill_reset",
+            "name": "Dodgy Meds",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Awaken a demon without consuming Aether.",
+            "effect_type": 16,
+            "id": 4200,
+            "img": "awaken_secret",
+            "name": "Aether Crystal",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Heals 25% of a single party member's HP.",
+            "effect_type": 18,
+            "id": 5100,
+            "img": "maseki",
+            "name": "Life Stone",
+            "param": 0,
+            "skill": 90001
+        },
+        {
+            "desc": "Fully heals a single party member's HP.",
+            "effect_type": 18,
+            "id": 5200,
+            "img": "hougyoku",
+            "name": "Bead",
+            "param": 0,
+            "skill": 90002
+        },
+        {
+            "desc": "Reveals all elemental affinities of all enemies.",
+            "effect_type": 18,
+            "id": 5300,
+            "img": "telescope",
+            "name": "Demon Analyzer",
+            "param": 0,
+            "skill": 90003
+        },
+        {
+            "desc": "Casts Repel Phys on all party members.",
+            "effect_type": 18,
+            "id": 5400,
+            "img": "physic_mirror",
+            "name": "Phys reflector",
+            "param": 0,
+            "skill": 90004
+        },
+        {
+            "desc": "Casts Repel Mag on all party members.",
+            "effect_type": 18,
+            "id": 5500,
+            "img": "magic_mirror",
+            "name": "Mag Reflector",
+            "param": 0,
+            "skill": 90005
+        },
+        {
+            "desc": "Cures Poison. (single party member)",
+            "effect_type": 18,
+            "id": 5600,
+            "img": "dispoison",
+            "name": "Dis-Poison",
+            "param": 0,
+            "skill": 90006
+        },
+        {
+            "desc": "Cures Charm. (single party member)",
+            "effect_type": 18,
+            "id": 5700,
+            "img": "discharm",
+            "name": "Dis-Charm",
+            "param": 0,
+            "skill": 90007
+        },
+        {
+            "desc": "Cures Mute. (single party member)",
+            "effect_type": 18,
+            "id": 5800,
+            "img": "disclose",
+            "name": "Dis-Mute",
+            "param": 0,
+            "skill": 90008
+        },
+        {
+            "desc": "Cures Bind. (single party member)",
+            "effect_type": 18,
+            "id": 5900,
+            "img": "disbind",
+            "name": "Dis-Bind",
+            "param": 0,
+            "skill": 90009
+        },
+        {
+            "desc": "Cures all status ailments. (single party member)",
+            "effect_type": 18,
+            "id": 6000,
+            "img": "amritasoda",
+            "name": "Amrita Soda",
+            "param": 0,
+            "skill": 90012
+        },
+        {
+            "desc": "Cures all status ailments. (all party members)",
+            "effect_type": 18,
+            "id": 6100,
+            "img": "amritashower",
+            "name": "Amrita Shower",
+            "param": 0,
+            "skill": 90013
+        },
+        {
+            "desc": "Revives a single party member with 25% HP.",
+            "effect_type": 18,
+            "id": 6200,
+            "img": "michikaeshinotama",
+            "name": "Revival Bead",
+            "param": 0,
+            "skill": 90010
+        },
+        {
+            "desc": "Revives a single party member with full HP.",
+            "effect_type": 18,
+            "id": 6300,
+            "img": "hangonko",
+            "name": "Balm of Rising",
+            "param": 0,
+            "skill": 90011
+        },
+        {
+            "desc": "Can be used for Demon Talk.\nYou can also sell them for 300\nMacca from the Item Screen.",
+            "effect_type": 17,
+            "id": 7100,
+            "img": "garnet",
+            "name": "Garnet",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Can be used for Demon Talk.\nYou can also sell them for 300\nMacca from the Item Screen.",
+            "effect_type": 17,
+            "id": 7200,
+            "img": "aquamarine",
+            "name": "Aquamarine",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Can be used for Demon Talk.\nYou can also sell them for 300\nMacca from the Item Screen.",
+            "effect_type": 17,
+            "id": 7300,
+            "img": "diamond",
+            "name": "Diamond",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Can be used for Demon Talk.\nYou can also sell them for 300\nMacca from the Item Screen.",
+            "effect_type": 17,
+            "id": 7400,
+            "img": "emerald",
+            "name": "Emerald",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Can be used for Demon Talk.\nYou can also sell them for 300\nMacca from the Item Screen.",
+            "effect_type": 17,
+            "id": 7500,
+            "img": "ruby",
+            "name": "Ruby",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Can be used for Demon Talk.\nYou can also sell them for 300\nMacca from the Item Screen.",
+            "effect_type": 17,
+            "id": 7600,
+            "img": "sapphire",
+            "name": "Sapphire",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Can be used for Demon Talk.\nYou can also sell them for 300\nMacca from the Item Screen.",
+            "effect_type": 17,
+            "id": 7700,
+            "img": "topaz",
+            "name": "Topaz",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Can be used for Demon Talk.\nYou can also sell them for 300\nMacca from the Item Screen.",
+            "effect_type": 17,
+            "id": 7800,
+            "img": "turquoise",
+            "name": "Turquoise",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Guarantees a successful Demon Talk.",
+            "effect_type": 17,
+            "id": 8100,
+            "img": "contract",
+            "name": "Demon Contracts",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Superior Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9100,
+            "img": "premium_ticket",
+            "name": "Superior Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Skill Genome Extraction at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9101,
+            "img": "skill_card_premium_ticket",
+            "name": "Skill Extraction File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform an Ultimate Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9200,
+            "img": "legend_ticket",
+            "name": "Ultimate Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform an Archetype specified Ultimate Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9201,
+            "img": "legend_int_con_ticket",
+            "name": "P/E Ultimate Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform an Archetype specified Ultimate Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9202,
+            "img": "legend_str_dex_ticket",
+            "name": "A/Psy Ultimate Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform an Aragami Archetype Ultimate Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9203,
+            "img": "legend_str_ticket",
+            "name": "Aragami Ultimate Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Protector Archetype Ultimate Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9204,
+            "img": "legend_int_ticket",
+            "name": "Protector Ultimate Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Psychic Archetype Ultimate Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9205,
+            "img": "legend_dex_ticket",
+            "name": "Psychic Ultimate Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform an Elementalist Archetype Ultimate Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9206,
+            "img": "legend_con_ticket",
+            "name": "Elementalist Ultimate Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Beginner Special Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9245,
+            "img": "starter_special_ticket",
+            "name": "Beginner Special Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Special Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9250,
+            "img": "special_ticket",
+            "name": "Special Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a 4\u2605 Fairy Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9251,
+            "img": "special_race_ticket",
+            "name": "4\u2605 Fairy Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a 4\u2605 Night Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9252,
+            "img": "special_race_ticket",
+            "name": "4\u2605 Night Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a 4\u2605 Divine/Herald Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9253,
+            "img": "special_race_ticket",
+            "name": "4\u2605 Divine/Herald Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a 4\u2605 Avian/Yoma Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9254,
+            "img": "special_race_ticket",
+            "name": "4\u2605 Avian/Yoma Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a 4\u2605 Avian/Yoma Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9255,
+            "img": "special_race_ticket",
+            "name": "4\u2605 Brute/Kishin Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a 4\u2605 Snake/Dragon Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9256,
+            "img": "special_race_ticket",
+            "name": "4\u2605 Snake/Dragon Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a 4\u2605 Holy/Avatar Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9257,
+            "img": "special_race_ticket",
+            "name": "4\u2605 Holy/Avatar Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a 4\u2605 Vile/Jaki Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9258,
+            "img": "special_race_ticket",
+            "name": "4\u2605 Vile/Jaki Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a 4\u2605 Megami/Femme Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9259,
+            "img": "special_race_ticket",
+            "name": "4\u2605 Megami/Femme Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a 4\u2605 Beast/Tyrant Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9260,
+            "img": "special_race_ticket",
+            "name": "4\u2605 Beast/Tyrant Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Normal Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9300,
+            "img": "normal_ticket",
+            "name": "Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Hell Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9400,
+            "img": "stamp_ticket",
+            "name": "Hell Bun",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Common Archetype summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9500,
+            "img": "archetype_basic_ticket",
+            "name": "Common Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform an Aragami Archetype summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9600,
+            "img": "archetype_str_ticket",
+            "name": "Aragami Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Protector Archetype summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9700,
+            "img": "archetype_int_ticket",
+            "name": "Protector Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Psychic Archetype summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9800,
+            "img": "archetype_dex_ticket",
+            "name": "Psychic Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a Elementalist Archetype summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9900,
+            "img": "archetype_con_ticket",
+            "name": "Elementalist Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a special type of Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9950,
+            "img": "sign_ticket",
+            "name": "Parchment Pieces",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform an absolute Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9951,
+            "img": "fantasy_ticket",
+            "name": "Absolute Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Used to perform a beginner absolute Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 9955,
+            "img": "starter_fantasy_ticket",
+            "name": "Beginner Absolute Summon File",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "A special material acquired by selling demons. Use this to perform Compendium Summons.",
+            "effect_type": 1,
+            "id": 20100,
+            "img": "karma",
+            "name": "Karma",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Enhance at Pandemonium to increase demon's Exp.",
+            "effect_type": 6,
+            "id": 22100,
+            "img": "exp_material",
+            "name": "Sword of Kusanagi 1\u2605",
+            "param": 500,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Enhance at Pandemonium to increase demon's Exp.",
+            "effect_type": 6,
+            "id": 22200,
+            "img": "exp_material",
+            "name": "Sword of Kusanagi 2\u2605",
+            "param": 1000,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Enhance at Pandemonium to increase demon's Exp.",
+            "effect_type": 6,
+            "id": 22300,
+            "img": "exp_material",
+            "name": "Sword of Kusanagi 3\u2605",
+            "param": 2000,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Enhance at Pandemonium to increase demon's Exp.",
+            "effect_type": 6,
+            "id": 22400,
+            "img": "exp_material",
+            "name": "Sword of Kusanagi 4\u2605",
+            "param": 10000,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Enhance at Pandemonium to increase demon's Exp.",
+            "effect_type": 6,
+            "id": 22500,
+            "img": "exp_material",
+            "name": "Sword of Kusanagi 5\u2605",
+            "param": 20000,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Enhance at Pandemonium to increase demon's Exp.",
+            "effect_type": 6,
+            "id": 22600,
+            "img": "exp_material",
+            "name": "Sword of Kusanagi 6\u2605",
+            "param": 40000,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Combine Points at Pandemonium to increase the Skill Points of demons.",
+            "effect_type": 5,
+            "id": 24100,
+            "img": "skill_material",
+            "name": "Yasaka Magatama 1\u2605",
+            "param": 1,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Combine Points at Pandemonium to increase the Skill Points of demons.",
+            "effect_type": 5,
+            "id": 24200,
+            "img": "skill_material",
+            "name": "Yasaka Magatama 2\u2605",
+            "param": 2,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Combine Points at Pandemonium to increase the Skill Points of demons.",
+            "effect_type": 5,
+            "id": 24300,
+            "img": "skill_material",
+            "name": "Yasaka Magatama 3\u2605",
+            "param": 3,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Combine Points at Pandemonium to increase the Skill Points of demons.",
+            "effect_type": 5,
+            "id": 24400,
+            "img": "skill_material",
+            "name": "Yasaka Magatama 4\u2605",
+            "param": 4,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Combine Points at Pandemonium to increase the Skill Points of demons.",
+            "effect_type": 5,
+            "id": 24500,
+            "img": "skill_material",
+            "name": "Yasaka Magatama 5\u2605",
+            "param": 5,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Combine Points at Pandemonium to increase the Skill Points of demons.",
+            "effect_type": 5,
+            "id": 24600,
+            "img": "skill_material",
+            "name": "Yasaka Magatama 6\u2605",
+            "param": 6,
+            "skill": 0
+        },
+        {
+            "desc": "Items used in Transfer at Pandemonium to increase a demon's skill level by 1.",
+            "effect_type": 20,
+            "id": 25100,
+            "img": "skill_lv_up_material",
+            "name": "Kasane Magatama",
+            "param": 1,
+            "skill": 0
+        },
+        {
+            "desc": "Material used in the Evolve screen at Pandemonium. Use it instead of sacrificing demons of the same rarity.",
+            "effect_type": 7,
+            "id": 26100,
+            "img": "evo_material",
+            "name": "Yata Mirror 1\u2605",
+            "param": 1,
+            "skill": 0
+        },
+        {
+            "desc": "Material used in the Evolve screen at Pandemonium. Use it instead of sacrificing demons of the same rarity.",
+            "effect_type": 7,
+            "id": 26200,
+            "img": "evo_material",
+            "name": "Yata Mirror 2\u2605",
+            "param": 2,
+            "skill": 0
+        },
+        {
+            "desc": "Material used in the Evolve screen at Pandemonium. Use it instead of sacrificing demons of the same rarity.",
+            "effect_type": 7,
+            "id": 26300,
+            "img": "evo_material",
+            "name": "Yata Mirror 3\u2605",
+            "param": 3,
+            "skill": 0
+        },
+        {
+            "desc": "Material used in the Evolve screen at Pandemonium. Use it instead of sacrificing demons of the same rarity.",
+            "effect_type": 7,
+            "id": 26400,
+            "img": "evo_material",
+            "name": "Yata Mirror 4\u2605",
+            "param": 4,
+            "skill": 0
+        },
+        {
+            "desc": "Material used in the Evolve screen at Pandemonium. Use it instead of sacrificing demons of the same rarity.",
+            "effect_type": 7,
+            "id": 26500,
+            "img": "evo_material",
+            "name": "Yata Mirror 5\u2605",
+            "param": 5,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28010,
+            "img": "neutral_lower",
+            "name": "Neutral Aether S",
+            "param": 3,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28020,
+            "img": "neutral_medium",
+            "name": "Neutral Aether M",
+            "param": 3,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28030,
+            "img": "neutral_senior",
+            "name": "Neutral Aether L",
+            "param": 3,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28040,
+            "img": "law_lower",
+            "name": "Lawful Aether S",
+            "param": 2,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28050,
+            "img": "law_medium",
+            "name": "Lawful Aether M",
+            "param": 2,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28060,
+            "img": "law_senior",
+            "name": "Lawful Aether L",
+            "param": 2,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28070,
+            "img": "chaos_lower",
+            "name": "Chaotic Aether S",
+            "param": 4,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28080,
+            "img": "chaos_medium",
+            "name": "Chaotic Aether M",
+            "param": 4,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28090,
+            "img": "chaos_senior",
+            "name": "Chaotic Aether L",
+            "param": 4,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28100,
+            "img": "light_lower",
+            "name": "Light Aether S",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28110,
+            "img": "light_medium",
+            "name": "Light Aether M",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28120,
+            "img": "light_senior",
+            "name": "Light Aether L",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28130,
+            "img": "dark_lower",
+            "name": "Dark Aether S",
+            "param": 1,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28140,
+            "img": "dark_medium",
+            "name": "Dark Aether M",
+            "param": 1,
+            "skill": 0
+        },
+        {
+            "desc": "Material used to Awaken demons in the Awaken screen at Pandemonium. Collect them at Strange Signal.",
+            "effect_type": 8,
+            "id": 28150,
+            "img": "dark_senior",
+            "name": "Dark Aether L",
+            "param": 1,
+            "skill": 0
+        },
+        {
+            "desc": "Obtain 5\u2605 to 6\u2605 Brands.",
+            "effect_type": 19,
+            "id": 30000,
+            "img": "mgtm_box_02",
+            "name": "Brand Cube",
+            "param": 100,
+            "skill": 0
+        },
+        {
+            "desc": "Obtain a 1\u2605 to 6\u2605 Brand.",
+            "effect_type": 19,
+            "id": 30001,
+            "img": "mgtm_box_00",
+            "name": "1 to 6\u2605 Brand Cube",
+            "param": 101,
+            "skill": 0
+        },
+        {
+            "desc": "Obtain a 4\u2605 to 6\u2605 Brand.",
+            "effect_type": 19,
+            "id": 30002,
+            "img": "mgtm_box_01",
+            "name": "4 to 6\u2605 Brand Cube",
+            "param": 102,
+            "skill": 0
+        },
+        {
+            "desc": "Obtain a \u2605 to 6\u2605 Brand.",
+            "effect_type": 19,
+            "id": 30003,
+            "img": "mgtm_box_02",
+            "name": "5 to 6\u2605 Brand Cube",
+            "param": 103,
+            "skill": 0
+        },
+        {
+            "desc": "Obtain a 6\u2605 Brand.",
+            "effect_type": 19,
+            "id": 30004,
+            "img": "mgtm_box_03",
+            "name": "6\u2605 Brand Cube",
+            "param": 104,
+            "skill": 0
+        },
+        {
+            "desc": "Obtain a 1\u2605 to 6\u2605 Brand at random.",
+            "effect_type": 19,
+            "id": 30005,
+            "img": "mgtm_box_00",
+            "name": "1 to 6\u2605 Brand Cube R",
+            "param": 105,
+            "skill": 0
+        },
+        {
+            "desc": "Obtain a 4\u2605 to 6\u2605 Brand at random.",
+            "effect_type": 19,
+            "id": 30006,
+            "img": "mgtm_box_01",
+            "name": "4 to 6\u2605 Brand Cube R",
+            "param": 106,
+            "skill": 0
+        },
+        {
+            "desc": "Obtain a 5\u2605 to 6\u2605 Brand at random.",
+            "effect_type": 19,
+            "id": 30007,
+            "img": "mgtm_box_02",
+            "name": "5 to 6\u2605 Brand Cube R",
+            "param": 107,
+            "skill": 0
+        },
+        {
+            "desc": "Obtain a 6\u2605 Brand at random.",
+            "effect_type": 19,
+            "id": 30008,
+            "img": "mgtm_box_03",
+            "name": "6\u2605 Brand Cube R",
+            "param": 108,
+            "skill": 0
+        },
+        {
+            "desc": "Changes the Archetype of a demon below Grade 60.\n*Excluding Common Archetypes.",
+            "effect_type": 24,
+            "id": 33001,
+            "img": "devil_shifter_ex_03",
+            "name": "Arch-Selector 3\u2605",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Changes the Archetype of a demon between Grades 60 to 79.\n*Excluding Common Archetypes.",
+            "effect_type": 24,
+            "id": 33002,
+            "img": "devil_shifter_ex_04",
+            "name": "Arch-Selector 4\u2605",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Changes the Archetype of a demon Grade 80 and above.\n*Excluding Common Archetypes.",
+            "effect_type": 24,
+            "id": 33003,
+            "img": "devil_shifter_ex_05",
+            "name": "Arch-Selector 5\u2605",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Changes the Archetype of a demon below Grade 60 at random.\n*Excluding Common Archetypes.",
+            "effect_type": 24,
+            "id": 33004,
+            "img": "devil_shifter_03",
+            "name": "Arch-Shifter 3\u2605",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Changes the Archetype of a demon between Grades 60 to 79 at random.\n*Excluding Common Archetypes.",
+            "effect_type": 24,
+            "id": 33005,
+            "img": "devil_shifter_04",
+            "name": "Arch-Shifter 4\u2605",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "Changes the Archetype of a demon Grade 80 and above at random.\n*Excluding Common Archetypes.",
+            "effect_type": 24,
+            "id": 33006,
+            "img": "devil_shifter_05",
+            "name": "Arch-Shifter 5\u2605",
+            "param": 0,
+            "skill": 0
+        }
+    ],
+    "lot": [
+        {
+            "category": 0,
+            "id": 100,
+            "is_buy": true,
+            "is_select_ui": true,
+            "rarity": [
+                0,
+                0,
+                0,
+                0,
+                90,
+                10
+            ]
+        },
+        {
+            "category": 0,
+            "id": 101,
+            "is_buy": true,
+            "is_select_ui": true,
+            "rarity": [
+                20,
+                20,
+                20,
+                15,
+                15,
+                10
+            ]
+        },
+        {
+            "category": 0,
+            "id": 102,
+            "is_buy": true,
+            "is_select_ui": true,
+            "rarity": [
+                0,
+                0,
+                0,
+                50,
+                40,
+                10
+            ]
+        },
+        {
+            "category": 0,
+            "id": 103,
+            "is_buy": true,
+            "is_select_ui": true,
+            "rarity": [
+                0,
+                0,
+                0,
+                0,
+                90,
+                10
+            ]
+        },
+        {
+            "category": 0,
+            "id": 104,
+            "is_buy": true,
+            "is_select_ui": true,
+            "rarity": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                100
+            ]
+        },
+        {
+            "category": 0,
+            "id": 105,
+            "is_buy": false,
+            "is_select_ui": false,
+            "rarity": [
+                20,
+                20,
+                20,
+                15,
+                15,
+                10
+            ]
+        },
+        {
+            "category": 0,
+            "id": 106,
+            "is_buy": false,
+            "is_select_ui": false,
+            "rarity": [
+                0,
+                0,
+                0,
+                50,
+                40,
+                10
+            ]
+        },
+        {
+            "category": 0,
+            "id": 107,
+            "is_buy": false,
+            "is_select_ui": false,
+            "rarity": [
+                0,
+                0,
+                0,
+                0,
+                90,
+                10
+            ]
+        },
+        {
+            "category": 0,
+            "id": 108,
+            "is_buy": false,
+            "is_select_ui": false,
+            "rarity": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                100
+            ]
+        }
+    ],
+    "mgtm": [
+        {
+            "id": 100,
+            "name": "War Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 1
+        },
+        {
+            "id": 101,
+            "name": "War Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 1
+        },
+        {
+            "id": 102,
+            "name": "War Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 1
+        },
+        {
+            "id": 103,
+            "name": "War Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 1
+        },
+        {
+            "id": 104,
+            "name": "War Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 1
+        },
+        {
+            "id": 105,
+            "name": "War Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 1
+        },
+        {
+            "id": 106,
+            "name": "War Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 1
+        },
+        {
+            "id": 107,
+            "name": "War Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 1
+        },
+        {
+            "id": 108,
+            "name": "War Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 1
+        },
+        {
+            "id": 109,
+            "name": "War Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 1
+        },
+        {
+            "id": 110,
+            "name": "War Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 1
+        },
+        {
+            "id": 111,
+            "name": "War Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 1
+        },
+        {
+            "id": 112,
+            "name": "War Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 1
+        },
+        {
+            "id": 113,
+            "name": "War Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 1
+        },
+        {
+            "id": 114,
+            "name": "War Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 1
+        },
+        {
+            "id": 115,
+            "name": "War Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 1
+        },
+        {
+            "id": 116,
+            "name": "War Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 1
+        },
+        {
+            "id": 117,
+            "name": "War Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 1
+        },
+        {
+            "id": 118,
+            "name": "War Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 1
+        },
+        {
+            "id": 119,
+            "name": "War Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 1
+        },
+        {
+            "id": 120,
+            "name": "War Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 1
+        },
+        {
+            "id": 121,
+            "name": "War Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 1
+        },
+        {
+            "id": 122,
+            "name": "War Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 1
+        },
+        {
+            "id": 123,
+            "name": "War Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 1
+        },
+        {
+            "id": 124,
+            "name": "War Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 1
+        },
+        {
+            "id": 125,
+            "name": "War Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 1
+        },
+        {
+            "id": 126,
+            "name": "War Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 1
+        },
+        {
+            "id": 127,
+            "name": "War Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 1
+        },
+        {
+            "id": 128,
+            "name": "War Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 1
+        },
+        {
+            "id": 129,
+            "name": "War Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 1
+        },
+        {
+            "id": 200,
+            "name": "Guard Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 2
+        },
+        {
+            "id": 201,
+            "name": "Guard Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 2
+        },
+        {
+            "id": 202,
+            "name": "Guard Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 2
+        },
+        {
+            "id": 203,
+            "name": "Guard Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 2
+        },
+        {
+            "id": 204,
+            "name": "Guard Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 2
+        },
+        {
+            "id": 205,
+            "name": "Guard Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 2
+        },
+        {
+            "id": 206,
+            "name": "Guard Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 2
+        },
+        {
+            "id": 207,
+            "name": "Guard Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 2
+        },
+        {
+            "id": 208,
+            "name": "Guard Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 2
+        },
+        {
+            "id": 209,
+            "name": "Guard Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 2
+        },
+        {
+            "id": 210,
+            "name": "Guard Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 2
+        },
+        {
+            "id": 211,
+            "name": "Guard Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 2
+        },
+        {
+            "id": 212,
+            "name": "Guard Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 2
+        },
+        {
+            "id": 213,
+            "name": "Guard Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 2
+        },
+        {
+            "id": 214,
+            "name": "Guard Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 2
+        },
+        {
+            "id": 215,
+            "name": "Guard Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 2
+        },
+        {
+            "id": 216,
+            "name": "Guard Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 2
+        },
+        {
+            "id": 217,
+            "name": "Guard Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 2
+        },
+        {
+            "id": 218,
+            "name": "Guard Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 2
+        },
+        {
+            "id": 219,
+            "name": "Guard Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 2
+        },
+        {
+            "id": 220,
+            "name": "Guard Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 2
+        },
+        {
+            "id": 221,
+            "name": "Guard Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 2
+        },
+        {
+            "id": 222,
+            "name": "Guard Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 2
+        },
+        {
+            "id": 223,
+            "name": "Guard Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 2
+        },
+        {
+            "id": 224,
+            "name": "Guard Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 2
+        },
+        {
+            "id": 225,
+            "name": "Guard Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 2
+        },
+        {
+            "id": 226,
+            "name": "Guard Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 2
+        },
+        {
+            "id": 227,
+            "name": "Guard Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 2
+        },
+        {
+            "id": 228,
+            "name": "Guard Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 2
+        },
+        {
+            "id": 229,
+            "name": "Guard Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 2
+        },
+        {
+            "id": 300,
+            "name": "Speed Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 3
+        },
+        {
+            "id": 301,
+            "name": "Speed Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 3
+        },
+        {
+            "id": 302,
+            "name": "Speed Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 3
+        },
+        {
+            "id": 303,
+            "name": "Speed Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 3
+        },
+        {
+            "id": 304,
+            "name": "Speed Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 3
+        },
+        {
+            "id": 305,
+            "name": "Speed Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 3
+        },
+        {
+            "id": 306,
+            "name": "Speed Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 3
+        },
+        {
+            "id": 307,
+            "name": "Speed Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 3
+        },
+        {
+            "id": 308,
+            "name": "Speed Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 3
+        },
+        {
+            "id": 309,
+            "name": "Speed Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 3
+        },
+        {
+            "id": 310,
+            "name": "Speed Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 3
+        },
+        {
+            "id": 311,
+            "name": "Speed Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 3
+        },
+        {
+            "id": 312,
+            "name": "Speed Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 3
+        },
+        {
+            "id": 313,
+            "name": "Speed Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 3
+        },
+        {
+            "id": 314,
+            "name": "Speed Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 3
+        },
+        {
+            "id": 315,
+            "name": "Speed Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 3
+        },
+        {
+            "id": 316,
+            "name": "Speed Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 3
+        },
+        {
+            "id": 317,
+            "name": "Speed Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 3
+        },
+        {
+            "id": 318,
+            "name": "Speed Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 3
+        },
+        {
+            "id": 319,
+            "name": "Speed Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 3
+        },
+        {
+            "id": 320,
+            "name": "Speed Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 3
+        },
+        {
+            "id": 321,
+            "name": "Speed Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 3
+        },
+        {
+            "id": 322,
+            "name": "Speed Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 3
+        },
+        {
+            "id": 323,
+            "name": "Speed Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 3
+        },
+        {
+            "id": 324,
+            "name": "Speed Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 3
+        },
+        {
+            "id": 325,
+            "name": "Speed Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 3
+        },
+        {
+            "id": 326,
+            "name": "Speed Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 3
+        },
+        {
+            "id": 327,
+            "name": "Speed Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 3
+        },
+        {
+            "id": 328,
+            "name": "Speed Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 3
+        },
+        {
+            "id": 329,
+            "name": "Speed Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 3
+        },
+        {
+            "id": 400,
+            "name": "Life Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 4
+        },
+        {
+            "id": 401,
+            "name": "Life Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 4
+        },
+        {
+            "id": 402,
+            "name": "Life Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 4
+        },
+        {
+            "id": 403,
+            "name": "Life Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 4
+        },
+        {
+            "id": 404,
+            "name": "Life Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 4
+        },
+        {
+            "id": 405,
+            "name": "Life Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 4
+        },
+        {
+            "id": 406,
+            "name": "Life Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 4
+        },
+        {
+            "id": 407,
+            "name": "Life Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 4
+        },
+        {
+            "id": 408,
+            "name": "Life Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 4
+        },
+        {
+            "id": 409,
+            "name": "Life Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 4
+        },
+        {
+            "id": 410,
+            "name": "Life Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 4
+        },
+        {
+            "id": 411,
+            "name": "Life Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 4
+        },
+        {
+            "id": 412,
+            "name": "Life Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 4
+        },
+        {
+            "id": 413,
+            "name": "Life Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 4
+        },
+        {
+            "id": 414,
+            "name": "Life Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 4
+        },
+        {
+            "id": 415,
+            "name": "Life Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 4
+        },
+        {
+            "id": 416,
+            "name": "Life Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 4
+        },
+        {
+            "id": 417,
+            "name": "Life Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 4
+        },
+        {
+            "id": 418,
+            "name": "Life Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 4
+        },
+        {
+            "id": 419,
+            "name": "Life Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 4
+        },
+        {
+            "id": 420,
+            "name": "Life Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 4
+        },
+        {
+            "id": 421,
+            "name": "Life Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 4
+        },
+        {
+            "id": 422,
+            "name": "Life Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 4
+        },
+        {
+            "id": 423,
+            "name": "Life Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 4
+        },
+        {
+            "id": 424,
+            "name": "Life Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 4
+        },
+        {
+            "id": 425,
+            "name": "Life Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 4
+        },
+        {
+            "id": 426,
+            "name": "Life Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 4
+        },
+        {
+            "id": 427,
+            "name": "Life Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 4
+        },
+        {
+            "id": 428,
+            "name": "Life Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 4
+        },
+        {
+            "id": 429,
+            "name": "Life Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 4
+        },
+        {
+            "id": 500,
+            "name": "Sick Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 5
+        },
+        {
+            "id": 501,
+            "name": "Sick Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 5
+        },
+        {
+            "id": 502,
+            "name": "Sick Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 5
+        },
+        {
+            "id": 503,
+            "name": "Sick Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 5
+        },
+        {
+            "id": 504,
+            "name": "Sick Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 5
+        },
+        {
+            "id": 505,
+            "name": "Sick Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 5
+        },
+        {
+            "id": 506,
+            "name": "Sick Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 5
+        },
+        {
+            "id": 507,
+            "name": "Sick Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 5
+        },
+        {
+            "id": 508,
+            "name": "Sick Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 5
+        },
+        {
+            "id": 509,
+            "name": "Sick Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 5
+        },
+        {
+            "id": 510,
+            "name": "Sick Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 5
+        },
+        {
+            "id": 511,
+            "name": "Sick Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 5
+        },
+        {
+            "id": 512,
+            "name": "Sick Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 5
+        },
+        {
+            "id": 513,
+            "name": "Sick Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 5
+        },
+        {
+            "id": 514,
+            "name": "Sick Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 5
+        },
+        {
+            "id": 515,
+            "name": "Sick Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 5
+        },
+        {
+            "id": 516,
+            "name": "Sick Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 5
+        },
+        {
+            "id": 517,
+            "name": "Sick Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 5
+        },
+        {
+            "id": 518,
+            "name": "Sick Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 5
+        },
+        {
+            "id": 519,
+            "name": "Sick Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 5
+        },
+        {
+            "id": 520,
+            "name": "Sick Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 5
+        },
+        {
+            "id": 521,
+            "name": "Sick Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 5
+        },
+        {
+            "id": 522,
+            "name": "Sick Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 5
+        },
+        {
+            "id": 523,
+            "name": "Sick Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 5
+        },
+        {
+            "id": 524,
+            "name": "Sick Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 5
+        },
+        {
+            "id": 525,
+            "name": "Sick Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 5
+        },
+        {
+            "id": 526,
+            "name": "Sick Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 5
+        },
+        {
+            "id": 527,
+            "name": "Sick Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 5
+        },
+        {
+            "id": 528,
+            "name": "Sick Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 5
+        },
+        {
+            "id": 529,
+            "name": "Sick Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 5
+        },
+        {
+            "id": 600,
+            "name": "Spell Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 6
+        },
+        {
+            "id": 601,
+            "name": "Spell Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 6
+        },
+        {
+            "id": 602,
+            "name": "Spell Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 6
+        },
+        {
+            "id": 603,
+            "name": "Spell Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 6
+        },
+        {
+            "id": 604,
+            "name": "Spell Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 6
+        },
+        {
+            "id": 605,
+            "name": "Spell Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 6
+        },
+        {
+            "id": 606,
+            "name": "Spell Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 6
+        },
+        {
+            "id": 607,
+            "name": "Spell Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 6
+        },
+        {
+            "id": 608,
+            "name": "Spell Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 6
+        },
+        {
+            "id": 609,
+            "name": "Spell Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 6
+        },
+        {
+            "id": 610,
+            "name": "Spell Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 6
+        },
+        {
+            "id": 611,
+            "name": "Spell Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 6
+        },
+        {
+            "id": 612,
+            "name": "Spell Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 6
+        },
+        {
+            "id": 613,
+            "name": "Spell Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 6
+        },
+        {
+            "id": 614,
+            "name": "Spell Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 6
+        },
+        {
+            "id": 615,
+            "name": "Spell Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 6
+        },
+        {
+            "id": 616,
+            "name": "Spell Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 6
+        },
+        {
+            "id": 617,
+            "name": "Spell Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 6
+        },
+        {
+            "id": 618,
+            "name": "Spell Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 6
+        },
+        {
+            "id": 619,
+            "name": "Spell Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 6
+        },
+        {
+            "id": 620,
+            "name": "Spell Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 6
+        },
+        {
+            "id": 621,
+            "name": "Spell Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 6
+        },
+        {
+            "id": 622,
+            "name": "Spell Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 6
+        },
+        {
+            "id": 623,
+            "name": "Spell Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 6
+        },
+        {
+            "id": 624,
+            "name": "Spell Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 6
+        },
+        {
+            "id": 625,
+            "name": "Spell Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 6
+        },
+        {
+            "id": 626,
+            "name": "Spell Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 6
+        },
+        {
+            "id": 627,
+            "name": "Spell Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 6
+        },
+        {
+            "id": 628,
+            "name": "Spell Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 6
+        },
+        {
+            "id": 629,
+            "name": "Spell Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 6
+        },
+        {
+            "id": 700,
+            "name": "Shield Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 7
+        },
+        {
+            "id": 701,
+            "name": "Shield Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 7
+        },
+        {
+            "id": 702,
+            "name": "Shield Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 7
+        },
+        {
+            "id": 703,
+            "name": "Shield Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 7
+        },
+        {
+            "id": 704,
+            "name": "Shield Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 7
+        },
+        {
+            "id": 705,
+            "name": "Shield Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 7
+        },
+        {
+            "id": 706,
+            "name": "Shield Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 7
+        },
+        {
+            "id": 707,
+            "name": "Shield Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 7
+        },
+        {
+            "id": 708,
+            "name": "Shield Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 7
+        },
+        {
+            "id": 709,
+            "name": "Shield Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 7
+        },
+        {
+            "id": 710,
+            "name": "Shield Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 7
+        },
+        {
+            "id": 711,
+            "name": "Shield Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 7
+        },
+        {
+            "id": 712,
+            "name": "Shield Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 7
+        },
+        {
+            "id": 713,
+            "name": "Shield Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 7
+        },
+        {
+            "id": 714,
+            "name": "Shield Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 7
+        },
+        {
+            "id": 715,
+            "name": "Shield Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 7
+        },
+        {
+            "id": 716,
+            "name": "Shield Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 7
+        },
+        {
+            "id": 717,
+            "name": "Shield Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 7
+        },
+        {
+            "id": 718,
+            "name": "Shield Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 7
+        },
+        {
+            "id": 719,
+            "name": "Shield Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 7
+        },
+        {
+            "id": 720,
+            "name": "Shield Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 7
+        },
+        {
+            "id": 721,
+            "name": "Shield Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 7
+        },
+        {
+            "id": 722,
+            "name": "Shield Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 7
+        },
+        {
+            "id": 723,
+            "name": "Shield Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 7
+        },
+        {
+            "id": 724,
+            "name": "Shield Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 7
+        },
+        {
+            "id": 725,
+            "name": "Shield Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 7
+        },
+        {
+            "id": 726,
+            "name": "Shield Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 7
+        },
+        {
+            "id": 727,
+            "name": "Shield Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 7
+        },
+        {
+            "id": 728,
+            "name": "Shield Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 7
+        },
+        {
+            "id": 729,
+            "name": "Shield Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 7
+        },
+        {
+            "id": 800,
+            "name": "Ward Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 8
+        },
+        {
+            "id": 801,
+            "name": "Ward Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 8
+        },
+        {
+            "id": 802,
+            "name": "Ward Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 8
+        },
+        {
+            "id": 803,
+            "name": "Ward Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 8
+        },
+        {
+            "id": 804,
+            "name": "Ward Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 8
+        },
+        {
+            "id": 805,
+            "name": "Ward Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 8
+        },
+        {
+            "id": 806,
+            "name": "Ward Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 8
+        },
+        {
+            "id": 807,
+            "name": "Ward Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 8
+        },
+        {
+            "id": 808,
+            "name": "Ward Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 8
+        },
+        {
+            "id": 809,
+            "name": "Ward Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 8
+        },
+        {
+            "id": 810,
+            "name": "Ward Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 8
+        },
+        {
+            "id": 811,
+            "name": "Ward Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 8
+        },
+        {
+            "id": 812,
+            "name": "Ward Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 8
+        },
+        {
+            "id": 813,
+            "name": "Ward Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 8
+        },
+        {
+            "id": 814,
+            "name": "Ward Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 8
+        },
+        {
+            "id": 815,
+            "name": "Ward Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 8
+        },
+        {
+            "id": 816,
+            "name": "Ward Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 8
+        },
+        {
+            "id": 817,
+            "name": "Ward Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 8
+        },
+        {
+            "id": 818,
+            "name": "Ward Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 8
+        },
+        {
+            "id": 819,
+            "name": "Ward Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 8
+        },
+        {
+            "id": 820,
+            "name": "Ward Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 8
+        },
+        {
+            "id": 821,
+            "name": "Ward Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 8
+        },
+        {
+            "id": 822,
+            "name": "Ward Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 8
+        },
+        {
+            "id": 823,
+            "name": "Ward Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 8
+        },
+        {
+            "id": 824,
+            "name": "Ward Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 8
+        },
+        {
+            "id": 825,
+            "name": "Ward Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 8
+        },
+        {
+            "id": 826,
+            "name": "Ward Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 8
+        },
+        {
+            "id": 827,
+            "name": "Ward Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 8
+        },
+        {
+            "id": 828,
+            "name": "Ward Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 8
+        },
+        {
+            "id": 829,
+            "name": "Ward Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 8
+        },
+        {
+            "id": 900,
+            "name": "Divine Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 9
+        },
+        {
+            "id": 901,
+            "name": "Divine Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 9
+        },
+        {
+            "id": 902,
+            "name": "Divine Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 9
+        },
+        {
+            "id": 903,
+            "name": "Divine Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 9
+        },
+        {
+            "id": 904,
+            "name": "Divine Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 9
+        },
+        {
+            "id": 905,
+            "name": "Divine Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 9
+        },
+        {
+            "id": 906,
+            "name": "Divine Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 9
+        },
+        {
+            "id": 907,
+            "name": "Divine Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 9
+        },
+        {
+            "id": 908,
+            "name": "Divine Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 9
+        },
+        {
+            "id": 909,
+            "name": "Divine Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 9
+        },
+        {
+            "id": 910,
+            "name": "Divine Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 9
+        },
+        {
+            "id": 911,
+            "name": "Divine Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 9
+        },
+        {
+            "id": 912,
+            "name": "Divine Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 9
+        },
+        {
+            "id": 913,
+            "name": "Divine Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 9
+        },
+        {
+            "id": 914,
+            "name": "Divine Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 9
+        },
+        {
+            "id": 915,
+            "name": "Divine Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 9
+        },
+        {
+            "id": 916,
+            "name": "Divine Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 9
+        },
+        {
+            "id": 917,
+            "name": "Divine Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 9
+        },
+        {
+            "id": 918,
+            "name": "Divine Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 9
+        },
+        {
+            "id": 919,
+            "name": "Divine Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 9
+        },
+        {
+            "id": 920,
+            "name": "Divine Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 9
+        },
+        {
+            "id": 921,
+            "name": "Divine Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 9
+        },
+        {
+            "id": 922,
+            "name": "Divine Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 9
+        },
+        {
+            "id": 923,
+            "name": "Divine Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 9
+        },
+        {
+            "id": 924,
+            "name": "Divine Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 9
+        },
+        {
+            "id": 925,
+            "name": "Divine Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 9
+        },
+        {
+            "id": 926,
+            "name": "Divine Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 9
+        },
+        {
+            "id": 927,
+            "name": "Divine Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 9
+        },
+        {
+            "id": 928,
+            "name": "Divine Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 9
+        },
+        {
+            "id": 929,
+            "name": "Divine Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 9
+        },
+        {
+            "id": 1000,
+            "name": "Aim Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 10
+        },
+        {
+            "id": 1001,
+            "name": "Aim Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 10
+        },
+        {
+            "id": 1002,
+            "name": "Aim Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 10
+        },
+        {
+            "id": 1003,
+            "name": "Aim Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 10
+        },
+        {
+            "id": 1004,
+            "name": "Aim Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 10
+        },
+        {
+            "id": 1005,
+            "name": "Aim Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 10
+        },
+        {
+            "id": 1006,
+            "name": "Aim Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 10
+        },
+        {
+            "id": 1007,
+            "name": "Aim Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 10
+        },
+        {
+            "id": 1008,
+            "name": "Aim Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 10
+        },
+        {
+            "id": 1009,
+            "name": "Aim Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 10
+        },
+        {
+            "id": 1010,
+            "name": "Aim Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 10
+        },
+        {
+            "id": 1011,
+            "name": "Aim Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 10
+        },
+        {
+            "id": 1012,
+            "name": "Aim Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 10
+        },
+        {
+            "id": 1013,
+            "name": "Aim Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 10
+        },
+        {
+            "id": 1014,
+            "name": "Aim Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 10
+        },
+        {
+            "id": 1015,
+            "name": "Aim Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 10
+        },
+        {
+            "id": 1016,
+            "name": "Aim Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 10
+        },
+        {
+            "id": 1017,
+            "name": "Aim Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 10
+        },
+        {
+            "id": 1018,
+            "name": "Aim Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 10
+        },
+        {
+            "id": 1019,
+            "name": "Aim Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 10
+        },
+        {
+            "id": 1020,
+            "name": "Aim Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 10
+        },
+        {
+            "id": 1021,
+            "name": "Aim Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 10
+        },
+        {
+            "id": 1022,
+            "name": "Aim Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 10
+        },
+        {
+            "id": 1023,
+            "name": "Aim Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 10
+        },
+        {
+            "id": 1024,
+            "name": "Aim Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 10
+        },
+        {
+            "id": 1025,
+            "name": "Aim Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 10
+        },
+        {
+            "id": 1026,
+            "name": "Aim Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 10
+        },
+        {
+            "id": 1027,
+            "name": "Aim Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 10
+        },
+        {
+            "id": 1028,
+            "name": "Aim Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 10
+        },
+        {
+            "id": 1029,
+            "name": "Aim Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 10
+        },
+        {
+            "id": 1100,
+            "name": "Dodge Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 11
+        },
+        {
+            "id": 1101,
+            "name": "Dodge Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 11
+        },
+        {
+            "id": 1102,
+            "name": "Dodge Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 11
+        },
+        {
+            "id": 1103,
+            "name": "Dodge Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 11
+        },
+        {
+            "id": 1104,
+            "name": "Dodge Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 11
+        },
+        {
+            "id": 1105,
+            "name": "Dodge Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 11
+        },
+        {
+            "id": 1106,
+            "name": "Dodge Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 11
+        },
+        {
+            "id": 1107,
+            "name": "Dodge Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 11
+        },
+        {
+            "id": 1108,
+            "name": "Dodge Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 11
+        },
+        {
+            "id": 1109,
+            "name": "Dodge Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 11
+        },
+        {
+            "id": 1110,
+            "name": "Dodge Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 11
+        },
+        {
+            "id": 1111,
+            "name": "Dodge Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 11
+        },
+        {
+            "id": 1112,
+            "name": "Dodge Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 11
+        },
+        {
+            "id": 1113,
+            "name": "Dodge Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 11
+        },
+        {
+            "id": 1114,
+            "name": "Dodge Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 11
+        },
+        {
+            "id": 1115,
+            "name": "Dodge Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 11
+        },
+        {
+            "id": 1116,
+            "name": "Dodge Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 11
+        },
+        {
+            "id": 1117,
+            "name": "Dodge Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 11
+        },
+        {
+            "id": 1118,
+            "name": "Dodge Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 11
+        },
+        {
+            "id": 1119,
+            "name": "Dodge Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 11
+        },
+        {
+            "id": 1120,
+            "name": "Dodge Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 11
+        },
+        {
+            "id": 1121,
+            "name": "Dodge Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 11
+        },
+        {
+            "id": 1122,
+            "name": "Dodge Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 11
+        },
+        {
+            "id": 1123,
+            "name": "Dodge Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 11
+        },
+        {
+            "id": 1124,
+            "name": "Dodge Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 11
+        },
+        {
+            "id": 1125,
+            "name": "Dodge Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 11
+        },
+        {
+            "id": 1126,
+            "name": "Dodge Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 11
+        },
+        {
+            "id": 1127,
+            "name": "Dodge Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 11
+        },
+        {
+            "id": 1128,
+            "name": "Dodge Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 11
+        },
+        {
+            "id": 1129,
+            "name": "Dodge Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 11
+        },
+        {
+            "id": 1200,
+            "name": "Heal Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 12
+        },
+        {
+            "id": 1201,
+            "name": "Heal Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 12
+        },
+        {
+            "id": 1202,
+            "name": "Heal Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 12
+        },
+        {
+            "id": 1203,
+            "name": "Heal Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 12
+        },
+        {
+            "id": 1204,
+            "name": "Heal Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 12
+        },
+        {
+            "id": 1205,
+            "name": "Heal Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 12
+        },
+        {
+            "id": 1206,
+            "name": "Heal Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 12
+        },
+        {
+            "id": 1207,
+            "name": "Heal Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 12
+        },
+        {
+            "id": 1208,
+            "name": "Heal Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 12
+        },
+        {
+            "id": 1209,
+            "name": "Heal Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 12
+        },
+        {
+            "id": 1210,
+            "name": "Heal Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 12
+        },
+        {
+            "id": 1211,
+            "name": "Heal Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 12
+        },
+        {
+            "id": 1212,
+            "name": "Heal Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 12
+        },
+        {
+            "id": 1213,
+            "name": "Heal Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 12
+        },
+        {
+            "id": 1214,
+            "name": "Heal Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 12
+        },
+        {
+            "id": 1215,
+            "name": "Heal Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 12
+        },
+        {
+            "id": 1216,
+            "name": "Heal Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 12
+        },
+        {
+            "id": 1217,
+            "name": "Heal Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 12
+        },
+        {
+            "id": 1218,
+            "name": "Heal Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 12
+        },
+        {
+            "id": 1219,
+            "name": "Heal Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 12
+        },
+        {
+            "id": 1220,
+            "name": "Heal Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 12
+        },
+        {
+            "id": 1221,
+            "name": "Heal Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 12
+        },
+        {
+            "id": 1222,
+            "name": "Heal Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 12
+        },
+        {
+            "id": 1223,
+            "name": "Heal Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 12
+        },
+        {
+            "id": 1224,
+            "name": "Heal Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 12
+        },
+        {
+            "id": 1225,
+            "name": "Heal Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 12
+        },
+        {
+            "id": 1226,
+            "name": "Heal Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 12
+        },
+        {
+            "id": 1227,
+            "name": "Heal Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 12
+        },
+        {
+            "id": 1228,
+            "name": "Heal Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 12
+        },
+        {
+            "id": 1229,
+            "name": "Heal Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 12
+        },
+        {
+            "id": 1300,
+            "name": "Lead Brand: Head",
+            "part": 1,
+            "rarity": 1,
+            "series": 13
+        },
+        {
+            "id": 1301,
+            "name": "Lead Brand: Body",
+            "part": 4,
+            "rarity": 1,
+            "series": 13
+        },
+        {
+            "id": 1302,
+            "name": "Lead Brand: L. Arm",
+            "part": 3,
+            "rarity": 1,
+            "series": 13
+        },
+        {
+            "id": 1303,
+            "name": "Lead Brand: Legs",
+            "part": 5,
+            "rarity": 1,
+            "series": 13
+        },
+        {
+            "id": 1304,
+            "name": "Lead Brand: R. Arm",
+            "part": 2,
+            "rarity": 1,
+            "series": 13
+        },
+        {
+            "id": 1305,
+            "name": "Lead Brand: Head",
+            "part": 1,
+            "rarity": 2,
+            "series": 13
+        },
+        {
+            "id": 1306,
+            "name": "Lead Brand: Body",
+            "part": 4,
+            "rarity": 2,
+            "series": 13
+        },
+        {
+            "id": 1307,
+            "name": "Lead Brand: L. Arm",
+            "part": 3,
+            "rarity": 2,
+            "series": 13
+        },
+        {
+            "id": 1308,
+            "name": "Lead Brand: Legs",
+            "part": 5,
+            "rarity": 2,
+            "series": 13
+        },
+        {
+            "id": 1309,
+            "name": "Lead Brand: R. Arm",
+            "part": 2,
+            "rarity": 2,
+            "series": 13
+        },
+        {
+            "id": 1310,
+            "name": "Lead Brand: Head",
+            "part": 1,
+            "rarity": 3,
+            "series": 13
+        },
+        {
+            "id": 1311,
+            "name": "Lead Brand: Body",
+            "part": 4,
+            "rarity": 3,
+            "series": 13
+        },
+        {
+            "id": 1312,
+            "name": "Lead Brand: L. Arm",
+            "part": 3,
+            "rarity": 3,
+            "series": 13
+        },
+        {
+            "id": 1313,
+            "name": "Lead Brand: Legs",
+            "part": 5,
+            "rarity": 3,
+            "series": 13
+        },
+        {
+            "id": 1314,
+            "name": "Lead Brand: R. Arm",
+            "part": 2,
+            "rarity": 3,
+            "series": 13
+        },
+        {
+            "id": 1315,
+            "name": "Lead Brand: Head",
+            "part": 1,
+            "rarity": 4,
+            "series": 13
+        },
+        {
+            "id": 1316,
+            "name": "Lead Brand: Body",
+            "part": 4,
+            "rarity": 4,
+            "series": 13
+        },
+        {
+            "id": 1317,
+            "name": "Lead Brand: L. Arm",
+            "part": 3,
+            "rarity": 4,
+            "series": 13
+        },
+        {
+            "id": 1318,
+            "name": "Lead Brand: Legs",
+            "part": 5,
+            "rarity": 4,
+            "series": 13
+        },
+        {
+            "id": 1319,
+            "name": "Lead Brand: R. Arm",
+            "part": 2,
+            "rarity": 4,
+            "series": 13
+        },
+        {
+            "id": 1320,
+            "name": "Lead Brand: Head",
+            "part": 1,
+            "rarity": 5,
+            "series": 13
+        },
+        {
+            "id": 1321,
+            "name": "Lead Brand: Body",
+            "part": 4,
+            "rarity": 5,
+            "series": 13
+        },
+        {
+            "id": 1322,
+            "name": "Lead Brand: L. Arm",
+            "part": 3,
+            "rarity": 5,
+            "series": 13
+        },
+        {
+            "id": 1323,
+            "name": "Lead Brand: Legs",
+            "part": 5,
+            "rarity": 5,
+            "series": 13
+        },
+        {
+            "id": 1324,
+            "name": "Lead Brand: R. Arm",
+            "part": 2,
+            "rarity": 5,
+            "series": 13
+        },
+        {
+            "id": 1325,
+            "name": "Lead Brand: Head",
+            "part": 1,
+            "rarity": 6,
+            "series": 13
+        },
+        {
+            "id": 1326,
+            "name": "Lead Brand: Body",
+            "part": 4,
+            "rarity": 6,
+            "series": 13
+        },
+        {
+            "id": 1327,
+            "name": "Lead Brand: L. Arm",
+            "part": 3,
+            "rarity": 6,
+            "series": 13
+        },
+        {
+            "id": 1328,
+            "name": "Lead Brand: Legs",
+            "part": 5,
+            "rarity": 6,
+            "series": 13
+        },
+        {
+            "id": 1329,
+            "name": "Lead Brand: R. Arm",
+            "part": 2,
+            "rarity": 6,
+            "series": 13
+        }
+    ],
+    "mgtm_eff": [
+        {
+            "name": "None",
+            "type": 0
+        },
+        {
+            "name": "HP",
+            "type": 1
+        },
+        {
+            "name": "HP",
+            "type": 2
+        },
+        {
+            "name": "Phys ATK",
+            "type": 3
+        },
+        {
+            "name": "Phys ATK",
+            "type": 4
+        },
+        {
+            "name": "Phys DEF",
+            "type": 5
+        },
+        {
+            "name": "Phys DEF",
+            "type": 6
+        },
+        {
+            "name": "Mag ATK",
+            "type": 7
+        },
+        {
+            "name": "Mag ATK",
+            "type": 8
+        },
+        {
+            "name": "Mag DEF",
+            "type": 9
+        },
+        {
+            "name": "Mag DEF",
+            "type": 10
+        },
+        {
+            "name": "Phys AC",
+            "type": 11
+        },
+        {
+            "name": "Phys EV",
+            "type": 12
+        },
+        {
+            "name": "Ailment Infliction",
+            "type": 13
+        },
+        {
+            "name": "Ailment Resistance",
+            "type": 14
+        },
+        {
+            "name": "Speed",
+            "type": 15
+        },
+        {
+            "name": "Critical",
+            "type": 16
+        },
+        {
+            "name": "MP Auto Recovery",
+            "type": 17
+        },
+        {
+            "name": "Auto-Barrier",
+            "type": 18
+        },
+        {
+            "name": "Healing Amount",
+            "type": 19
+        },
+        {
+            "name": "Order",
+            "type": 20
+        }
+    ],
+    "mgtm_part": [
+        {
+            "id": 1,
+            "main_param": "HP(+ only)",
+            "name": "Head"
+        },
+        {
+            "id": 2,
+            "main_param": "HP, Phys ATK, Phys DEF, Mag ATK, Mag DEF, \nCritical, Accuracy, Evasion",
+            "name": "R. Arm"
+        },
+        {
+            "id": 3,
+            "main_param": "HP, Phys ATK, Phys DEF, Mag ATK, Mag DEF, \nAilment Infliction, Ailment Resistance",
+            "name": "L. Arm"
+        },
+        {
+            "id": 4,
+            "main_param": "Phys DEF(+ only), Mag DEF(+ only)",
+            "name": "Body"
+        },
+        {
+            "id": 5,
+            "main_param": "HP, Phys ATK, Phys DEF, Mag ATK, Mag DEF, \nHealing Amount, Speed",
+            "name": "Legs"
+        }
+    ],
+    "mgtm_prm": {
+        "enhace_cost_1": [
+            0,
+            30,
+            50,
+            80,
+            130,
+            220
+        ],
+        "enhace_cost_2": [
+            0,
+            50,
+            80,
+            130,
+            220,
+            370,
+            620,
+            1050,
+            1780
+        ],
+        "enhace_cost_3": [
+            0,
+            75,
+            120,
+            200,
+            340,
+            570,
+            960,
+            1630,
+            2770,
+            2900,
+            3040,
+            3190
+        ],
+        "enhace_cost_4": [
+            0,
+            100,
+            170,
+            280,
+            470,
+            790,
+            1340,
+            2270,
+            3850,
+            4040,
+            4240,
+            4450,
+            4670,
+            4900,
+            5140
+        ],
+        "enhace_cost_5": [
+            0,
+            150,
+            250,
+            420,
+            710,
+            1200,
+            2040,
+            3460,
+            5880,
+            6170,
+            6470,
+            6790,
+            7120,
+            7470,
+            7840
+        ],
+        "enhace_cost_6": [
+            0,
+            300,
+            510,
+            860,
+            1460,
+            2480,
+            4210,
+            7150,
+            12150,
+            12750,
+            13380,
+            14040,
+            14740,
+            15470,
+            16240
+        ],
+        "max_lv": [
+            0,
+            6,
+            9,
+            12,
+            15,
+            15,
+            15
+        ],
+        "option_open_lv": [
+            3,
+            6
+        ],
+        "option_open_lv_1": [
+            3,
+            6
+        ],
+        "option_open_lv_2": [
+            3,
+            6,
+            9
+        ],
+        "option_open_lv_3": [
+            3,
+            6,
+            9
+        ],
+        "option_open_lv_4": [
+            3,
+            6,
+            9,
+            15
+        ],
+        "option_open_lv_5": [
+            3,
+            6,
+            9,
+            15
+        ],
+        "option_open_lv_6": [
+            3,
+            6,
+            9,
+            15
+        ],
+        "option_up_lv": [
+            3,
+            6
+        ],
+        "option_up_lv_1": [
+            3,
+            6
+        ],
+        "option_up_lv_2": [
+            3,
+            6,
+            9
+        ],
+        "option_up_lv_3": [
+            3,
+            6,
+            9
+        ],
+        "option_up_lv_4": [
+            3,
+            6,
+            9,
+            15
+        ],
+        "option_up_lv_5": [
+            3,
+            6,
+            9,
+            15
+        ],
+        "option_up_lv_6": [
+            3,
+            6,
+            9,
+            15
+        ],
+        "remove_cost": [
+            100,
+            200,
+            1000,
+            5000,
+            10000,
+            30000
+        ],
+        "subparam_up_lv": [],
+        "subparam_up_lv_1": [],
+        "subparam_up_lv_2": [],
+        "subparam_up_lv_3": [
+            10,
+            11,
+            12
+        ],
+        "subparam_up_lv_4": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+        ],
+        "subparam_up_lv_5": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+        ],
+        "subparam_up_lv_6": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+        ],
+        "true_enhance_lv": [
+            0,
+            0,
+            0,
+            10,
+            10,
+            10,
+            10
+        ],
+        "true_upgrade_prob_1": [
+            0,
+            100,
+            100,
+            100,
+            100,
+            100
+        ],
+        "true_upgrade_prob_2": [
+            0,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+        ],
+        "true_upgrade_prob_3": [
+            0,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            75,
+            50,
+            30
+        ],
+        "true_upgrade_prob_4": [
+            0,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            75,
+            50,
+            30,
+            25,
+            15,
+            10
+        ],
+        "true_upgrade_prob_5": [
+            0,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            75,
+            50,
+            30,
+            25,
+            15,
+            10
+        ],
+        "true_upgrade_prob_6": [
+            0,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            75,
+            50,
+            30,
+            25,
+            15,
+            10
+        ]
+    },
+    "mgtm_srs": [
+        {
+            "color": 1777729535,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 1,
+            "img": "destruction",
+            "is_box_hide": false,
+            "name": "War",
+            "set_eff": {
+                "effect_desc": "Increases Phys ATK.",
+                "num": 3,
+                "series_id": 1,
+                "type": 4,
+                "val": 20
+            }
+        },
+        {
+            "color": -9834753,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 2,
+            "img": "solid",
+            "is_box_hide": false,
+            "name": "Guard",
+            "set_eff": {
+                "effect_desc": "Increases Phys DEF.",
+                "num": 2,
+                "series_id": 2,
+                "type": 6,
+                "val": 30
+            }
+        },
+        {
+            "color": -15242753,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 3,
+            "img": "quick",
+            "is_box_hide": false,
+            "name": "Speed",
+            "set_eff": {
+                "effect_desc": "Increases Battle Speed.\n(Equipped demon only)",
+                "num": 2,
+                "series_id": 3,
+                "type": 15,
+                "val": 25
+            }
+        },
+        {
+            "color": 1660884991,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 4,
+            "img": "life",
+            "is_box_hide": false,
+            "name": "Life",
+            "set_eff": {
+                "effect_desc": "Increases HP.",
+                "num": 3,
+                "series_id": 4,
+                "type": 2,
+                "val": 50
+            }
+        },
+        {
+            "color": -1763329,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 5,
+            "img": "infection",
+            "is_box_hide": false,
+            "name": "Sick",
+            "set_eff": {
+                "effect_desc": "Increases probability of inflicting status ailments.",
+                "num": 3,
+                "series_id": 5,
+                "type": 13,
+                "val": 20
+            }
+        },
+        {
+            "color": 7995391,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 6,
+            "img": "annihilation",
+            "is_box_hide": false,
+            "name": "Spell",
+            "set_eff": {
+                "effect_desc": "Increases Mag ATK.",
+                "num": 3,
+                "series_id": 6,
+                "type": 8,
+                "val": 20
+            }
+        },
+        {
+            "color": 1998709247,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 7,
+            "img": "safeguard",
+            "is_box_hide": false,
+            "name": "Shield",
+            "set_eff": {
+                "effect_desc": "Increases Mag DEF.",
+                "num": 2,
+                "series_id": 7,
+                "type": 10,
+                "val": 30
+            }
+        },
+        {
+            "color": -513137409,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 8,
+            "img": "protection",
+            "is_box_hide": false,
+            "name": "Ward",
+            "set_eff": {
+                "effect_desc": "Casts Barrier when battle starts.\n(Gains immunity to all status ailments for 3 turns.)",
+                "num": 2,
+                "series_id": 8,
+                "type": 18,
+                "val": 3
+            }
+        },
+        {
+            "color": 255,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 9,
+            "img": "benefit",
+            "is_box_hide": false,
+            "name": "Divine",
+            "set_eff": {
+                "effect_desc": "Increases natural MP recovery by 1.",
+                "num": 3,
+                "series_id": 9,
+                "type": 17,
+                "val": 1
+            }
+        },
+        {
+            "color": 255,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 10,
+            "img": "precision",
+            "is_box_hide": false,
+            "name": "Aim",
+            "set_eff": {
+                "effect_desc": "Increases Phys hit rate.",
+                "num": 2,
+                "series_id": 10,
+                "type": 11,
+                "val": 10
+            }
+        },
+        {
+            "color": 255,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 11,
+            "img": "avoid",
+            "is_box_hide": false,
+            "name": "Dodge",
+            "set_eff": {
+                "effect_desc": "Increases Phys evasion rate.",
+                "num": 2,
+                "series_id": 11,
+                "type": 12,
+                "val": 10
+            }
+        },
+        {
+            "color": 255,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 12,
+            "img": "healing",
+            "is_box_hide": false,
+            "name": "Heal",
+            "set_eff": {
+                "effect_desc": "Increases Healing skill effectiveness.",
+                "num": 2,
+                "series_id": 12,
+                "type": 19,
+                "val": 30
+            }
+        },
+        {
+            "color": 255,
+            "desc": "Grants {1}{2}when\nequipped as a {0} set.",
+            "id": 13,
+            "img": "shift",
+            "is_box_hide": false,
+            "name": "Lead",
+            "set_eff": {
+                "effect_desc": "Attacks one turn earlier during battle.",
+                "num": 2,
+                "series_id": 13,
+                "type": 20,
+                "val": 1
+            }
+        }
+    ],
+    "piece_how_to_get": "You can obtain them in Wanted.",
+    "player_title": [
+        {
+            "desc": "Reach Liberator Rank E5",
+            "end_ts": 0,
+            "id": 1,
+            "img": "rank_00",
+            "name": "NEWCOMER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank E4",
+            "end_ts": 0,
+            "id": 2,
+            "img": "rank_00",
+            "name": "BEGINNER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank E3",
+            "end_ts": 0,
+            "id": 3,
+            "img": "rank_00",
+            "name": "LEARNER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank E2",
+            "end_ts": 0,
+            "id": 4,
+            "img": "rank_00",
+            "name": "BELIEVER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank E1",
+            "end_ts": 0,
+            "id": 5,
+            "img": "rank_00",
+            "name": "MESSENGER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank D5",
+            "end_ts": 0,
+            "id": 6,
+            "img": "rank_00",
+            "name": "WORSHIPPER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank D4",
+            "end_ts": 0,
+            "id": 7,
+            "img": "rank_00",
+            "name": "EXPLORER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank D3",
+            "end_ts": 0,
+            "id": 8,
+            "img": "rank_00",
+            "name": "SUMMONER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank D2",
+            "end_ts": 0,
+            "id": 9,
+            "img": "rank_00",
+            "name": "SEARCHER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank D1",
+            "end_ts": 0,
+            "id": 10,
+            "img": "rank_00",
+            "name": "SOLDIER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank C3",
+            "end_ts": 0,
+            "id": 11,
+            "img": "rank_00",
+            "name": "SEEKER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank C2",
+            "end_ts": 0,
+            "id": 12,
+            "img": "rank_00",
+            "name": "INVESTIGATOR",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank C1",
+            "end_ts": 0,
+            "id": 13,
+            "img": "rank_00",
+            "name": "EXECUTOR",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank B3",
+            "end_ts": 0,
+            "id": 14,
+            "img": "rank_00",
+            "name": "GO-GETTER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank B2",
+            "end_ts": 0,
+            "id": 15,
+            "img": "rank_00",
+            "name": "LEADER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank B1",
+            "end_ts": 0,
+            "id": 16,
+            "img": "rank_00",
+            "name": "COMMANDER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank A3",
+            "end_ts": 0,
+            "id": 17,
+            "img": "rank_00",
+            "name": "BERSERKER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank A2",
+            "end_ts": 0,
+            "id": 18,
+            "img": "rank_00",
+            "name": "AGGRESSOR",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank A1",
+            "end_ts": 0,
+            "id": 19,
+            "img": "rank_00",
+            "name": "RULER",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Liberator Rank S",
+            "end_ts": 0,
+            "id": 20,
+            "img": "rank_00",
+            "name": "LIBERATOR",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Clear all NORMAL difficulty Chapter 1 Story Quests",
+            "end_ts": 0,
+            "id": 9000030,
+            "img": "story_00",
+            "name": "Official Member",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Clear all NORMAL difficulty Chapter 2 Story Quests",
+            "end_ts": 0,
+            "id": 9000031,
+            "img": "story_00",
+            "name": "Free Citizen",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Clear all NORMAL difficulty Chapter 3 Story Quests",
+            "end_ts": 0,
+            "id": 9000032,
+            "img": "story_00",
+            "name": "School Intruder",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Clear all NORMAL difficulty Chapter 4 Story Quests",
+            "end_ts": 0,
+            "id": 9000033,
+            "img": "story_00",
+            "name": "King of The Ring",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Clear all NORMAL difficulty Chapter 5 Story Quests",
+            "end_ts": 0,
+            "id": 9000034,
+            "img": "story_00",
+            "name": "Bomb Squad",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Clear all NORMAL difficulty Chapter 6 Story Quests",
+            "end_ts": 0,
+            "id": 9000035,
+            "img": "story_00",
+            "name": "Round 10!",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Log 180 Common Archetypes in the Compendium",
+            "end_ts": 0,
+            "id": 9000036,
+            "img": "basic_02",
+            "name": "Demon Freak",
+            "rarity": 3,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log 160 Common Archetypes in the Compendium",
+            "end_ts": 0,
+            "id": 9000037,
+            "img": "basic_01",
+            "name": "Demon Collector",
+            "rarity": 2,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log 160 Aragami Archetypes in the Compendium",
+            "end_ts": 0,
+            "id": 9000038,
+            "img": "basic_02",
+            "name": "Aragami Freak",
+            "rarity": 3,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log 120 Aragami Archetypes in the Compendium",
+            "end_ts": 0,
+            "id": 9000039,
+            "img": "basic_01",
+            "name": "Aragami Collector",
+            "rarity": 2,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log 160 Psychic Archetypes in the Compendium",
+            "end_ts": 0,
+            "id": 9000040,
+            "img": "basic_02",
+            "name": "Psychic Freak",
+            "rarity": 3,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log 120 Psychic Archetypes in the Compendium",
+            "end_ts": 0,
+            "id": 9000041,
+            "img": "basic_01",
+            "name": "Psychic Collector",
+            "rarity": 2,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log 160 Protector Archetypes in the Compendium",
+            "end_ts": 0,
+            "id": 9000042,
+            "img": "basic_02",
+            "name": "Protector Freak",
+            "rarity": 3,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log 120 Protector Archetypes in the Compendium",
+            "end_ts": 0,
+            "id": 9000043,
+            "img": "basic_01",
+            "name": "Protector Collector",
+            "rarity": 2,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log 160 Elementalist Archetypes in the Compendium",
+            "end_ts": 0,
+            "id": 9000044,
+            "img": "basic_02",
+            "name": "Elementalist Freak",
+            "rarity": 3,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log 120 Elementalist Archetypes in the Compendium",
+            "end_ts": 0,
+            "id": 9000045,
+            "img": "basic_01",
+            "name": "Elementalist Collector",
+            "rarity": 2,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat the 10F Aura Gate Boss",
+            "end_ts": 0,
+            "id": 9000046,
+            "img": "story_00",
+            "name": "Seeker of Knowledge",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat the 20F Aura Gate Boss",
+            "end_ts": 0,
+            "id": 9000047,
+            "img": "story_00",
+            "name": "Seeker of Extinction",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat the 30F Aura Gate Boss",
+            "end_ts": 0,
+            "id": 9000048,
+            "img": "story_00",
+            "name": "Seeker of Desire",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat the 40F Aura Gate Boss",
+            "end_ts": 0,
+            "id": 9000049,
+            "img": "story_00",
+            "name": "Seeker of Emptiness",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat the 50F Aura Gate Boss",
+            "end_ts": 0,
+            "id": 9000050,
+            "img": "story_01",
+            "name": "Seeker of Salvation",
+            "rarity": 2,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Rank 1st in Dx2 Duel",
+            "end_ts": 0,
+            "id": 9000051,
+            "img": "battle_02",
+            "name": "Champion",
+            "rarity": 3,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Be in the top 2 in Dx2 Duel",
+            "end_ts": 0,
+            "id": 9000052,
+            "img": "battle_02",
+            "name": "2nd Place",
+            "rarity": 3,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Be in the top 3 in Dx2 Duel",
+            "end_ts": 0,
+            "id": 9000053,
+            "img": "battle_02",
+            "name": "3rd Place",
+            "rarity": 3,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Be in the top 1,000 in Dx2 Duel",
+            "end_ts": 0,
+            "id": 9000054,
+            "img": "battle_01",
+            "name": "Elite",
+            "rarity": 2,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Be in the top 3,000 in Dx2 Duel",
+            "end_ts": 0,
+            "id": 9000055,
+            "img": "battle_00",
+            "name": "Duelist",
+            "rarity": 1,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Evolve 10 demons that are 1 or 2\u2605 to 6\u2605",
+            "end_ts": 0,
+            "id": 9000056,
+            "img": "basic_01",
+            "name": "Manic Trainer",
+            "rarity": 2,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Get 50 Likes for a Demon Rating post",
+            "end_ts": 0,
+            "id": 9000057,
+            "img": "basic_00",
+            "name": "Trend Maker",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Get 200 Likes for a Demon Rating post",
+            "end_ts": 0,
+            "id": 9000058,
+            "img": "basic_02",
+            "name": "Influencer",
+            "rarity": 3,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Receive a Superior Summon File from the Black Market Customer Loyalty Bonus",
+            "end_ts": 0,
+            "id": 9000059,
+            "img": "basic_02",
+            "name": "Jackpot!",
+            "rarity": 3,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Clear 1,000 Leveling Quests using the Main Character as the leader of the main party that includes a Pixie",
+            "end_ts": 0,
+            "id": 9000060,
+            "img": "smn_00",
+            "name": "I shall defend!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Clear 1,000 Leveling Quests using the Main Character as the leader of the main party that includes a Pixie",
+            "end_ts": 0,
+            "id": 9000061,
+            "img": "smn_00",
+            "name": "I shall defend!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Clear 200 Brands of Sin quests using Templar Dragon and a Nekomata",
+            "end_ts": 0,
+            "id": 9000062,
+            "img": "smn_00",
+            "name": "OMG!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Clear 300 Chapter 1 quests using Megakin and a Jack Frost",
+            "end_ts": 0,
+            "id": 9000063,
+            "img": "smn_00",
+            "name": "Check it out!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Clear 200 Wanted quests using Chalk Eater and a Forneus",
+            "end_ts": 0,
+            "id": 9000064,
+            "img": "smn_00",
+            "name": "This is messed up.",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Clear 200 Strange Signal quests using Eileen and a Mermaid",
+            "end_ts": 0,
+            "id": 9000065,
+            "img": "smn_00",
+            "name": "Piece of cake!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Clear 300 Chapter 5 quests using Shionyan and an Isis",
+            "end_ts": 0,
+            "id": 9000066,
+            "img": "smn_00",
+            "name": "My IQ? It's over 180.",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Clear 300 Chapter 6 quests using Meat Balloon and a Horkos",
+            "end_ts": 0,
+            "id": 9000067,
+            "img": "smn_00",
+            "name": "I am a pro you know.",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Clear 300 Wanted quests using Kangaroo Boxer and an Ammut",
+            "end_ts": 0,
+            "id": 9000068,
+            "img": "smn_00",
+            "name": "I am in fact, strong.",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Clear 200 Strange Signal quests using Seiran Saikawa and a Feng Huang",
+            "end_ts": 0,
+            "id": 9000069,
+            "img": "smn_00",
+            "name": "Don\u2019t think. FEEL!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Clear Demon Buster Kiwami: Seth",
+            "end_ts": 0,
+            "id": 9000070,
+            "img": "battle_02",
+            "name": "Kiwami Seth",
+            "rarity": 3,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Clear Demon Buster Kiwami: Lakshmi",
+            "end_ts": 0,
+            "id": 9000071,
+            "img": "battle_02",
+            "name": "Kiwami Lakshmi",
+            "rarity": 3,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Clear Demon Buster Kiwami: Cu Chulainn",
+            "end_ts": 0,
+            "id": 9000072,
+            "img": "battle_02",
+            "name": "Kiwami Cu Chulainn",
+            "rarity": 3,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Receive 100 social interactions from other players",
+            "end_ts": 0,
+            "id": 9000073,
+            "img": "basic_00",
+            "name": "Popular",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Receive 250 social interactions from other players",
+            "end_ts": 0,
+            "id": 9000074,
+            "img": "basic_01",
+            "name": "Adored",
+            "rarity": 2,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Diamond 1 in Dx2 Duel a total of 10 times",
+            "end_ts": 0,
+            "id": 9000075,
+            "img": "battle_01",
+            "name": "Diamond D\u00d72",
+            "rarity": 2,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Reach Legend in Dx2 Duel a total of 10 times",
+            "end_ts": 0,
+            "id": 9000076,
+            "img": "battle_02",
+            "name": "Legend D\u00d72",
+            "rarity": 3,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Log in a total of 100 days",
+            "end_ts": 0,
+            "id": 9000077,
+            "img": "basic_00",
+            "name": "Rookie",
+            "rarity": 1,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log in a total of 300 days",
+            "end_ts": 0,
+            "id": 9000078,
+            "img": "basic_01",
+            "name": "Expert",
+            "rarity": 2,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Log in a total of 500 days",
+            "end_ts": 0,
+            "id": 9000079,
+            "img": "basic_02",
+            "name": "Veteran",
+            "rarity": 3,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Spend over 10,000,000 Macca at the Black Market",
+            "end_ts": 0,
+            "id": 9000080,
+            "img": "basic_01",
+            "name": "Black Mkt Regular",
+            "rarity": 2,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Manage to Enhance a 4\u2605 and above\nBrand to the limit without failing once",
+            "end_ts": 0,
+            "id": 9000081,
+            "img": "basic_02",
+            "name": "Lucky",
+            "rarity": 3,
+            "tab": 3,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat Slime 1,000 times",
+            "end_ts": 0,
+            "id": 9000082,
+            "img": "battle_00",
+            "name": "Ahh...",
+            "rarity": 1,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat Jack Frost 500 times",
+            "end_ts": 0,
+            "id": 9000083,
+            "img": "battle_00",
+            "name": "Hee-ho!",
+            "rarity": 1,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat Alice 100 times",
+            "end_ts": 0,
+            "id": 9000085,
+            "img": "battle_01",
+            "name": "Die For Me!",
+            "rarity": 2,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Use Templar Dragon to defeat\nBlack Ooze 1,000 times",
+            "end_ts": 0,
+            "id": 9000086,
+            "img": "smn_00",
+            "name": "Great game!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Use Shionyan to defeat Horkos 500 times",
+            "end_ts": 0,
+            "id": 9000087,
+            "img": "smn_00",
+            "name": "You worthless pig!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Use Chalk Eater to defeat\nDecarabia 1,000 times",
+            "end_ts": 0,
+            "id": 9000088,
+            "img": "smn_00",
+            "name": "Hacked in!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Use Kangaroo Boxer to defeat Attis 100 times",
+            "end_ts": 0,
+            "id": 9000089,
+            "img": "smn_00",
+            "name": "OK, I'll strip.",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Use Meat Balloon to defeat Sucubus 100 times",
+            "end_ts": 0,
+            "id": 9000090,
+            "img": "smn_00",
+            "name": "Let's kick some ass!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Use Seiran to defeat Metatron 100 times",
+            "end_ts": 0,
+            "id": 9000091,
+            "img": "smn_00",
+            "name": "Of course kung fu.",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Use Megakin and make Jack Frost your ally 100 times",
+            "end_ts": 0,
+            "id": 9000092,
+            "img": "smn_00",
+            "name": "He's my partner.",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Use Eileen and make Leanansidhe your ally 100 times",
+            "end_ts": 0,
+            "id": 9000093,
+            "img": "smn_00",
+            "name": "BFF!",
+            "rarity": 1,
+            "tab": 2,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat the Aura Gate 10F Boss with both parties\nhaving a Grade total of 10 or less without Continuing",
+            "end_ts": 0,
+            "id": 9000094,
+            "img": "battle_01",
+            "name": "He who unveils Truth",
+            "rarity": 2,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat the Aura Gate 20F Boss with both parties\nhaving a Grade total of 20 or less without Continuing",
+            "end_ts": 0,
+            "id": 9000095,
+            "img": "battle_01",
+            "name": "He who wishes to die",
+            "rarity": 2,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat the Aura Gate 30F Boss with both parties\nhaving a Grade total of 30 or less without Continuing",
+            "end_ts": 0,
+            "id": 9000096,
+            "img": "battle_01",
+            "name": "He who is uninhibited",
+            "rarity": 2,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat the Aura Gate 40F Boss with both parties\nhaving a Grade total of 100 or less without Continuing",
+            "end_ts": 0,
+            "id": 9000097,
+            "img": "battle_01",
+            "name": "He who wants nothing",
+            "rarity": 2,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Defeat the Aura Gate 50F Boss with both parties\nhaving a Grade total of 150 or less without Continuing",
+            "end_ts": 0,
+            "id": 9000098,
+            "img": "battle_02",
+            "name": "He who guides mankind",
+            "rarity": 3,
+            "tab": 1,
+            "ts": 0
+        },
+        {
+            "desc": "Clear Demon Buster Kiwami: Siegfried",
+            "end_ts": 0,
+            "id": 9000100,
+            "img": "battle_02",
+            "name": "Kiwami Siegfried",
+            "rarity": 3,
+            "tab": 1,
+            "ts": 1543622400000
+        },
+        {
+            "desc": "Clear all NORMAL difficulty Chapter 7 (Normal) Story Quests",
+            "end_ts": 0,
+            "id": 9000101,
+            "img": "story_00",
+            "name": "Vanquisher of Evil",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Clear all NORMAL difficulty Chapter 7 (Alternate) Story Quests",
+            "end_ts": 0,
+            "id": 9000102,
+            "img": "story_00",
+            "name": "Alternate Fate",
+            "rarity": 1,
+            "tab": 0,
+            "ts": 0
+        },
+        {
+            "desc": "Clear Demon Buster Kiwami:Black Frost",
+            "end_ts": 0,
+            "id": 9000106,
+            "img": "battle_02",
+            "name": "Kiwami Black Frost",
+            "rarity": 3,
+            "tab": 1,
+            "ts": 1546300800000
+        }
+    ],
+    "prize": [
+        {
+            "desc": "Gems that can be used for many things.",
+            "id": 0,
+            "img": "",
+            "name": "Gems",
+            "type": 3
+        },
+        {
+            "desc": "Gems that can be used for many things.\n*Paid.",
+            "id": 1,
+            "img": "",
+            "name": "Gems (Paid)",
+            "type": 3
+        },
+        {
+            "desc": "Gems that can be used for many things.\n*Free. Paid Gems will be used first.",
+            "id": 2,
+            "img": "",
+            "name": "Gems (Free)",
+            "type": 3
+        },
+        {
+            "desc": "Chaotic Aether\nS, M, L Set",
+            "id": 4,
+            "img": "dummy",
+            "name": "Chaotic Aether Set",
+            "type": 7
+        },
+        {
+            "desc": "Dark Aether\nS, M, L Set",
+            "id": 1,
+            "img": "dummy",
+            "name": "Dark Aether Set",
+            "type": 7
+        },
+        {
+            "desc": "Neutral Aether\nS, M, L Set",
+            "id": 3,
+            "img": "dummy",
+            "name": "Neutral Aether Set",
+            "type": 7
+        },
+        {
+            "desc": "Light Aether\nS, M, L Set",
+            "id": 0,
+            "img": "dummy",
+            "name": "Light Aether Set",
+            "type": 7
+        },
+        {
+            "desc": "Lawful Aether\nS, M, L Set",
+            "id": 2,
+            "img": "dummy",
+            "name": "Lawful Aether Set",
+            "type": 7
+        },
+        {
+            "desc": "All in one Aether S (Light, Dark, Lawful, Neutral, Chaotic) Set",
+            "id": 1,
+            "img": "awaken_00",
+            "name": "Aether S Set",
+            "type": 8
+        },
+        {
+            "desc": "All in one Aether M (Light, Dark, Lawful, Neutral, Chaotic) Set",
+            "id": 2,
+            "img": "awaken_01",
+            "name": "Aether M Set",
+            "type": 8
+        },
+        {
+            "desc": "All in one Aether L (Light, Dark, Lawful, Neutral, Chaotic) Set",
+            "id": 3,
+            "img": "awaken_02",
+            "name": "Aether L Set",
+            "type": 8
+        },
+        {
+            "desc": "Adds 1 Skill Point to {0}.",
+            "id": 0,
+            "img": "",
+            "name": "Soul of {0}",
+            "type": 9
+        },
+        {
+            "desc": "Collect a certain amount to summon {0}.",
+            "id": 0,
+            "img": "",
+            "name": "Fragments of {0}",
+            "type": 10
+        },
+        {
+            "desc": "A drive with vital mission information.",
+            "id": 200001,
+            "img": "0000",
+            "name": "Log Data",
+            "type": 14
+        },
+        {
+            "desc": "A popular snack.\nTry not to eat too many!\u3000",
+            "id": 200002,
+            "img": "0001",
+            "name": "Kitty Kandy",
+            "type": 14
+        },
+        {
+            "desc": "Wood with special powers.",
+            "id": 200003,
+            "img": "0002",
+            "name": "Sacred Wood",
+            "type": 14
+        },
+        {
+            "desc": "A stone with special powers.",
+            "id": 200004,
+            "img": "0003",
+            "name": "Power Stone",
+            "type": 14
+        },
+        {
+            "desc": "Black model gun.",
+            "id": 200005,
+            "img": "0004",
+            "name": "Model Gun",
+            "type": 14
+        },
+        {
+            "desc": "A frog that fell from the sky.",
+            "id": 200006,
+            "img": "0005",
+            "name": "Frog",
+            "type": 14
+        },
+        {
+            "desc": "A frog that fell from the sky.",
+            "id": 100200001,
+            "img": "0005",
+            "name": "Frog",
+            "type": 14
+        },
+        {
+            "desc": "Collect 10 billion of these seals to have any wish granted.",
+            "id": 100200002,
+            "img": "0006",
+            "name": "Hellmark",
+            "type": 14
+        },
+        {
+            "desc": "Strips of paper with wishes written on them.",
+            "id": 100200003,
+            "img": "0007",
+            "name": "Wishes",
+            "type": 14
+        },
+        {
+            "desc": "Photographs of demons",
+            "id": 100200004,
+            "img": "0008",
+            "name": "Demon Photos",
+            "type": 14
+        },
+        {
+            "desc": "Info on the accident",
+            "id": 100200005,
+            "img": "0009",
+            "name": "Clues",
+            "type": 14
+        },
+        {
+            "desc": "Fire Wisps that sprung out of Pyro Jack's lantern.\nSurprisingly cool to the touch.\n",
+            "id": 100200006,
+            "img": "0014",
+            "name": "Fire Wisps",
+            "type": 14
+        },
+        {
+            "desc": "Cosplay materials",
+            "id": 100200007,
+            "img": "0011",
+            "name": "Fabric",
+            "type": 14
+        },
+        {
+            "desc": "A very dodgy-looking drink",
+            "id": 100200008,
+            "img": "0012",
+            "name": "U-ded",
+            "type": 14
+        },
+        {
+            "desc": "An old book which summons demons when read",
+            "id": 100200009,
+            "img": "0013",
+            "name": "Demonic Books",
+            "type": 14
+        },
+        {
+            "desc": "Christmas presents containing kids' toys and candy.",
+            "id": 100200010,
+            "img": "0018",
+            "name": "Presents",
+            "type": 14
+        },
+        {
+            "desc": "Wooden boards used to write wishes on at shrines.",
+            "id": 100200011,
+            "img": "0019",
+            "name": "Ema Boards",
+            "type": 14
+        },
+        {
+            "desc": "Obtained Exp will be increased.",
+            "id": 1,
+            "img": "exp_boost_3d",
+            "name": "Exp 25% increase",
+            "type": 15
+        },
+        {
+            "desc": "Obtained Macca will be increased.",
+            "id": 2,
+            "img": "gold",
+            "name": "Macca 100% increase",
+            "type": 15
+        },
+        {
+            "desc": "Obtained Magnetite will be increased.",
+            "id": 3,
+            "img": "magnetite",
+            "name": "Magnetite 50% increase",
+            "type": 15
+        },
+        {
+            "desc": "???",
+            "id": 4,
+            "img": "magatama_head",
+            "name": "Free Brand Removal",
+            "type": 15
+        },
+        {
+            "desc": "An item that can be used to transfer a skill owned by {0} to a different demon.",
+            "id": 0,
+            "img": "",
+            "name": "{0} Genome",
+            "type": 17
+        }
+    ],
+    "pvp_tier": [
+        {
+            "id": 1,
+            "img": "bronze",
+            "name": "Bronze 1",
+            "need_point": 0,
+            "rank": 1,
+            "star": 1
+        },
+        {
+            "id": 2,
+            "img": "bronze",
+            "name": "Bronze 2",
+            "need_point": 1100,
+            "rank": 1,
+            "star": 2
+        },
+        {
+            "id": 3,
+            "img": "bronze",
+            "name": "Bronze 3",
+            "need_point": 1200,
+            "rank": 1,
+            "star": 3
+        },
+        {
+            "id": 4,
+            "img": "silver",
+            "name": "Silver 1",
+            "need_point": 1300,
+            "rank": 2,
+            "star": 1
+        },
+        {
+            "id": 5,
+            "img": "silver",
+            "name": "Silver 2",
+            "need_point": 1400,
+            "rank": 2,
+            "star": 2
+        },
+        {
+            "id": 6,
+            "img": "silver",
+            "name": "Silver 3",
+            "need_point": 1500,
+            "rank": 2,
+            "star": 3
+        },
+        {
+            "id": 7,
+            "img": "gold",
+            "name": "Gold 1",
+            "need_point": 1600,
+            "rank": 3,
+            "star": 1
+        },
+        {
+            "id": 8,
+            "img": "gold",
+            "name": "Gold 2",
+            "need_point": 1700,
+            "rank": 3,
+            "star": 2
+        },
+        {
+            "id": 9,
+            "img": "gold",
+            "name": "Gold 3",
+            "need_point": 1800,
+            "rank": 3,
+            "star": 3
+        },
+        {
+            "id": 10,
+            "img": "platinum",
+            "name": "Diamond 1",
+            "need_point": 1900,
+            "rank": 4,
+            "star": 1
+        },
+        {
+            "id": 11,
+            "img": "platinum",
+            "name": "Diamond 2",
+            "need_point": 2000,
+            "rank": 4,
+            "star": 2
+        },
+        {
+            "id": 12,
+            "img": "platinum",
+            "name": "Diamond 3",
+            "need_point": 2100,
+            "rank": 4,
+            "star": 3
+        },
+        {
+            "id": 13,
+            "img": "legend",
+            "name": "Legend",
+            "need_point": 2300,
+            "rank": 5,
+            "star": 0
+        }
+    ],
+    "pvp_win_bonus": [
+        {},
+        {
+            "dmg": 2,
+            "hp": 0,
+            "pt": 0
+        },
+        {
+            "dmg": 2,
+            "hp": 4,
+            "pt": 0
+        },
+        {
+            "dmg": 4,
+            "hp": 4,
+            "pt": 0
+        },
+        {
+            "dmg": 4,
+            "hp": 4,
+            "pt": 10
+        },
+        {
+            "dmg": 4,
+            "hp": 8,
+            "pt": 10
+        },
+        {
+            "dmg": 6,
+            "hp": 8,
+            "pt": 10
+        },
+        {
+            "dmg": 6,
+            "hp": 8,
+            "pt": 20
+        },
+        {
+            "dmg": 6,
+            "hp": 12,
+            "pt": 20
+        },
+        {
+            "dmg": 8,
+            "hp": 12,
+            "pt": 20
+        },
+        {
+            "dmg": 8,
+            "hp": 12,
+            "pt": 30
+        }
+    ],
+    "stamina_item": [
+        {
+            "desc": "Recovers 10 Stamina.",
+            "id": 1010,
+            "img": "ap_10",
+            "name": "+10 Stamina",
+            "point": 10,
+            "recover_type": 1
+        },
+        {
+            "desc": "Recovers 20 Stamina.",
+            "id": 1020,
+            "img": "ap_20",
+            "name": "+20 Stamina",
+            "point": 20,
+            "recover_type": 1
+        },
+        {
+            "desc": "Recovers 30 Stamina.",
+            "id": 1030,
+            "img": "ap_30",
+            "name": "+30 Stamina",
+            "point": 30,
+            "recover_type": 1
+        },
+        {
+            "desc": "Recovers 40 Stamina.",
+            "id": 1040,
+            "img": "ap_40",
+            "name": "+40 Stamina",
+            "point": 40,
+            "recover_type": 1
+        },
+        {
+            "desc": "Recovers 50 Stamina.",
+            "id": 1050,
+            "img": "ap_50",
+            "name": "+50 Stamina",
+            "point": 50,
+            "recover_type": 1
+        },
+        {
+            "desc": "Recovers 1 Duel Stamina.",
+            "id": 2001,
+            "img": "pp_1",
+            "name": "+1 Duel Stamina",
+            "point": 1,
+            "recover_type": 2
+        },
+        {
+            "desc": "Recovers 2 Duel Stamina.",
+            "id": 2002,
+            "img": "pp_2",
+            "name": "+2 Duel Stamina",
+            "point": 2,
+            "recover_type": 2
+        },
+        {
+            "desc": "Recovers 3 Duel Stamina.",
+            "id": 2003,
+            "img": "pp_3",
+            "name": "+3 Duel Stamina",
+            "point": 3,
+            "recover_type": 2
+        },
+        {
+            "desc": "Recovers 4 Duel Stamina.",
+            "id": 2004,
+            "img": "pp_4",
+            "name": "+4 Duel Stamina",
+            "point": 4,
+            "recover_type": 2
+        },
+        {
+            "desc": "Recovers 5 Duel Stamina.",
+            "id": 2005,
+            "img": "pp_5",
+            "name": "+5 Duel Stamina",
+            "point": 5,
+            "recover_type": 2
+        },
+        {
+            "desc": "Recovers Aura Gate Action Points.",
+            "id": 3001,
+            "img": "00000000",
+            "name": "Aura Gate Action Points",
+            "point": 1,
+            "recover_type": 3
+        }
+    ]
+}
