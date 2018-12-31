@@ -451,7 +451,7 @@ object Dx2Plan extends JSApp {
     val ordering = rxOrdering()
     require(demons.size == ordering.size)
     val turnCount = demons.size * maxTurnsPerDemon
-    val colEighth = "flex: 0 0 12.5%; max-width: 12.5%; "
+    val colNinth = "flex-basis: 11.111111%; max-width: 11.111111%; "
     val rows = (0 until turnCount) map { turn => {
       val round = turn / ordering.size
       val demonOrder = turn % ordering.size
@@ -497,7 +497,7 @@ object Dx2Plan extends JSApp {
 
           div(
             `class` := "col-2 align-self-center",
-            style := colEighth + "height: 80%",
+            style := colNinth + "height: 80%",
             button(
               name := s"turn${turn}",
               `class` := s"btn $buttonClass h-100 w-100",
@@ -517,36 +517,35 @@ object Dx2Plan extends JSApp {
         val row = ListBuffer[Frag]()
         row += div(
           `class` := "col-2 h-100",
-          style := colEighth + "display: table",
+          style := colNinth + "display: table",
           div(
             style := "height: 100%; display: table-cell; vertical-align: middle",
             div(
-              div(`class` := "row", strong(demonName)),
-              div(
-                `class` := "row",
-                if (orleans) {
-                  s"$mp [${mp + 3}] MP"
-                } else {
-                  s"$mp MP"
-                }
-              ),
-              div(`class` := "row", s"$pressTurns press turns"),
-              div(`class` := "row", {
-                em {
-                  rxGameState().demonModifiers(demonId).mkString(", ")
-                }
-              }),
-            )
+              `class` := "row",
+              style := "margin-left:0px",
+              strong(demonName)
+            ),
+            div(
+              `class` := "row",
+              style := "margin-left:0px",
+              if (orleans) {
+                s"$mp [${mp + 3}] MP"
+              } else {
+                s"$mp MP"
+              }
+            ),
+            div(
+              `class` := "row",
+              style := "margin-left:0px",
+              s"$pressTurns press turns"
+            ),
+            div(`class` := "row",
+              style := "margin-left:0px",
+              em(rxGameState().demonModifiers(demonId).mkString(", "))
+            ),
           )
         )
-        row += div(
-          `class` := "col-10",
-          style := "align-items: center",
-          div(
-            `class` := "row h-100",
-            buttons
-          )
-        )
+        row ++= buttons
         row += div(`class` := "w-100")
         Some(row.toList)
       } else {
@@ -679,6 +678,10 @@ object Dx2Plan extends JSApp {
       ).render
     )
 
-    container.appendChild(moveConfigurationTable.render)
+    container.appendChild(
+      div(
+        moveConfigurationTable
+      ).render
+    )
   }
 }
