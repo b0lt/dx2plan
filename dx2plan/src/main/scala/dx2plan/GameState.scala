@@ -1,8 +1,10 @@
 package dx2plan
 
+import dx2db._
+
 sealed trait Move {
   def name: String
-  def element: String
+  def element: Option[Element]
   def mpCost: Int
   def pressTurnCost: Double
 
@@ -23,21 +25,25 @@ sealed trait Move {
 
 case object Pass extends Move {
   def name = "Pass"
-  def element = "none"
+  def element = None
   def mpCost = 0
   def pressTurnCost = 0.5
 }
 
 case object Attack extends Move {
   def name = "Attack"
-  def element = "phys"
+  def element = Some(Element.Phys)
   def mpCost = 0
   def pressTurnCost = 1
 }
 
 case class Spell(skill: Skill, awakened: Boolean) extends Move {
   def name = skill.name
-  def element = skill.element
+  def element = skill match {
+    case active: Skill.Active => active.element
+    case passive: Skill.Passive => None
+  }
+
   def mpCost = {
     if (awakened) {
       skill.cost.getOrElse(1) - 1
@@ -55,32 +61,22 @@ case class Spell(skill: Skill, awakened: Boolean) extends Move {
 }
 
 sealed trait GlobalModifier
-case object OrleansPrayer extends GlobalModifier
+case object OrleanPrayer extends GlobalModifier
 
 sealed trait DemonModifier {
-  def consumedBy(element: String): Boolean
-
-}
-
-object DemonModifier {
-  def isMagicalNuke(element: String) = {
-    element match {
-      case "almighty" | "fire" | "ice" | "elec" | "force" | "light" | "dark" => true
-      case _ => false
-    }
-  }
+  def consumedBy(element: Option[Element]): Boolean
 }
 
 case object Rebellion extends DemonModifier {
-  def consumedBy(element: String) = element == "phys"
+  def consumedBy(element: Option[Element]) = element.map(_.isPhysical).getOrElse(false)
 }
 
 case object Charge extends DemonModifier {
-  def consumedBy(element: String) = element == "phys"
+  def consumedBy(element: Option[Element]) = element.map(_.isPhysical).getOrElse(false)
 }
 
 case object Concentrate extends DemonModifier {
-  def consumedBy(element: String) = DemonModifier.isMagicalNuke(element)
+  def consumedBy(element: Option[Element]) = element.map(_.isMagical).getOrElse(false)
 }
 
 object Move {
@@ -89,33 +85,33 @@ object Move {
     string match {
       case "Pass" => Pass
       case "Attack" => Attack
-      case awakened(name) => Skill.find(name) match {
-        case Some(skill) => Spell(skill, true)
+      case awakened(name) => Dx2Plan.db.skills.get(name) match {
+        case Some(skill) => Spell(skill.asActive, true)
         case None => Pass
       }
-      case unawakened => Skill.find(unawakened) match {
-        case Some(skill) => Spell(skill, false)
+      case unawakened => Dx2Plan.db.skills.get(unawakened) match {
+        case Some(skill) => Spell(skill.asActive, false)
         case None => Pass
       }
     }
   }
 }
 
-case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[DemonId, Int],
-                     globalModifiers: Set[GlobalModifier], demonModifiers: Map[DemonId, Set[DemonModifier]]) {
-  def evaluate(demonId: DemonId, move: Move) = {
+case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[ConfigurationId, Int],
+                     globalModifiers: Set[GlobalModifier], demonModifiers: Map[ConfigurationId, Set[DemonModifier]]) {
+  def evaluate(configurationId: ConfigurationId, move: Move) = {
     var newDemonModifiers = demonModifiers
     var newGlobalModifiers = globalModifiers
     var pressTurnCost = move.pressTurnCost
 
-    if (move.element == "phys" && demonModifiers(demonId).contains(Rebellion)) {
+    if (move.element == Some(Element.Phys) && demonModifiers(configurationId).contains(Rebellion)) {
       pressTurnCost = 0.5
     }
 
     val newDemonMp = {
-      val mp = demonMp(demonId) - move.mpCost
-      if (mp < 0 && mp >= -3 && globalModifiers.contains(OrleansPrayer)) {
-        newGlobalModifiers -= OrleansPrayer
+      val mp = demonMp(configurationId) - move.mpCost
+      if (mp < 0 && mp >= -3 && globalModifiers.contains(OrleanPrayer)) {
+        newGlobalModifiers -= OrleanPrayer
         mp + 3
       } else {
         mp
@@ -134,30 +130,30 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[DemonId, 
 
     move.name match {
       case "Charge" => {
-        newDemonModifiers += (demonId -> (demonModifiers(demonId) + Charge - Concentrate))
+        newDemonModifiers += (configurationId -> (demonModifiers(configurationId) + Charge - Concentrate))
       }
 
       case "Concentrate" => {
-        newDemonModifiers += (demonId -> (demonModifiers(demonId) + Concentrate - Charge))
+        newDemonModifiers += (configurationId -> (demonModifiers(configurationId) + Concentrate - Charge))
       }
 
       case "Rebellion" => {
-        newDemonModifiers += (demonId -> (demonModifiers(demonId) + Rebellion))
+        newDemonModifiers += (configurationId -> (demonModifiers(configurationId) + Rebellion))
       }
 
       case "Mega Boost" => {
-        newDemonModifiers += (demonId -> (demonModifiers(demonId) + Charge + Rebellion))
+        newDemonModifiers += (configurationId -> (demonModifiers(configurationId) + Charge + Rebellion))
       }
 
       case "Red Zone" => {
         for (i <- 0 until 4) {
-          val id = DemonId(i)
+          val id = ConfigurationId(i)
           newDemonModifiers += (id -> (demonModifiers(id) + Rebellion))
         }
       }
 
-      case "Orleans Prayer" => {
-        newGlobalModifiers += OrleansPrayer
+      case "Orlean Prayer" => {
+        newGlobalModifiers += OrleanPrayer
       }
 
       case "Silent Prayer" => {
@@ -169,33 +165,33 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[DemonId, 
 
     newDemonModifiers =
       newDemonModifiers +
-      (demonId -> newDemonModifiers(demonId).filterNot(_.consumedBy(move.element)))
+      (configurationId -> newDemonModifiers(configurationId).filterNot(_.consumedBy(move.element)))
 
     GameState(
       turnNumber + 1,
       newPressTurns,
-      demonMp + (demonId -> newDemonMp),
+      demonMp + (configurationId -> newDemonMp),
       newGlobalModifiers,
       newDemonModifiers,
     )
   }
 
-  def regenMp(demonId: DemonId, mpRegenBonus: Int, maxMpBonus: Int) = {
-    val previousMp = demonMp(demonId)
+  def regenMp(configurationId: ConfigurationId, mpRegenBonus: Int, maxMpBonus: Int) = {
+    val previousMp = demonMp(configurationId)
     var regen = 3 + mpRegenBonus
     val newMp = Math.min(10 + maxMpBonus, previousMp + regen)
-    GameState(turnNumber, pressTurns, demonMp + (demonId -> newMp), globalModifiers, demonModifiers)
+    GameState(turnNumber, pressTurns, demonMp + (configurationId -> newMp), globalModifiers, demonModifiers)
   }
 }
 
 object GameState {
-  def initial(demonIds: Seq[DemonId]): GameState = {
+  def initial(configurationIds: Seq[ConfigurationId]): GameState = {
     GameState(
       0,
-      demonIds.length,
-      (demonIds map { (_ -> Dx2Plan.initialMp) }).toMap,
+      configurationIds.length,
+      (configurationIds map { (_ -> Dx2Plan.initialMp) }).toMap,
       Set[GlobalModifier](),
-      (demonIds map { (_ -> Set[DemonModifier]()) }).toMap,
+      (configurationIds map { (_ -> Set[DemonModifier]()) }).toMap,
     )
   }
 }

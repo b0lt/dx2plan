@@ -15,31 +15,33 @@ import scalatags.JsDom.tags2.section
 import rx._
 
 import upickle.default._
-import upickle.default.{ReadWriter => RW, macroRW}
+
+import dx2db._
 
 // Identifier of demon based on input box layout (i.e. 0 is left-most)
-case class DemonId(id: Int)
-object DemonId {
-  implicit val rw: RW[DemonId] = macroRW
+case class ConfigurationId(id: Int)
+object ConfigurationId {
+  implicit val rw: ReadWriter[ConfigurationId] = macroRW
 }
 
 case class DemonConfiguration(demon: Var[Option[Demon]] = Var[Option[Demon]](None),
-                              color: Var[Color] = Var[Color](Color.Clear),
+                              archetype: Var[Archetype] = Var[Archetype](Archetype.Clear),
                               divine: Var[Boolean] = Var[Boolean](false),
                               lead: Var[Boolean] = Var[Boolean](false),
                               transferSkill0: Var[Option[Skill]] = Var(None),
                               transferSkill1: Var[Option[Skill]] = Var(None),
                               actions: List[Var[Move]] = List.tabulate(Dx2Plan.maxTurnsPerDemon)(_ => Var[Move](Pass)))
 
-case class SerializedDemonConfiguration(demon: String, color: String, divine: Boolean, lead: Boolean,
-                                        transferSkill0: String, transferSkill1: String, actions: List[String]) {
+case class SerializedDemonConfiguration(demon: Option[DemonId], archetype: Archetype, divine: Boolean, lead: Boolean,
+                                        transferSkill0: Option[SkillId], transferSkill1: Option[SkillId],
+                                        actions: List[String]) {
   def applyToConfig(config: DemonConfiguration) {
-    config.demon() = Demon.find(demon)
-    config.color() = Color.deserialize(color)
+    config.demon() = demon flatMap { Dx2Plan.db.demons.get }
+    config.archetype() = archetype
     config.divine() = divine
     config.lead() = lead
-    config.transferSkill0() = Skill.find(transferSkill0)
-    config.transferSkill1() = Skill.find(transferSkill1)
+    config.transferSkill0() = transferSkill0.flatMap(Dx2Plan.db.skills.get)
+    config.transferSkill1() = transferSkill1.flatMap(Dx2Plan.db.skills.get)
     actions.zipWithIndex.foreach { case (action, index) => {
       config.actions(index)() = Move.deserialize(action)
     }}
@@ -47,17 +49,17 @@ case class SerializedDemonConfiguration(demon: String, color: String, divine: Bo
 }
 
 object SerializedDemonConfiguration {
-  implicit val rw: RW[SerializedDemonConfiguration] = macroRW
+  implicit val rw: ReadWriter[SerializedDemonConfiguration] = macroRW
 
   def fromConfig(config: DemonConfiguration)(implicit ctx: Ctx.Owner, data: Ctx.Data) = {
-    val demon = config.demon().map(_.name).getOrElse("")
-    val color = config.color().serialize()
+    val demon = config.demon().map(_.id)
+    val archetype = config.archetype()
     val divine = config.divine()
     val lead = config.lead()
-    val transferSkill0 = config.transferSkill0().map(_.name).getOrElse("")
-    val transferSkill1 = config.transferSkill1().map(_.name).getOrElse("")
+    val transferSkill0 = config.transferSkill0().map(_.id)
+    val transferSkill1 = config.transferSkill1().map(_.id)
     val actions = config.actions.map { action => action().serialize() }
-    SerializedDemonConfiguration(demon, color, divine, lead, transferSkill0, transferSkill1, actions)
+    SerializedDemonConfiguration(demon, archetype, divine, lead, transferSkill0, transferSkill1, actions)
   }
 }
 
@@ -66,7 +68,7 @@ object DemonConfiguration {
     SerializedDemonConfiguration.fromConfig(config)
   }
 
-  def serialize(config: Map[DemonId, DemonConfiguration])(implicit ctx: Ctx.Owner, data: Ctx.Data): String = {
+  def serialize(config: Map[ConfigurationId, DemonConfiguration])(implicit ctx: Ctx.Owner, data: Ctx.Data): String = {
     val bytes = writeBinary(config.map { case (key, value) => (key -> serialize(value)) }.toMap)
     var compressedBytes: Array[Byte] = LZMA.compress(bytes.toJSArray, 1).toArray
     Base64.getUrlEncoder().encodeToString(compressedBytes)
@@ -76,7 +78,7 @@ object DemonConfiguration {
     try {
       val bytes = Base64.getUrlDecoder().decode(data)
       var decompressedBytes: Array[Byte] = LZMA.decompress(bytes.toJSArray).toArray
-      val serializedConfigs = readBinary[Map[DemonId, SerializedDemonConfiguration]](decompressedBytes)
+      val serializedConfigs = readBinary[Map[ConfigurationId, SerializedDemonConfiguration]](decompressedBytes)
       Some(serializedConfigs)
     } catch {
       case ex: Throwable => {
@@ -92,13 +94,15 @@ object Dx2Plan extends JSApp {
   import Framework._
   implicit val ctx: Ctx.Owner = Ctx.Owner.safe()
 
+  val db: Database = read[Database](Dx2DbBlob.blob)
+
   val maxDemonCount = 4
   val maxTurnsPerDemon = 4
   val initialMp = 2
 
   // Underlying reactive variables for demon configuration.
-  val rxConfigurations: Map[DemonId, DemonConfiguration] = (0 until maxDemonCount).map { id =>
-    DemonId(id) -> DemonConfiguration()
+  val rxConfigurations: Map[ConfigurationId, DemonConfiguration] = (0 until maxDemonCount).map { id =>
+    ConfigurationId(id) -> DemonConfiguration()
   }.toMap
 
   // Actually selected demons.
@@ -106,10 +110,10 @@ object Dx2Plan extends JSApp {
     rxConfigurations.filterNot { case (_, value) => value.demon().isEmpty }
   }
 
-  // List of DemonIds ordered by turn order.
+  // List of ConfigurationIds ordered by turn order.
   val rxOrdering = Rx {
     val demonInfo = rxDemons().map { case (id, configuration) => {
-      val agi = configuration.demon().get.stats(Stat.Agility)
+      val agi = configuration.demon().get.stats.agility
       val lead = configuration.lead()
       (id, agi, lead)
     }}
@@ -119,7 +123,7 @@ object Dx2Plan extends JSApp {
     agiSorted.map { case (index, agi, lead) => index }
   }
 
-  def hasSkill(demonId: DemonId, skillName: String)(implicit ctx: Ctx.Owner, data: Ctx.Data): Boolean = {
+  def hasSkill(demonId: ConfigurationId, skillName: String)(implicit ctx: Ctx.Owner, data: Ctx.Data): Boolean = {
     val rxSkills = rxDemonSkills(demonId)
     rxSkills().find((skill: Spell) => {
       skill.skill.name == skillName
@@ -175,12 +179,12 @@ object Dx2Plan extends JSApp {
             if (hasSkill(demonId, "Mana Gain")) maxMpBonus += 1
             if (hasSkill(demonId, "Mana Surge")) maxMpBonus += 1
 
-            val previousDemonId = ordering((n - 1) % demons.size)
+            val previousConfigurationId = ordering((n - 1) % demons.size)
             val previousDemonTurn = (n - 1) / demons.size
-            val rxPreviousDemonMove = demons(previousDemonId).actions(previousDemonTurn)
+            val rxPreviousDemonMove = demons(previousConfigurationId).actions(previousDemonTurn)
 
             // TODO: Lunar Blessing (should it happen on evaluation, or on spell creation?)
-            prev.evaluate(previousDemonId, rxPreviousDemonMove()).regenMp(demonId, mpRegenBonus, maxMpBonus)
+            prev.evaluate(previousConfigurationId, rxPreviousDemonMove()).regenMp(demonId, mpRegenBonus, maxMpBonus)
           }
           lb += nextState
           lastState = Some(nextState)
@@ -191,17 +195,17 @@ object Dx2Plan extends JSApp {
   }
 
   val rxDemonSkills = ((0 until maxDemonCount) map { i: Int => {
-    val demonId = DemonId(i)
+    val demonId = ConfigurationId(i)
     (demonId -> Rx {
       val configuration = rxConfigurations(demonId)
       val skills = ListBuffer[Spell]()
       configuration.demon() foreach { demon =>
         demon.baseSkills.foreach { skill =>
-          skills += Spell(skill, false)
+          skills += Spell(Dx2Plan.db.skills(skill), false)
         }
-        demon.awakenSkills(configuration.color()) match {
+        demon.awakenSkills.get(configuration.archetype()) match {
           case Some(skill) => {
-            skills += Spell(skill, true)
+            skills += Spell(Dx2Plan.db.skills(skill), true)
           }
           case None => {}
         }
@@ -214,24 +218,25 @@ object Dx2Plan extends JSApp {
           }
         }
       }
+
       skills.toList
     })
   }}).toMap
 
-  def generateDemonConfiguration(demonId: DemonId, serializedConfig: Option[SerializedDemonConfiguration]) = {
-    val idx = demonId.id
+  def generateDemonConfiguration(configurationId: ConfigurationId, serializedConfig: Option[SerializedDemonConfiguration]) = {
+    val idx = configurationId.id
     val demonNameId = s"demon${idx}";
     val demonArchetypeId = s"demon${idx}Archetype";
     val demonDivineId = s"demon${idx}Divine";
     val demonLeadId = s"demon${idx}Lead";
-    val demon = rxConfigurations(demonId)
-    val (color, divine, lead): Tuple3[Color, Boolean, Boolean] = serializedConfig.map {
-      config => (Color.deserialize(config.color), config.divine, config.lead)
-    }.getOrElse((Color.Clear, false, false))
+    val configuration = rxConfigurations(configurationId)
+    val (selectedArchetype, divine, lead): Tuple3[Archetype, Boolean, Boolean] = serializedConfig.map {
+      config => (config.archetype, config.divine, config.lead)
+    }.getOrElse((Archetype.Clear, false, false))
 
-    val transferSkills = serializedConfig.map {
+    val transferSkills: Seq[Option[SkillId]] = serializedConfig.map {
       config => Seq(config.transferSkill0, config.transferSkill1)
-    }.getOrElse(Seq("", ""))
+    }.getOrElse(Seq(None, None))
 
     (
       input(
@@ -240,9 +245,9 @@ object Dx2Plan extends JSApp {
         autofocus := idx == 0,
         tabindex := idx * 10 + 1,
         autocomplete := "false",
-        value := Rx { demon.demon().map(_.name).getOrElse("") },
+        value := Rx { configuration.demon().map(_.name).getOrElse("") },
         oninput := ({(elem: HTMLInputElement) => {
-          rxConfigurations(demonId).demon() = Demon.find(elem.value)
+          configuration.demon() = Dx2Plan.db.demons.get(elem.value)
         }}: js.ThisFunction)
       ),
       select(
@@ -250,38 +255,23 @@ object Dx2Plan extends JSApp {
         id := demonArchetypeId,
         tabindex := idx * 10 + 2,
         oninput := ({(elem: HTMLSelectElement) => {
-          rxConfigurations(demonId).color() = elem.value match {
-            case "clear" => Color.Clear
-            case "red" => Color.Red
-            case "yellow" => Color.Yellow
-            case "purple" => Color.Purple
-            case "teal" => Color.Teal
+          configuration.archetype() = elem.value match {
+            case "clear" => Archetype.Clear
+            case "red" => Archetype.Red
+            case "yellow" => Archetype.Yellow
+            case "purple" => Archetype.Purple
+            case "teal" => Archetype.Teal
           }
         }}: js.ThisFunction),
-        option(
-          value := "clear",
-          if (color == Color.Clear) selected := true,
-          "Clear"),
-        option(
-          value := "red",
-          if (color == Color.Red) selected := true,
-          "Red"
-        ),
-        option(
-          value := "yellow",
-          if (color == Color.Yellow) selected := true,
-          "Yellow"
-        ),
-        option(
-          value := "purple",
-          if (color == Color.Purple) selected := true,
-          "Purple"
-        ),
-        option(
-          value := "teal",
-          if (color == Color.Teal) selected := true,
-          "Teal"
-        ),
+        Archetype.all().map(
+          archetype => {
+            option(
+              value := archetype.stringValue,
+              if (selectedArchetype == archetype) selected := true,
+              archetype.toString()
+            )
+          }
+        ).toSeq
       ),
       div(
         div(
@@ -293,7 +283,7 @@ object Dx2Plan extends JSApp {
             `type` := "checkbox",
             if (divine) checked := true,
             onchange := ({(elem: HTMLInputElement) => {
-              rxConfigurations(demonId).divine() = elem.checked
+              configuration.divine() = elem.checked
             }}: js.ThisFunction)
           ),
           label(
@@ -313,7 +303,7 @@ object Dx2Plan extends JSApp {
             disabled := true,
             if (lead) checked := true,
             onchange := ({(elem: HTMLInputElement) => {
-              rxConfigurations(demonId).lead() = elem.checked
+              configuration.lead() = elem.checked
             }}: js.ThisFunction)
           ),
           label(
@@ -326,10 +316,10 @@ object Dx2Plan extends JSApp {
       {
         val baseSkills: Seq[Rx.Dynamic[Option[Skill]]] = (0 until 3) map {
           i => Rx {
-            val demonOpt = demon.demon()
+            val demonOpt = configuration.demon()
             demonOpt flatMap { demon =>
               if (demon.baseSkills.length > i) {
-                Some(demon.baseSkills(i))
+                Some(Dx2Plan.db.skills(demon.baseSkills(i)))
               } else {
                 None
               }
@@ -338,9 +328,9 @@ object Dx2Plan extends JSApp {
         }
 
         val awakenSkill: Rx.Dynamic[Option[Skill]] = Rx {
-          val demonOpt = demon.demon()
-          val color = demon.color()
-          demonOpt flatMap { _.awakenSkills(color) }
+          val demonOpt = configuration.demon()
+          val archetype = configuration.archetype()
+          demonOpt flatMap { _.awakenSkills.get(archetype).map(Dx2Plan.db.skills.apply) }
         }
 
         val lockedSkills = baseSkills.map((_, false)) ++ Seq((awakenSkill, true))
@@ -405,9 +395,9 @@ object Dx2Plan extends JSApp {
         val transferSkillElements = (0 until 2).map {
           i => Rx {
             val rxTransferSkill = if (i == 0) {
-              demon.transferSkill0
+              configuration.transferSkill0
             } else {
-              demon.transferSkill1
+              configuration.transferSkill1
             }
 
             div(
@@ -418,9 +408,9 @@ object Dx2Plan extends JSApp {
                 input(
                   `type` := "text",
                   `class` := "form-control",
-                  value := transferSkills(i),
+                  value := transferSkills(i).flatMap(Dx2Plan.db.skills.get).map(_.name).getOrElse(""),
                   oninput := ({(elem: HTMLInputElement) => {
-                    rxTransferSkill() = Skill.find(elem.value)
+                    rxTransferSkill() = Dx2Plan.db.skills.get(elem.value)
                   }}: js.ThisFunction)
                 ),
                 div(
@@ -458,20 +448,20 @@ object Dx2Plan extends JSApp {
     val rows = (0 until turnCount) map { turn => {
       val round = turn / ordering.size
       val demonOrder = turn % ordering.size
-      val demonId = ordering(demonOrder)
+      val configurationId = ordering(demonOrder)
 
-      val demon = demons(demonId)
-      require(!demon.demon().isEmpty)
+      val configuration = demons(configurationId)
+      require(!configuration.demon().isEmpty)
 
-      val demonName = demon.demon().get.name
+      val demonName = configuration.demon().get.name
 
       val rxGameState = rxGameStates(turn)
-      val mp = rxGameState().demonMp(demonId)
-      val orleans = rxGameState().globalModifiers.contains(OrleansPrayer)
+      val mp = rxGameState().demonMp(configurationId)
+      val orleans = rxGameState().globalModifiers.contains(OrleanPrayer)
       val pressTurns = rxGameState().pressTurns
       if (pressTurns > 0) {
-        val rxSelectedAction = demon.actions(round)
-        val rxSkills = rxDemonSkills(demonId)
+        val rxSelectedAction = configuration.actions(round)
+        val rxSkills = rxDemonSkills(configurationId)
         val skills = rxSkills() filter { skill => skill.mpCost > 0 }
         val moves: Seq[Move] = Seq(Pass, Attack) ++ skills
         val selectedAction = rxSelectedAction()
@@ -507,7 +497,7 @@ object Dx2Plan extends JSApp {
               style := "padding-left: 0px; padding-right: 0px; font-size: 0.75rem; font-weight: bold",
               id := buttonId,
               onclick := ({(elem: HTMLInputElement) => {
-                val rxAction = rxConfigurations(demonId).actions(round)
+                val rxAction = configuration.actions(round)
                 rxAction() = move
               }}: js.ThisFunction),
               move.name,
@@ -544,7 +534,7 @@ object Dx2Plan extends JSApp {
             ),
             div(`class` := "row",
               style := "margin-left:0px",
-              em(rxGameState().demonModifiers(demonId).mkString(", "))
+              em(rxGameState().demonModifiers(configurationId).mkString(", "))
             ),
           )
         )
@@ -575,43 +565,43 @@ object Dx2Plan extends JSApp {
   def main(): Unit = {
     dom.document.body.innerHTML = ""
 
-    val serializedConfigs: Option[Map[DemonId, SerializedDemonConfiguration]] = dom.document.location.hash match {
+    val serializedConfigs: Option[Map[ConfigurationId, SerializedDemonConfiguration]] = dom.document.location.hash match {
       case "#example" => {
         val ishtar = SerializedDemonConfiguration(
-          "Ishtar",
-          "Yellow",
+          Some(Dx2Plan.db.demons("Ishtar").id),
+          Archetype.Yellow,
           divine = true, lead = false,
-          "", "",
+          None, None,
           List("Concentrate (awakened)", "Attack", "Mesopotamian Star", "Attack")
         )
         val fenrir = SerializedDemonConfiguration(
-          "Fenrir",
-          "Purple",
+          Some(Dx2Plan.db.demons("Fenrir").id),
+          Archetype.Purple,
           divine = false, lead = false,
-          "Rakunda", "Makarakarn",
-          List("Pass", "Pass", "Pass", "Pass")
+          Some(Dx2Plan.db.skills("Rakunda").id), Some(Dx2Plan.db.skills("Makarakarn").id),
+          List("Pass", "Pass", "Pass", "Pass"),
         )
         val pyro = SerializedDemonConfiguration(
-          "Pyro Jack",
-          "Yellow",
+          Some(Dx2Plan.db.demons("Pyro Jack").id),
+          Archetype.Yellow,
           divine = false, lead = false,
-          "Megido", "",
-          List("Tag (awakened)", "Tag (awakened)", "Tag (awakened)", "Tag (awakened)")
+          Some(Dx2Plan.db.skills("Megido").id), None,
+          List("Tag (awakened)", "Tag (awakened)", "Tag (awakened)", "Tag (awakened)"),
         )
         val jack = SerializedDemonConfiguration(
-          "Jack Frost",
-          "Yellow",
+          Some(Dx2Plan.db.demons("Jack Frost").id),
+          Archetype.Yellow,
           divine = false, lead = false,
-          "", "",
-          List("Tag (awakened)", "Tag (awakened)", "Tag (awakened)", "Tag (awakened)")
+          None, None,
+          List("Tag (awakened)", "Tag (awakened)", "Tag (awakened)", "Tag (awakened)"),
         )
 
         Some(
           Map(
-            (DemonId(0) -> ishtar),
-            (DemonId(1) -> fenrir),
-            (DemonId(2) -> pyro),
-            (DemonId(3) -> jack)
+            (ConfigurationId(0) -> ishtar),
+            (ConfigurationId(1) -> fenrir),
+            (ConfigurationId(2) -> pyro),
+            (ConfigurationId(3) -> jack)
           )
         )
       }
@@ -633,7 +623,7 @@ object Dx2Plan extends JSApp {
     }
 
     val demonConfigurationElements = (0 until maxDemonCount) map {
-      i => generateDemonConfiguration(DemonId(i), serializedConfigs.map(config => config(DemonId(i))))
+      i => generateDemonConfiguration(ConfigurationId(i), serializedConfigs.map(config => config(ConfigurationId(i))))
     }
 
     val container = dom.document.body.appendChild(

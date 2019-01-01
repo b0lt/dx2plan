@@ -19,30 +19,26 @@ lazy val dx2plan = crossProject(JSPlatform).withoutSuffixFor(JSPlatform).crossTy
       "com.lihaoyi" %%% "scalarx" % "0.4.0",
     ),
     sourceGenerators in Compile += Def.task {
-      val demonsFile = baseDirectory.value / "../src/main/resources/demons.csv"
-      val skillsFile = baseDirectory.value / "../src/main/resources/skills.csv"
-
+      val dx2dbPath = baseDirectory.value / "../../dx2db/shared/src/main/resources/dx2db.json"
       val sourceDir = (sourceManaged in Compile).value
-      val sourceFile = sourceDir / "Dx2Db.scala"
+      val sourceFile = sourceDir / "Dx2DbBlob.scala"
 
       // Java has a 64k limit on the length of string literals, so chunk the file up and concatenate.
-      // TODO: Convert to json and load it directly instead of this abomination.
-      val demonChunks = IO.read(demonsFile).grouped(60000).toList.map(_.replaceAllLiterally("$", "$$"))
-      val skillChunks = IO.read(skillsFile).grouped(60000).toList.map(_.replaceAllLiterally("$", "$$"))
+      // TODO: Load the json directly instead of this abomination.
+      val chunks = IO.read(dx2dbPath).grouped(60000).toList.map(_.replaceAllLiterally("$", "$$"))
 
       val scalaCode =
         s"""
         package dx2plan
 
-        object Dx2Db {
-          final val demons = ${demonChunks.map("raw\"\"\"" + _ + "\"\"\"").mkString(" + ")}
-          final val skills = ${skillChunks.map("raw\"\"\"" + _ + "\"\"\"").mkString(" + ")}
+        object Dx2DbBlob {
+          final val blob = ${chunks.map("raw\"\"\"" + _ + "\"\"\"").mkString(" + ")}
         }
         """
       IO.write(sourceFile, scalaCode)
       Seq(sourceFile)
     }.taskValue,
-  )
+  ).dependsOn(dx2db)
 
 lazy val dx2db = crossProject(JSPlatform, JVMPlatform).crossType(CrossType.Full)
   .in(file("dx2db"))
