@@ -56,6 +56,8 @@ lazy val dx2db = crossProject(JSPlatform, JVMPlatform).crossType(CrossType.Full)
       "com.nrinaudo" %%% "kantan.csv-generic" % "0.5.0",
     ),
     unmanagedResourceDirectories in Compile += baseDirectory.value / "../shared/src/main/resources",
+    fork in run := true,
+    baseDirectory in run := baseDirectory.value / "../../dx2db/shared/src/main/resources",
   )
 
 lazy val altemascraper = crossProject(JVMPlatform).withoutSuffixFor(JVMPlatform).crossType(CrossType.Pure)

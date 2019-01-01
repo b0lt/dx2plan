@@ -1,5 +1,10 @@
 package dx2db
 
+import java.nio.file.{Paths, Files}
+import java.nio.charset.StandardCharsets
+
+import upickle.default._
+
 object Dx2Db extends App {
   lazy val dataFiles = DataFiles.fromResources().get
 
@@ -58,4 +63,12 @@ object Dx2Db extends App {
 
     filtered
   }
+
+  lazy val db = Database(demons, skills)
+  lazy val serialized = write(db)
+
+  // Make sure that we can roundtrip.
+  assert(db == read[Database](serialized))
+
+  Files.write(Paths.get("dx2db.json"), serialized.getBytes(StandardCharsets.UTF_8))
 }

@@ -33,7 +33,7 @@ object SkillParser {
       assert(active("cost_type").num.toInt == 1)
 
       val target = {
-        val result = Target.fromValue(active("target").num.toInt)
+        val result = Target.fromIntValue(active("target").num.toInt)
         // Silent Prayer, which is implemented via two chained skills.
         if (id.value == 2020) {
           assert(result == Target.AllAllies)
