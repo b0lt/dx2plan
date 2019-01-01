@@ -20,6 +20,11 @@ sealed trait Skill extends StringableKey {
   def asActive = this.asInstanceOf[Skill.Active]
   def asPassive = this.asInstanceOf[Skill.Passive]
 
+  def cost: Option[Int] = this match {
+    case active: Skill.Active => Some(active.mpCost)
+    case passive: Skill.Passive => None
+  }
+
   override def toString() = name
   override def asStringKey = name
 }
