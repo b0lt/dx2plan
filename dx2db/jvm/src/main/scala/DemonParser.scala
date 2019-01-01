@@ -5,7 +5,7 @@ import scala.collection.mutable.ListBuffer
 import ujson.Js
 
 object DemonParser {
-  def parseDemon(demonData: Js.Obj, races: Map[Int, String]): Option[Demon] = {
+  def parseDemon(locale: String, demonData: ujson.Obj, races: Map[Int, String]): Option[Demon] = {
     val id = DemonId(demonData("id").num.toInt)
     val name = demonData("name").str
     val description = demonData("desc").str
@@ -20,12 +20,13 @@ object DemonParser {
       return None
     }
 
-    val race = races(demonData("race").num.toInt)
+    val raceId = demonData("race").num.toInt
+    val race = Race(races(raceId), raceId)
     val grade = demonData("grade").num.toInt
 
     var skills = ListBuffer[SkillId]()
     demonData("skl").arr.foreach {
-      case Js.Obj(skill) => {
+      case ujson.Obj(skill) => {
         if (skill.value.contains("is_awake")) {
           // Clear awaken skill, skip this and handle it later.
           assert(skill("is_awake").bool == true)
@@ -45,7 +46,7 @@ object DemonParser {
     var archetypeSkills = Map[Archetype, SkillId]()
 
     demonData("arches").arr.foreach {
-      case Js.Obj(arch) => {
+      case ujson.Obj(arch) => {
         val archetype = Archetype.fromJsonId(arch("type").num.toInt)
         val skillId = SkillId(arch("id").num.toInt)
         assert(!archetypeSkills.contains(archetype))
@@ -57,19 +58,18 @@ object DemonParser {
     Some(
       Demon(
         id = id,
-        name = name,
-        jpName = None,
+        names = Map(locale -> name),
         race = race,
         grade = grade,
         description = description,
+        stats = Stats.empty(),
         baseSkills = skills.toSeq,
         archetypeSkills = archetypeSkills,
-        rawData = demonData
       )
     )
   }
 
-  def parse(dataFiles: LocalizedDataFiles): DemonDb = {
+  def parse(locale: String, dataFiles: LocalizedDataFiles): DemonDb = {
     val json = ujson.read(dataFiles.dataFile2)
 
     val races = json("dvl_race").arr.map { raceValue =>
@@ -81,7 +81,7 @@ object DemonParser {
     val demonBuffer = ListBuffer[(DemonId, Demon)]()
 
     for (demonData <- demonArray) {
-      parseDemon(demonData.obj, races) match {
+      parseDemon(locale, demonData.obj, races) match {
         case Some(demon) => demonBuffer += (demon.id -> demon)
         case None => {}
       }
@@ -90,5 +90,39 @@ object DemonParser {
     new DemonDb(demonBuffer.toMap)
   }
 
-  def parse(dataFiles: DataFiles): DemonDb = parse(dataFiles.en)
+  def combineNames(base: DemonDb, other: DemonDb) = {
+    val namedDemons = base.demons.map { case (demonId, demon) =>
+      other.get(demonId) match {
+        case Some(otherDemon) => {
+          // Do some sanity checking.
+          if (demon.race != otherDemon.race ||
+              demon.grade != otherDemon.grade ||
+              demon.baseSkills != otherDemon.baseSkills ||
+              demon.archetypeSkills != otherDemon.archetypeSkills) {
+            System.err.println(s"Base: ${demon.name}\nOther: ${otherDemon.name}\n")
+            System.err.println(s"Base: ${demon.race}\nOther: ${otherDemon.race}\n")
+            System.err.println(s"Base: ${demon.baseSkills}\nOther: ${otherDemon.baseSkills}\n")
+            System.err.println(s"Base: ${demon.archetypeSkills}\nOther: ${otherDemon.archetypeSkills}\n")
+            throw new RuntimeException(s"Mismatch for demon ID $demonId")
+            System.exit(1)
+          }
+
+          (demonId -> demon.copy(names = demon.names ++ otherDemon.names))
+        }
+
+        case None => {
+          System.err.println(s"warning: failed to find localized name for ${demon.name}")
+          (demonId -> demon)
+        }
+      }
+    }
+
+    DemonDb(namedDemons)
+  }
+
+  def parse(dataFiles: DataFiles): DemonDb = {
+    val en = parse("en", dataFiles.en)
+    val jp = parse("jp", dataFiles.jp)
+    combineNames(en, jp)
+  }
 }
