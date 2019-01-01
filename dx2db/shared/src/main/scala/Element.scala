@@ -3,7 +3,10 @@ package dx2db
 import upickle.default._
 
 // Shift value stored in data3.dvl_skl[n].active.attr.
-sealed class Element(val intValue: Int, val stringValue: String)
+sealed class Element(val intValue: Int, val stringValue: String) {
+  def isPhysical() = this == Element.Phys
+  def isMagical() = !isPhysical
+}
 
 object Element {
   implicit val rw: ReadWriter[Element] = {
