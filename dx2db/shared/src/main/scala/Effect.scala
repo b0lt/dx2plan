@@ -1,8 +1,18 @@
 package dx2db
 
+import upickle.default.{ReadWriter => RW, macroRW}
+
 sealed trait Effect
 
 object Effect {
+  implicit val rw: RW[Effect] = {
+    RW.merge(
+      macroRW[Tetraja.type], macroRW[Tetrakarn.type], macroRW[Makarakarn.type], macroRW[FiveElements.type],
+      macroRW[Charge.type], macroRW[Concentrate.type], macroRW[Rebellion.type],
+      macroRW[Barrier.type], macroRW[Lydia.type]
+    )
+  }
+
   def fromJson(obj: ujson.Obj): Set[Effect] = {
     obj.value.map {
       case ("avoid_death", _) => Tetraja
@@ -22,17 +32,30 @@ object Effect {
     }.toSet
   }
 
+  @upickle.implicits.key("avoid_death")
   final case object Tetraja extends Effect
 
+  @upickle.implicits.key("repel_phy")
   final case object Tetrakarn extends Effect
+
+  @upickle.implicits.key("repel_mag")
   final case object Makarakarn extends Effect
+
+  @upickle.implicits.key("repel_almighty")
   final case object FiveElements extends Effect
 
+  @upickle.implicits.key("charge_phy")
   final case object Charge extends Effect
+
+  @upickle.implicits.key("concentrate_mag")
   final case object Concentrate extends Effect
 
+  @upickle.implicits.key("force_critical")
   final case object Rebellion extends Effect
 
+  @upickle.implicits.key("barrier")
   final case object Barrier extends Effect
+
+  @upickle.implicits.key("lydia")
   final case object Lydia extends Effect
 }

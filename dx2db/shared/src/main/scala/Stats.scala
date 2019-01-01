@@ -1,5 +1,7 @@
 package dx2db
 
+import upickle.default.{ReadWriter => RW, macroRW}
+
 case class Stats(hp: Int, strength: Int, magic: Int, vitality: Int, agility: Int, luck: Int) {
   private def level = 50
   private def attack(stat: Int) = (stat * 2.1 + level * 5.6 + 50).toInt
@@ -16,5 +18,7 @@ case class Stats(hp: Int, strength: Int, magic: Int, vitality: Int, agility: Int
 }
 
 object Stats {
+  implicit val rw: RW[Stats] = macroRW
+
   def empty(): Stats = Stats(0, 0, 0, 0, 0, 0)
 }

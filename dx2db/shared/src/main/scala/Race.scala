@@ -1,5 +1,7 @@
 package dx2db
 
+import upickle.default.{ReadWriter => RW, macroRW}
+
 // TODO: Localize this as well?
 case class Race(name: String, id: Int) {
   override def equals(other: Any): Boolean = {
@@ -11,4 +13,8 @@ case class Race(name: String, id: Int) {
   }
 
   override def hashCode(): Int = id.hashCode()
+}
+
+object Race {
+  implicit val rw: RW[Race] = macroRW
 }
