@@ -36,19 +36,21 @@ jobs:
       - deploy:
           name: Deploy
           command: |
+            git config --global user.email "3079085+b0lt@users.noreply.github.com"
+            git config --global user.name b0lt
+
+            mkdir -p /tmp
+            git clone $CIRCLE_REPOSITORY_URL /tmp/gh-pages -b gh-pages
+
+            JS_OUTPUT_DIR=/src/dx2plan/.js/target/scala-2.12
+            cp $JS_OUTPUT_DIR/dx2plan-opt.js $JS_OUTPUT_DIR/dx2plan-opt.js.map /tmp/gh-pages
+            cp /src/dx2db/shared/src/main/resources/dx2db.json /tmp/gh-pages
+
+            cd /tmp/gh-pages
+
+            git add -A
+            git commit -m "Automated deployment to GitHub Pages: ${CIRCLE_SHA1}" --allow-empty
+
             if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
-              git config --global user.email "3079085+b0lt@users.noreply.github.com"
-              git config --global user.name b0lt
-
-              mkdir -p /tmp
-              git clone $CIRCLE_REPOSITORY_URL /tmp/gh-pages -b gh-pages
-
-              JS_OUTPUT_DIR=/src/dx2plan/.js/target/scala-2.12
-              cp $JS_OUTPUT_DIR/dx2plan-opt.js $JS_OUTPUT_DIR/dx2plan-opt.js.map /tmp/gh-pages
-              cp /src/dx2db/shared/src/main/resources/dx2db.json /tmp/gh-pages
-
-              cd /tmp/gh-pages
-              git add -A
-              git commit -m "Automated deployment to GitHub Pages: ${CIRCLE_SHA1}" --allow-empty
               git push origin $TARGET_BRANCH
             fi
