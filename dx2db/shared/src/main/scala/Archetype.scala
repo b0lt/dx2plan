@@ -8,6 +8,8 @@ object Archetype {
   implicit val rw: ReadWriter[Archetype] =
     readwriter[String].bimap[Archetype](_.stringValue, Archetype.fromStringValue(_))
 
+  def all(): Iterable[Archetype] = Seq(Clear, Red, Yellow, Purple, Teal)
+
   case object Clear extends Archetype("clear")
   case object Red extends Archetype("red")
   case object Yellow extends Archetype("yellow")
