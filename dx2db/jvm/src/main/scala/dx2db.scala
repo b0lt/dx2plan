@@ -2,8 +2,21 @@ package dx2db
 
 object Dx2Db extends App {
   lazy val dataFiles = DataFiles.fromResources().get
+
+  // This is a bit disgusting. The data files from the game are incomplete (stats for level 1, missing gacha skills),
+  // so we parse both the English and Japanese versions of the game files to get the Japanese names, and then use the
+  // Japanese names to scrape Altema for the information we're missing.
+  lazy val altema = AltemaParser.parse(dataFiles)
   lazy val fullSkills = SkillParser.parse(dataFiles)
-  lazy val demons = DemonParser.parse(dataFiles)
+  lazy val rawDemons = DemonParser.parse(dataFiles)
+  lazy val demons = altema match {
+    case Some(alt) => alt.augment(rawDemons)
+    case None => {
+      System.err.println("warning: failed to augment demon db with altema db")
+      rawDemons
+    }
+  }
+
   lazy val skills = {
     val usedSkills = demons.flatMap {
       case (_, demon) => {

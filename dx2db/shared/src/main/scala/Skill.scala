@@ -8,7 +8,6 @@ sealed trait Skill extends StringableKey {
   def id: SkillId
   def name: String
   def description: String
-  def rawData: ujson.Obj
 
   def isActive: Boolean
   final def isPassive: Boolean = !isActive
@@ -21,14 +20,24 @@ sealed trait Skill extends StringableKey {
 }
 
 object Skill {
-  case class Active(id: SkillId, name: String, description: String, rawData: ujson.Obj, element: Option[Element],
-                    mpCost: Int, target: Target, effects: Set[Effect], effectCancels: Set[Effect]) extends Skill {
+  case class Active(
+      id: SkillId,
+      name: String,
+      description: String,
+      element: Option[Element],
+      mpCost: Int,
+      target: Target,
+      effects: Set[Effect],
+      effectCancels: Set[Effect]
+  ) extends Skill {
     final override def isActive = true
-
-    def activeRaw = rawData("active").obj
   }
 
-  case class Passive(id: SkillId, name: String, description: String, rawData: ujson.Obj) extends Skill {
+  case class Passive(
+      id: SkillId,
+      name: String,
+      description: String,
+  ) extends Skill {
     final override def isActive = false
   }
 }

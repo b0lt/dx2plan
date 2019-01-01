@@ -4,16 +4,21 @@ case class DemonId(value: Int)
 
 case class Demon(
     id: DemonId,
-    name: String,
-    jpName: Option[String],
-    race: String,
+    names: Map[String, String],
+    race: Race,
     grade: Int,
     description: String,
+    stats: Stats,
     baseSkills: Seq[SkillId],
     archetypeSkills: Map[Archetype, SkillId],
-    rawData: ujson.Obj
 ) extends StringableKey {
-  override def toString() = name
+  def name: String = {
+    names.get("en") match {
+      case Some(name) => name
+      case None => names("jp")
+    }
+  }
+
   override def asStringKey = name
 }
 

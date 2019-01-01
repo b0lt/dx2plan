@@ -59,10 +59,10 @@ object SkillParser {
         }
       }
 
-      Skill.Active(id, name, description, skillData, element, cost, target, effects, effectCancel)
+      Skill.Active(id, name, description, element, cost, target, effects, effectCancel)
     } else {
       assert(skillData.value.contains("passive"))
-      Skill.Passive(id, name, description, skillData)
+      Skill.Passive(id, name, description)
     }
   }
 
