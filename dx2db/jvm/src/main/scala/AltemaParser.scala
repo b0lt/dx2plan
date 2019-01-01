@@ -7,7 +7,7 @@ case class AltemaDemon(id: AltemaId, name: String, stats: Stats) extends Stringa
 
 case class AltemaDb(
   backing: Map[AltemaId, AltemaDemon]
-) extends TypedMap[AltemaDb, AltemaId, AltemaDemon] with StringMap[AltemaId, AltemaDemon] {
+) extends TypedMap[AltemaDb, AltemaId, AltemaDemon] with CaseInsensitiveStringMap[AltemaId, AltemaDemon] {
   def construct(map: Map[AltemaId, AltemaDemon]) = AltemaDb(backing)
 
   def augment(demons: DemonDb): DemonDb = {

@@ -26,7 +26,7 @@ sealed trait Skill extends StringableKey {
   }
 
   override def toString() = name
-  override def asStringKey = name
+  override def asStringKey = name.toLowerCase
 }
 
 object Skill {
@@ -65,7 +65,7 @@ object Skill {
 
 case class SkillDb(
     skills: Map[SkillId, Skill]
-) extends TypedMap[SkillDb, SkillId, Skill] with StringMap[SkillId, Skill] {
+) extends TypedMap[SkillDb, SkillId, Skill] with CaseInsensitiveStringMap[SkillId, Skill] {
   override def backing = skills
   override def construct(map: Map[SkillId, Skill]) = SkillDb(map)
 

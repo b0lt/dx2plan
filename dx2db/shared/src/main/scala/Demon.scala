@@ -35,7 +35,7 @@ object Demon {
 
 case class DemonDb(
     demons: Map[DemonId, Demon]
-) extends TypedMap[DemonDb, DemonId, Demon] with StringMap[DemonId, Demon] {
+) extends TypedMap[DemonDb, DemonId, Demon] with CaseInsensitiveStringMap[DemonId, Demon] {
   override def backing = demons
   override def construct(map: Map[DemonId, Demon]) = DemonDb(map)
 }

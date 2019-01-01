@@ -4,17 +4,17 @@ trait StringableKey {
   def asStringKey: String
 }
 
-trait StringMap[K, V <: StringableKey] {
+trait CaseInsensitiveStringMap[K, V <: StringableKey] {
   def backing: Map[K, V]
 
   private lazy val stringKeys: Map[String, K] = {
     backing.map {
-      case (key, value) => (value.asStringKey, key)
+      case (key, value) => (value.asStringKey.toLowerCase, key)
     }.toMap
   }
 
-  def apply(stringKey: String) = backing(stringKeys(stringKey))
-  def get(stringKey: String) = stringKeys.get(stringKey).flatMap(backing.get)
+  def apply(stringKey: String) = backing(stringKeys(stringKey.toLowerCase))
+  def get(stringKey: String) = stringKeys.get(stringKey.toLowerCase).flatMap(backing.get)
 }
 
 trait TypedMap[Derived, K, V] {
