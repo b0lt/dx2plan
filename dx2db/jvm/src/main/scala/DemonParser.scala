@@ -2,8 +2,6 @@ package dx2db
 
 import scala.collection.mutable.ListBuffer
 
-import ujson.Js
-
 object DemonParser {
   def parseDemon(locale: String, demonData: ujson.Obj, races: Map[Int, String]): Option[Demon] = {
     val id = DemonId(demonData("id").num.toInt)
