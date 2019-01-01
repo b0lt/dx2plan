@@ -25,7 +25,7 @@ object Dx2Db extends App {
   lazy val skills = {
     val usedSkills = demons.flatMap {
       case (_, demon) => {
-        demon.baseSkills ++ demon.archetypeSkills.values
+        demon.baseSkills ++ demon.awakenSkills.values
       }
     }.toSet
 

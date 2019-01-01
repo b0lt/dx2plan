@@ -15,7 +15,7 @@ case class Demon(
     description: String,
     stats: Stats,
     baseSkills: Seq[SkillId],
-    archetypeSkills: Map[Archetype, SkillId],
+    awakenSkills: Map[Archetype, SkillId],
 ) extends StringableKey {
   def name: String = {
     names.get("en") match {
@@ -24,7 +24,7 @@ case class Demon(
     }
   }
 
-  def obtainableSkills: Set[SkillId] = (baseSkills ++ archetypeSkills.values).toSet
+  def obtainableSkills: Set[SkillId] = (baseSkills ++ awakenSkills.values).toSet
 
   override def asStringKey = name
 }

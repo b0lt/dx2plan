@@ -43,14 +43,14 @@ object DemonParser {
       case _ => return None
     }
 
-    var archetypeSkills = Map[Archetype, SkillId]()
+    var awakenSkills = Map[Archetype, SkillId]()
 
     demonData("arches").arr.foreach {
       case ujson.Obj(arch) => {
         val archetype = Archetype.fromJsonId(arch("type").num.toInt)
         val skillId = SkillId(arch("id").num.toInt)
-        assert(!archetypeSkills.contains(archetype))
-        archetypeSkills += (archetype -> skillId)
+        assert(!awakenSkills.contains(archetype))
+        awakenSkills += (archetype -> skillId)
       }
       case _ => return None
     }
@@ -64,7 +64,7 @@ object DemonParser {
         description = description,
         stats = Stats.empty(),
         baseSkills = skills.toSeq,
-        archetypeSkills = archetypeSkills,
+        awakenSkills = awakenSkills,
       )
     )
   }
@@ -98,11 +98,11 @@ object DemonParser {
           if (demon.race != otherDemon.race ||
               demon.grade != otherDemon.grade ||
               demon.baseSkills != otherDemon.baseSkills ||
-              demon.archetypeSkills != otherDemon.archetypeSkills) {
+              demon.awakenSkills != otherDemon.awakenSkills) {
             System.err.println(s"Base: ${demon.name}\nOther: ${otherDemon.name}\n")
             System.err.println(s"Base: ${demon.race}\nOther: ${otherDemon.race}\n")
             System.err.println(s"Base: ${demon.baseSkills}\nOther: ${otherDemon.baseSkills}\n")
-            System.err.println(s"Base: ${demon.archetypeSkills}\nOther: ${otherDemon.archetypeSkills}\n")
+            System.err.println(s"Base: ${demon.awakenSkills}\nOther: ${otherDemon.awakenSkills}\n")
             throw new RuntimeException(s"Mismatch for demon ID $demonId")
             System.exit(1)
           }
