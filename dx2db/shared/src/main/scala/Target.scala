@@ -2,7 +2,7 @@ package dx2db
 
 import upickle.default._
 
-sealed class Target(intValue: Int, val stringValue: String)
+sealed abstract class Target(intValue: Int, val stringValue: String)
 
 object Target {
   implicit val rw: ReadWriter[Target] = {
