@@ -15,13 +15,13 @@ object ConfigurationId {
   implicit val rw: ReadWriter[ConfigurationId] = macroRW
 }
 
-case class DemonConfiguration(demon: Var[Option[Demon]] = Var[Option[Demon]](None),
-                              archetype: Var[Archetype] = Var[Archetype](Archetype.Clear),
-                              divine: Var[Boolean] = Var[Boolean](false),
-                              lead: Var[Boolean] = Var[Boolean](false),
+case class DemonConfiguration(demon: Var[Option[Demon]] = Var(None),
+                              archetype: Var[Archetype] = Var(Archetype.Clear),
+                              divine: Var[Boolean] = Var(false),
+                              lead: Var[Boolean] = Var(false),
                               transferSkill0: Var[Option[Skill]] = Var(None),
                               transferSkill1: Var[Option[Skill]] = Var(None),
-                              actions: List[Var[Move]] = List.tabulate(Dx2Plan.maxTurnsPerDemon)(_ => Var[Move](Pass)))
+                              actions: List[Var[Move]] = List.tabulate(Dx2Plan.maxTurnsPerDemon)(_ => Var(Pass)))
 
 case class SerializedDemonConfiguration(demon: Option[DemonId], archetype: Archetype, divine: Boolean, lead: Boolean,
                                         transferSkill0: Option[SkillId], transferSkill1: Option[SkillId],
