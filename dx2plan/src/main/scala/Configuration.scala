@@ -9,24 +9,85 @@ import rx._
 
 import dx2db._
 
+// Holder of all state.
+case class Configuration(
+  demonConfigurations: Map[ConfigurationId, DemonConfiguration] =
+    List.tabulate(Dx2Plan.maxDemonCount)(id => ConfigurationId(id) -> DemonConfiguration()).toMap,
+) {
+  def serialize()(implicit ctx: Ctx.Owner, data: Ctx.Data): SerializedConfiguration = {
+    val serializedDemons = demonConfigurations.map { case (key, value) => (key -> value.serialize()) }.toMap
+    SerializedConfiguration(serializedDemons)
+  }
+}
+
+case class SerializedConfiguration(
+  demonConfigurations: Map[ConfigurationId, SerializedDemonConfiguration],
+) {
+  def applyTo(configuration: Configuration) = {
+    demonConfigurations.foreach {
+      case (id, demonConfiguration) => {
+        demonConfiguration.applyTo(configuration.demonConfigurations(id))
+      }
+    }
+  }
+
+  def compress(): String = {
+    val bytes = writeBinary(this)
+    var compressedBytes: Array[Byte] = LZMA.compress(bytes.toJSArray, 1).toArray
+    Base64.getUrlEncoder().encodeToString(compressedBytes)
+  }
+}
+
+object SerializedConfiguration {
+  implicit val rw: ReadWriter[SerializedConfiguration] = macroRW
+
+  def fromCompressedBytes(data: String) = {
+    try {
+      val bytes = Base64.getUrlDecoder().decode(data)
+      var decompressedBytes: Array[Byte] = LZMA.decompress(bytes.toJSArray).toArray
+      val serializedConfigs = readBinary[SerializedConfiguration](decompressedBytes)
+      Some(serializedConfigs)
+    } catch {
+      case ex: Throwable => {
+        println(s"Failed to deserialize data: '$data'")
+        ex.printStackTrace()
+        None
+      }
+    }
+  }
+}
+
 // Identifier of demon based on input box layout (i.e. 0 is left-most)
 case class ConfigurationId(id: Int)
 object ConfigurationId {
   implicit val rw: ReadWriter[ConfigurationId] = macroRW
 }
 
-case class DemonConfiguration(demon: Var[Option[Demon]] = Var(None),
-                              archetype: Var[Archetype] = Var(Archetype.Clear),
-                              divine: Var[Boolean] = Var(false),
-                              lead: Var[Boolean] = Var(false),
-                              transferSkill0: Var[Option[Skill]] = Var(None),
-                              transferSkill1: Var[Option[Skill]] = Var(None),
-                              actions: List[Var[Move]] = List.tabulate(Dx2Plan.maxTurnsPerDemon)(_ => Var(Pass)))
+case class DemonConfiguration(
+  demon: Var[Option[Demon]] = Var(None),
+  archetype: Var[Archetype] = Var(Archetype.Clear),
+  divine: Var[Boolean] = Var(false),
+  lead: Var[Boolean] = Var(false),
+  transferSkill0: Var[Option[Skill]] = Var(None),
+  transferSkill1: Var[Option[Skill]] = Var(None),
+  actions: List[Var[Move]] = List.tabulate(Dx2Plan.maxTurnsPerDemon)(_ => Var(Pass))
+) {
+  def serialize()(implicit ctx: Ctx.Owner, data: Ctx.Data): SerializedDemonConfiguration = {
+    val demon = this.demon().map(_.id)
+    val archetype = this.archetype()
+    val divine = this.divine()
+    val lead = this.lead()
+    val transferSkill0 = this.transferSkill0().map(_.id)
+    val transferSkill1 = this.transferSkill1().map(_.id)
+    val actions = this.actions.map { action => action().serialize() }
+    SerializedDemonConfiguration(demon, archetype, divine, lead, transferSkill0, transferSkill1, actions)
+  }
+}
 
 case class SerializedDemonConfiguration(demon: Option[DemonId], archetype: Archetype, divine: Boolean, lead: Boolean,
                                         transferSkill0: Option[SkillId], transferSkill1: Option[SkillId],
                                         actions: List[String]) {
-  def applyToConfig(config: DemonConfiguration) {
+  def applyTo(config: DemonConfiguration) {
     config.demon() = demon flatMap { Dx2Plan.db.demons.get }
     config.archetype() = archetype
     config.divine() = divine
@@ -41,42 +102,4 @@ case class SerializedDemonConfiguration(demon: Option[DemonId], archetype: Arche
 
 object SerializedDemonConfiguration {
   implicit val rw: ReadWriter[SerializedDemonConfiguration] = macroRW
-
-  def fromConfig(config: DemonConfiguration)(implicit ctx: Ctx.Owner, data: Ctx.Data) = {
-    val demon = config.demon().map(_.id)
-    val archetype = config.archetype()
-    val divine = config.divine()
-    val lead = config.lead()
-    val transferSkill0 = config.transferSkill0().map(_.id)
-    val transferSkill1 = config.transferSkill1().map(_.id)
-    val actions = config.actions.map { action => action().serialize() }
-    SerializedDemonConfiguration(demon, archetype, divine, lead, transferSkill0, transferSkill1, actions)
-  }
-}
-
-object DemonConfiguration {
-  def serialize(config: DemonConfiguration)(implicit ctx: Ctx.Owner, data: Ctx.Data): SerializedDemonConfiguration = {
-    SerializedDemonConfiguration.fromConfig(config)
-  }
-
-  def serialize(config: Map[ConfigurationId, DemonConfiguration])(implicit ctx: Ctx.Owner, data: Ctx.Data): String = {
-    val bytes = writeBinary(config.map { case (key, value) => (key -> serialize(value)) }.toMap)
-    var compressedBytes: Array[Byte] = LZMA.compress(bytes.toJSArray, 1).toArray
-    Base64.getUrlEncoder().encodeToString(compressedBytes)
-  }
-
-  def deserialize(data: String) = {
-    try {
-      val bytes = Base64.getUrlDecoder().decode(data)
-      var decompressedBytes: Array[Byte] = LZMA.decompress(bytes.toJSArray).toArray
-      val serializedConfigs = readBinary[Map[ConfigurationId, SerializedDemonConfiguration]](decompressedBytes)
-      Some(serializedConfigs)
-    } catch {
-      case ex: Throwable => {
-        println(s"Failed to deserialize data: '$data'")
-        ex.printStackTrace()
-        None
-      }
-    }
-  }
 }

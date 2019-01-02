@@ -24,19 +24,18 @@ object Dx2Plan extends JSApp {
   val maxTurnsPerDemon = 4
   val initialMp = 2
 
-  // Underlying reactive variables for demon configuration.
-  val rxConfigurations: Map[ConfigurationId, DemonConfiguration] = (0 until maxDemonCount).map { id =>
-    ConfigurationId(id) -> DemonConfiguration()
-  }.toMap
+  val rxConfiguration = Configuration()
+
+  val rxDemons = rxConfiguration.demonConfigurations
 
   // Actually selected demons.
-  val rxDemons = Rx {
-    rxConfigurations.filterNot { case (_, value) => value.demon().isEmpty }
+  val rxSelectedDemons = Rx {
+    rxDemons.filter { case (_, value) => value.demon().isDefined }
   }
 
   // List of ConfigurationIds ordered by turn order.
   val rxOrdering = Rx {
-    val demonInfo = rxDemons().map { case (id, configuration) => {
+    val demonInfo = rxSelectedDemons().map { case (id, configuration) => {
       val agi = configuration.demon().get.stats.agility
       val lead = configuration.lead()
       (id, agi, lead)
@@ -64,7 +63,7 @@ object Dx2Plan extends JSApp {
       lastState match {
         case None => {
           val initialState = Rx {
-            val demons = rxDemons()
+            val demons = rxSelectedDemons()
             val ordering = rxOrdering()
             val demonId = ordering(0)
 
@@ -88,7 +87,7 @@ object Dx2Plan extends JSApp {
           val nextState = Rx {
             val prev = previousState()
 
-            val demons = rxDemons()
+            val demons = rxSelectedDemons()
             val ordering = rxOrdering()
             require(demons.size == ordering.size)
 
@@ -119,9 +118,9 @@ object Dx2Plan extends JSApp {
   }
 
   val rxDemonSkills = ((0 until maxDemonCount) map { i: Int => {
-    val demonId = ConfigurationId(i)
-    (demonId -> Rx {
-      val configuration = rxConfigurations(demonId)
+    val configurationId = ConfigurationId(i)
+    (configurationId -> Rx {
+      val configuration = rxDemons(configurationId)
       val skills = ListBuffer[Spell]()
       configuration.demon() foreach { demon =>
         demon.baseSkills.foreach { skill =>
@@ -147,25 +146,24 @@ object Dx2Plan extends JSApp {
     })
   }}).toMap
 
-  def generateDemonConfiguration(configurationId: ConfigurationId, serializedConfig: Option[SerializedDemonConfiguration]) = {
+  def generateDemonConfiguration(configurationId: ConfigurationId, serialized: Option[SerializedConfiguration]) = {
     val idx = configurationId.id
-    val demonNameId = s"demon${idx}";
-    val demonArchetypeId = s"demon${idx}Archetype";
     val demonDivineId = s"demon${idx}Divine";
     val demonLeadId = s"demon${idx}Lead";
-    val configuration = rxConfigurations(configurationId)
-    val (selectedArchetype, divine, lead): Tuple3[Archetype, Boolean, Boolean] = serializedConfig.map {
+    val configuration = rxDemons(configurationId)
+
+    val demonConfig = serialized.map(_.demonConfigurations(configurationId))
+    val (selectedArchetype, divine, lead): Tuple3[Archetype, Boolean, Boolean] = demonConfig.map {
       config => (config.archetype, config.divine, config.lead)
     }.getOrElse((Archetype.Clear, false, false))
 
-    val transferSkills: Seq[Option[SkillId]] = serializedConfig.map {
+    val transferSkills: Seq[Option[SkillId]] = demonConfig.map {
       config => Seq(config.transferSkill0, config.transferSkill1)
     }.getOrElse(Seq(None, None))
 
     (
       input(
         `class` := "form-control",
-        id := demonNameId,
         autofocus := idx == 0,
         tabindex := idx * 10 + 1,
         autocomplete := "false",
@@ -176,7 +174,6 @@ object Dx2Plan extends JSApp {
       ),
       select(
         `class` := "form-control",
-        id := demonArchetypeId,
         tabindex := idx * 10 + 2,
         oninput := ({(elem: HTMLSelectElement) => {
           configuration.archetype() = elem.value match {
@@ -364,7 +361,7 @@ object Dx2Plan extends JSApp {
   }
 
   val moveConfigurationTable = Rx {
-    val demons = rxDemons()
+    val demons = rxSelectedDemons()
     val ordering = rxOrdering()
     require(demons.size == ordering.size)
     val turnCount = demons.size * maxTurnsPerDemon
@@ -480,7 +477,7 @@ object Dx2Plan extends JSApp {
   val permalink = Rx {
     div(
       a(
-        href := s"#${DemonConfiguration.serialize(rxConfigurations)}",
+        href := s"#${rxConfiguration.serialize().compress()}",
         s"Permalink"
       ),
     )
@@ -489,7 +486,7 @@ object Dx2Plan extends JSApp {
   def main(): Unit = {
     dom.document.body.innerHTML = ""
 
-    val serializedConfigs: Option[Map[ConfigurationId, SerializedDemonConfiguration]] = dom.document.location.hash match {
+    val serializedConfiguration: Option[SerializedConfiguration] = dom.document.location.hash match {
       case "#example" => {
         val ishtar = SerializedDemonConfiguration(
           Some(Dx2Plan.db.demons("Ishtar").id),
@@ -521,11 +518,13 @@ object Dx2Plan extends JSApp {
         )
 
         Some(
-          Map(
-            (ConfigurationId(0) -> ishtar),
-            (ConfigurationId(1) -> fenrir),
-            (ConfigurationId(2) -> pyro),
-            (ConfigurationId(3) -> jack)
+          SerializedConfiguration(
+            demonConfigurations = Map(
+              (ConfigurationId(0) -> ishtar),
+              (ConfigurationId(1) -> fenrir),
+              (ConfigurationId(2) -> pyro),
+              (ConfigurationId(3) -> jack)
+            ),
           )
         )
       }
@@ -533,21 +532,15 @@ object Dx2Plan extends JSApp {
       case "" => None
       case "#" => None
 
-      case _ => {
-        DemonConfiguration.deserialize(dom.document.location.hash.substring(1))
+      case hash => {
+        SerializedConfiguration.fromCompressedBytes(hash.substring(1))
       }
     }
 
-    serializedConfigs foreach { configs =>
-      configs map {
-        case (id, serializedConfig) => {
-          serializedConfig.applyToConfig(rxConfigurations(id))
-        }
-      }
-    }
+    serializedConfiguration.foreach(_.applyTo(rxConfiguration))
 
     val demonConfigurationElements = (0 until maxDemonCount) map {
-      i => generateDemonConfiguration(ConfigurationId(i), serializedConfigs.map(config => config(ConfigurationId(i))))
+      i => generateDemonConfiguration(ConfigurationId(i), serializedConfiguration)
     }
 
     val container = dom.document.body.appendChild(
