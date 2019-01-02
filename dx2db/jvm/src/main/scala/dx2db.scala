@@ -65,7 +65,7 @@ object Dx2Db extends App {
   }
 
   lazy val db = Database(demons, skills)
-  lazy val serialized = write(db)
+  lazy val serialized = write(db, 2)
 
   // Make sure that we can roundtrip.
   assert(db == read[Database](serialized))
