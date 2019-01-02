@@ -2,63 +2,164 @@ package dx2plan
 
 import dx2db._
 
+import upickle.default.{ReadWriter => RW, macroRW}
+
+sealed trait UsageType {
+  def next(skill: Skill.Active): UsageType
+}
+
+object UsageType {
+  implicit val rw: RW[UsageType] = RW.merge(macroRW[Normal.type], macroRW[Critical.type], macroRW[Null.type])
+
+  case object Normal extends UsageType {
+    def next(skill: Skill.Active) = {
+      skill.element match {
+        case Some(Element.Almighty) => Null
+        case Some(element) => Critical
+        case None => Normal
+      }
+    }
+  }
+
+  case object Critical extends UsageType {
+    def next(skill: Skill.Active) = Null
+  }
+
+  case object Null extends UsageType {
+    def next(skill: Skill.Active) = Normal
+  }
+}
+
 sealed trait Move {
   def name: String
+  def postscript: Option[String] = None
+
   def element: Option[Element]
   def mpCost: Int
   def pressTurnCost: Double
 
-  final def serialize() = {
-    this match {
-      case Pass => "Pass"
-      case Attack => "Attack"
-      case Spell(skill, awakened) => {
-        if (awakened) {
-          s"${skill.name} (awakened)"
-        } else {
-          skill.name
-        }
-      }
-    }
-  }
+  def nextType: Move
+  def usageType: UsageType
+  def isSameAction(move: Move): Boolean
+}
+object Move {
+  implicit val rw: RW[Move] = macroRW
 }
 
-case object Pass extends Move {
-  def name = "Pass"
+case class Pass(usageType: UsageType = UsageType.Normal) extends Move {
+  def name = usageType match {
+    case UsageType.Normal => "Pass"
+    case UsageType.Critical => "Lucky Skip"
+    case _ => ???
+  }
+
   def element = None
   def mpCost = 0
-  def pressTurnCost = 0.5
+  def pressTurnCost = usageType match {
+    case UsageType.Normal => 0.5
+    case UsageType.Critical => 0
+    case _ => ???
+  }
+
+  def nextType = usageType match {
+    case UsageType.Normal => Pass(UsageType.Critical)
+    case UsageType.Critical => Pass(UsageType.Normal)
+    case _ => ???
+  }
+
+  def isSameAction(action: Move) = action match {
+    case Pass(_) => true
+    case _ => false
+  }
+}
+object Pass {
+  implicit val rw: RW[Pass] = macroRW
 }
 
-case object Attack extends Move {
-  def name = "Attack"
+case class Attack(usageType: UsageType = UsageType.Normal) extends Move {
+  def name = usageType match {
+    case UsageType.Normal => "Attack"
+    case UsageType.Critical => "Critical"
+    case UsageType.Null => "Null"
+  }
+
   def element = Some(Element.Phys)
   def mpCost = 0
-  def pressTurnCost = 1
+  def pressTurnCost = usageType match {
+    case UsageType.Normal => 1
+    case UsageType.Critical => 0.5
+    case UsageType.Null => 2
+  }
+
+  def nextType = usageType match {
+    case UsageType.Normal => Attack(UsageType.Critical)
+    case UsageType.Critical => Attack(UsageType.Null)
+    case UsageType.Null => Attack(UsageType.Normal)
+  }
+
+  def isSameAction(action: Move) = action match {
+    case Attack(_) => true
+    case _ => false
+  }
+}
+object Attack {
+  implicit val rw: RW[Attack] = macroRW
 }
 
-case class Spell(skill: Skill, awakened: Boolean) extends Move {
-  def name = skill.name
-  def element = skill match {
+// TODO: Handle skill levels.
+case class SkillInstance(skill: Skill, awakened: Boolean)
+
+object SkillInstance {
+  implicit val rw: RW[SkillInstance] = macroRW
+}
+
+case class SkillUsage(skillInstance: SkillInstance, usageType: UsageType = UsageType.Normal) extends Move {
+  def name = skillInstance.skill.name
+  override def postscript = usageType match {
+    case UsageType.Normal => None
+    case UsageType.Critical => {
+      if (element.get.isMagical) {
+        Some("Weakness")
+      } else {
+        Some("Critical")
+      }
+    }
+
+    case UsageType.Null => Some("Null")
+  }
+
+  def element = skillInstance.skill match {
     case active: Skill.Active => active.element
     case passive: Skill.Passive => None
   }
 
   def mpCost = {
-    if (awakened) {
-      skill.cost.getOrElse(1) - 1
-    } else {
-      skill.cost.getOrElse(0)
-    }
+    skillInstance.skill.cost.getOrElse(0)
   }
 
   def pressTurnCost = {
-    name match {
-      case "Tag" => 0
-      case _ => 1
+    usageType match {
+      case UsageType.Normal => name match {
+        case "Tag" => 0
+        case _ => 1
+      }
+
+      case UsageType.Critical => 0.5
+      case UsageType.Null => 2
     }
   }
+
+  def nextType = SkillUsage(skillInstance, usageType.next(skillInstance.skill.asActive))
+  def isSameAction(action: Move) = action match {
+    case SkillUsage(otherSkillInstance, _) => skillInstance == otherSkillInstance
+    case _ => false
+  }
 }
+
+object SkillUsage {
+  implicit val rw: RW[SkillUsage] = macroRW
+}
+
 
 sealed trait GlobalModifier
 case object OrleanPrayer extends GlobalModifier
@@ -79,24 +180,6 @@ case object Concentrate extends DemonModifier {
   def consumedBy(element: Option[Element]) = element.map(_.isMagical).getOrElse(false)
 }
 
-object Move {
-  def deserialize(string: String): Move = {
-    val awakened = raw"(.+) \(awakened\)".r
-    string match {
-      case "Pass" => Pass
-      case "Attack" => Attack
-      case awakened(name) => Dx2Plan.db.skills.get(name) match {
-        case Some(skill) => Spell(skill.asActive, true)
-        case None => Pass
-      }
-      case unawakened => Dx2Plan.db.skills.get(unawakened) match {
-        case Some(skill) => Spell(skill.asActive, false)
-        case None => Pass
-      }
-    }
-  }
-}
-
 case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[ConfigurationId, Int],
                      globalModifiers: Set[GlobalModifier], demonModifiers: Map[ConfigurationId, Set[DemonModifier]]) {
   def evaluate(configurationId: ConfigurationId, move: Move) = {
@@ -104,8 +187,10 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[Configura
     var newGlobalModifiers = globalModifiers
     var pressTurnCost = move.pressTurnCost
 
-    if (move.element == Some(Element.Phys) && demonModifiers(configurationId).contains(Rebellion)) {
-      pressTurnCost = 0.5
+    if (move.element == Some(Element.Phys) && move.usageType != UsageType.Null) {
+      if (demonModifiers(configurationId).contains(Rebellion)) {
+        pressTurnCost = 0.5
+      }
     }
 
     val newDemonMp = {
@@ -119,13 +204,17 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[Configura
     }
 
     val newPressTurns = {
-      if (pressTurnCost == 0) {
-        pressTurns
-      } else if (pressTurns % 1 == 0) {
-        pressTurns - pressTurnCost
-      } else {
-        pressTurns - 0.5
+      require(pressTurnCost == 0 || pressTurnCost == 0.5 || pressTurnCost == 1 || pressTurnCost == 2)
+
+      var x = pressTurns
+      // Consume the half-turn first.
+      if (x % 1 != 0) {
+        x -= 0.5
+        pressTurnCost = Math.max(0, pressTurnCost - 1)
       }
+
+      // Consume whatever's left.
+      x - pressTurnCost
     }
 
     move.name match {

@@ -74,7 +74,7 @@ case class DemonConfiguration(
   lead: Var[Boolean] = Var(false),
   transferSkill0: Var[Option[Skill]] = Var(None),
   transferSkill1: Var[Option[Skill]] = Var(None),
-  actions: List[Var[Move]] = List.tabulate(Dx2Plan.maxTurnsPerDemon)(_ => Var(Pass))
+  actions: List[Var[Move]] = List.tabulate(Dx2Plan.maxTurnsPerDemon)(_ => Var(Pass()))
 ) {
   def serialize()(implicit ctx: Ctx.Owner, data: Ctx.Data): SerializedDemonConfiguration = {
     val demon = this.demon().map(_.id)
@@ -83,14 +83,14 @@ case class DemonConfiguration(
     val lead = this.lead()
     val transferSkill0 = this.transferSkill0().map(_.id)
     val transferSkill1 = this.transferSkill1().map(_.id)
-    val actions = this.actions.map { action => action().serialize() }
+    val actions = this.actions.map { action => action() }
     SerializedDemonConfiguration(demon, archetype, divine, lead, transferSkill0, transferSkill1, actions)
   }
 }
 
 case class SerializedDemonConfiguration(demon: Option[DemonId], archetype: Archetype, divine: Boolean, lead: Boolean,
                                         transferSkill0: Option[SkillId], transferSkill1: Option[SkillId],
-                                        actions: List[String]) {
+                                        actions: List[Move]) {
   def applyTo(config: DemonConfiguration) {
     config.demon() = demon flatMap { Dx2Plan.db.demons.get }
     config.archetype() = archetype
@@ -99,7 +99,7 @@ case class SerializedDemonConfiguration(demon: Option[DemonId], archetype: Arche
     config.transferSkill0() = transferSkill0.flatMap(Dx2Plan.db.skills.get)
     config.transferSkill1() = transferSkill1.flatMap(Dx2Plan.db.skills.get)
     actions.zipWithIndex.foreach { case (action, index) => {
-      config.actions(index)() = Move.deserialize(action)
+      config.actions(index)() = action
     }}
   }
 }

@@ -77,10 +77,11 @@ object Dx2Plan {
     leadSorted.map { case (index, agi, lead) => index }
   }
 
+  // TODO: Switch to using SkillId.
   def hasSkill(demonId: ConfigurationId, skillName: String)(implicit ctx: Ctx.Owner, data: Ctx.Data): Boolean = {
     val rxSkills = rxDemonSkills(demonId)
-    rxSkills().find((skill: Spell) => {
-      skill.skill.name == skillName
+    rxSkills().find((skill: SkillUsage) => {
+      skill.skillInstance.skill.name == skillName
     }) match {
       case Some(skill) => true
       case None => false
@@ -152,14 +153,16 @@ object Dx2Plan {
     val configurationId = ConfigurationId(i)
     (configurationId -> Rx {
       val configuration = rxDemons(configurationId)
-      val skills = ListBuffer[Spell]()
+      val skills = ListBuffer[SkillUsage]()
       configuration.demon() foreach { demon =>
         demon.baseSkills.foreach { skill =>
-          skills += Spell(Dx2Plan.db.skills(skill), false)
+          val skillInstance = SkillInstance(Dx2Plan.db.skills(skill), false)
+          skills += SkillUsage(skillInstance, UsageType.Normal)
         }
         demon.awakenSkills.get(configuration.archetype()) match {
           case Some(skill) => {
-            skills += Spell(Dx2Plan.db.skills(skill), true)
+            val skillInstance = SkillInstance(Dx2Plan.db.skills(skill), true)
+            skills += SkillUsage(skillInstance, UsageType.Normal)
           }
           case None => {}
         }
@@ -167,7 +170,8 @@ object Dx2Plan {
           rxTransferSkill => {
             val transferSkill = rxTransferSkill()
             transferSkill foreach { skill =>
-              skills += Spell(skill, false)
+              val skillInstance = SkillInstance(skill, false)
+              skills += SkillUsage(skillInstance, UsageType.Normal)
             }
           }
         }
@@ -411,16 +415,17 @@ object Dx2Plan {
       val pressTurns = rxGameState().pressTurns
       if (pressTurns > 0) {
         val rxSelectedAction = configuration.actions(round)
+        println(s"rxSelectedAction = $rxSelectedAction")
         val rxSkills = rxDemonSkills(configurationId)
         val skills = rxSkills() filter { skill => skill.mpCost > 0 }
-        val moves: Seq[Move] = Seq(Pass, Attack) ++ skills
+        val moves: Seq[Move] = Seq(Pass(), Attack()) ++ skills
         val selectedAction = rxSelectedAction()
         val buttons = moves.zipWithIndex.map { case (move, index) => {
           val buttonId = s"turn${turn}_${index}"
           val enoughMp = mp >= move.mpCost
-          val selected = selectedAction == move
+          val selected = selectedAction.isSameAction(move)
 
-          val buttonColor = (move.name) match {
+          val buttonColor = move.name match {
             case "Pass" => "secondary"
             case "Attack" => "info"
             case "Tag" => "warning"
@@ -433,6 +438,13 @@ object Dx2Plan {
                 "danger"
               }
             }
+          }
+
+          // Use selectedAction instead of move, if we're selected, since move is the base move without crit/miss.
+          val (moveName, postscript) = if (selected) {
+            (selectedAction.name, selectedAction.postscript)
+          } else {
+            (move.name, move.postscript)
           }
 
           val buttonSelection = if (selected) "" else "-outline"
@@ -448,11 +460,18 @@ object Dx2Plan {
               id := buttonId,
               onclick := ({(elem: HTMLInputElement) => {
                 val rxAction = configuration.actions(round)
-                rxAction() = move
+                if (selected) {
+                  // Cycle to the next usageType.
+                  rxAction() = selectedAction.nextType
+                } else {
+                  rxAction() = move
+                }
               }}: js.ThisFunction),
-              move.name,
+              moveName,
               if (move.mpCost != 0) { br },
               if (move.mpCost != 0) { s"${move.mpCost} MP" },
+              if (postscript.isDefined) { br },
+              if (postscript.isDefined) { postscript.get },
             ),
           )
         }}.toList
@@ -536,28 +555,42 @@ object Dx2Plan {
           Archetype.Yellow,
           divine = true, lead = false,
           None, None,
-          List("Concentrate (awakened)", "Attack", "Mesopotamian Star", "Attack")
+          List(
+            SkillUsage(SkillInstance(Dx2Plan.db.skills("Concentrate"), true)),
+            Attack(),
+            SkillUsage(SkillInstance(Dx2Plan.db.skills("Mesopotamian Star"), false)),
+            Attack(),
+          ),
         )
         val fenrir = SerializedDemonConfiguration(
           Some(Dx2Plan.db.demons("Fenrir").id),
           Archetype.Purple,
           divine = false, lead = false,
           Some(Dx2Plan.db.skills("Rakunda").id), Some(Dx2Plan.db.skills("Makarakarn").id),
-          List("Pass", "Pass", "Pass", "Pass"),
+          List(Pass(), Pass(), Pass(), Pass()),
         )
         val pyro = SerializedDemonConfiguration(
           Some(Dx2Plan.db.demons("Pyro Jack").id),
           Archetype.Yellow,
           divine = false, lead = false,
           Some(Dx2Plan.db.skills("Megido").id), None,
-          List("Tag (awakened)", "Tag (awakened)", "Tag (awakened)", "Tag (awakened)"),
+          List(
+            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+            SkillUsage(SkillInstance(Dx2Plan.db.skills("Megido"), false)),
+          )
         )
         val jack = SerializedDemonConfiguration(
           Some(Dx2Plan.db.demons("Jack Frost").id),
           Archetype.Yellow,
           divine = false, lead = false,
           None, None,
-          List("Tag (awakened)", "Tag (awakened)", "Tag (awakened)", "Tag (awakened)"),
+          List(
+            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+          )
         )
 
         Some(
