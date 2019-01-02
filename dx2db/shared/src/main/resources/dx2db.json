@@ -588,12 +588,12 @@
       "grade": 65,
       "description": "A native Japanese god worshipped widely around the Shinano region from before the Yamato administration took control. Many places in Japan that include the word \"Shakuji\" are said to be named in tribute to this god.",
       "stats": {
-        "hp": 0,
-        "strength": 0,
-        "magic": 0,
-        "vitality": 0,
-        "agility": 0,
-        "luck": 0
+        "hp": 990,
+        "strength": 93,
+        "magic": 183,
+        "vitality": 132,
+        "agility": 154,
+        "luck": 151
       },
       "baseSkills": [
         1124,

@@ -1,6 +1,8 @@
 import java.nio.file.{Paths, Files}
 import java.nio.charset.StandardCharsets
 
+import ujson._
+
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL._
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
@@ -22,7 +24,9 @@ object AltemaScraper extends App {
 
   data match {
     case Some(string) => {
-      Files.write(Paths.get("altema.json"), string.getBytes(StandardCharsets.UTF_8))
+      val json = read(string)
+      val formatted = write(json, 2)
+      Files.write(Paths.get("altema.json"), formatted.getBytes(StandardCharsets.UTF_8))
     }
 
     case None => {
