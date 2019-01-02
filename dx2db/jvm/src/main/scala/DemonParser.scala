@@ -62,7 +62,7 @@ object DemonParser {
         description = description,
         stats = Stats.empty(),
         baseSkills = skills.toSeq,
-        awakenSkills = awakenSkills,
+        awakenSkills = ArchetypeMap.fromMap(awakenSkills),
       )
     )
   }
