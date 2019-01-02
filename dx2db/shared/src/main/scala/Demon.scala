@@ -15,7 +15,7 @@ case class Demon(
     description: String,
     stats: Stats,
     baseSkills: Seq[SkillId],
-    awakenSkills: Map[Archetype, SkillId],
+    awakenSkills: ArchetypeMap[SkillId],
 ) extends StringableKey {
   def name: String = {
     names.get("en") match {
