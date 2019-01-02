@@ -25,14 +25,14 @@ jobs:
                     apt-get clean && apt-get autoclean
       - checkout
       - run:
-          name: Build dx2db
-          command: </dev/null sbt dx2dbJVM/run
+          name: Build everything
+          command: </dev/null sbt compile
       - run:
           name: Build dx2plan.js
           command: </dev/null sbt dx2plan/fullOptJS
       - run:
-          name: Make sure the tree is still clean
-          command: git diff --exit-code > /dev/null
+          name: Make sure changes to dx2db are checked in
+          command: </dev/null sbt dx2dbJVM/run && git diff --exit-code
       - deploy:
           name: Deploy
           command: |
