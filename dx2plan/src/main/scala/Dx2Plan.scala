@@ -43,15 +43,38 @@ object Dx2Plan extends JSApp {
 
   // List of ConfigurationIds ordered by turn order.
   val rxOrdering = Rx {
-    val demonInfo = rxSelectedDemons().map { case (id, configuration) => {
+    type OrderEntry = (ConfigurationId, Int, Boolean)
+
+    val demonInfo: Iterable[OrderEntry] = rxSelectedDemons().map { case (id, configuration) => {
       val agi = configuration.demon().get.stats.agility
       val lead = configuration.lead()
       (id, agi, lead)
     }}
     val agiSorted = demonInfo.toSeq.sortWith((left, right) => left._2 > right._2)
 
-    // TODO: Handle lead brands.
-    agiSorted.map { case (index, agi, lead) => index }
+    // Lead brands move demons up one slot, processed left to right.
+    // (e.g. if you give [2, 3, 4] lead brands, the final ordering will be [1, 2, 3, 4])
+    val leadSorted = agiSorted.foldLeft(ListBuffer[OrderEntry]())({
+      (buf: ListBuffer[OrderEntry], entry: OrderEntry) => {
+        val (index, agi, lead) = entry
+        if (buf.isEmpty) {
+          buf += entry
+        } else if (!lead) {
+          // No lead brand, just append ourselves.
+          buf += entry
+        } else if (buf.last._3) {
+          // The previous demon has a lead brand, so we must be in a scenario where all preceding demons have lead.
+          buf += entry
+        } else {
+          // We have a lead brand and the demon in front of us doesn't.
+          val tail = buf.remove(buf.length - 1)
+          buf += entry
+          buf += tail
+        }
+      }
+    })
+
+    leadSorted.map { case (index, agi, lead) => index }
   }
 
   def hasSkill(demonId: ConfigurationId, skillName: String)(implicit ctx: Ctx.Owner, data: Ctx.Data): Boolean = {
@@ -221,7 +244,6 @@ object Dx2Plan extends JSApp {
             "Divine"
           ),
         ),
-        // TODO: Actually implement sorting that takes lead brands into account.*/
         div(
           `class` := "form-check form-check-inline",
           input(
@@ -229,7 +251,6 @@ object Dx2Plan extends JSApp {
             id := demonLeadId,
             tabindex := idx * 10 + 4,
             `type` := "checkbox",
-            disabled := true,
             if (lead) checked := true,
             onchange := ({(elem: HTMLInputElement) => {
               configuration.lead() = elem.checked
