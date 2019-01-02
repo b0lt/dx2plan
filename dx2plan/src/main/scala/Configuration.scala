@@ -13,7 +13,7 @@ import dx2db._
 case class Configuration(
   demonConfigurations: Map[ConfigurationId, DemonConfiguration] =
     List.tabulate(Dx2Plan.maxDemonCount)(id => ConfigurationId(id) -> DemonConfiguration()).toMap,
-  first: Var[Boolean] = Var(false),
+  first: Var[Boolean] = Var(true),
 ) {
   def serialize()(implicit ctx: Ctx.Owner, data: Ctx.Data): SerializedConfiguration = {
     val serializedDemons = demonConfigurations.map { case (key, value) => (key -> value.serialize()) }.toMap
