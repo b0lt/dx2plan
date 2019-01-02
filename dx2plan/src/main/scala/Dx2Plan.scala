@@ -14,7 +14,7 @@ import upickle.default._
 
 import dx2db._
 
-object Dx2Plan extends JSApp {
+object Dx2Plan {
   import Framework._
   implicit val ctx: Ctx.Owner = Ctx.Owner.safe()
 
@@ -526,7 +526,7 @@ object Dx2Plan extends JSApp {
     )
   }
 
-  def main(): Unit = {
+  def main(args: Array[String]): Unit = {
     dom.document.body.innerHTML = ""
 
     val serializedConfiguration: Option[SerializedConfiguration] = dom.document.location.hash match {

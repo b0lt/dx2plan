@@ -2,6 +2,8 @@
 
 package dx2plan
 
+import scala.language.implicitConversions
+
 import scalatags.JsDom.all._
 import scala.util.{Failure, Success}
 import rx._

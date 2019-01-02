@@ -2,7 +2,8 @@ enablePlugins(WorkbenchPlugin)
 
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
-scalaVersion := "2.12.8"
+ThisBuild / scalaVersion := "2.12.8"
+ThisBuild / scalacOptions := Seq("-unchecked", "-deprecation", "-feature")
 
 lazy val dx2plan = crossProject(JSPlatform).withoutSuffixFor(JSPlatform).crossType(CrossType.Pure)
   .in(file("dx2plan"))
