@@ -185,11 +185,11 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[Configura
 }
 
 object GameState {
-  def initial(configurationIds: Seq[ConfigurationId]): GameState = {
+  def initial(configurationIds: Seq[ConfigurationId], initialMp: Int): GameState = {
     GameState(
       0,
       configurationIds.length,
-      (configurationIds map { (_ -> Dx2Plan.initialMp) }).toMap,
+      (configurationIds map { (_ -> initialMp) }).toMap,
       Set[GlobalModifier](),
       (configurationIds map { (_ -> Set[DemonModifier]()) }).toMap,
     )

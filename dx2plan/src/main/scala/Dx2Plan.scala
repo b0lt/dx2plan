@@ -22,9 +22,17 @@ object Dx2Plan extends JSApp {
 
   val maxDemonCount = 4
   val maxTurnsPerDemon = 4
-  val initialMp = 2
 
   val rxConfiguration = Configuration()
+
+  val rxInitialMp = Rx {
+    val first = rxConfiguration.first()
+    if (first) {
+      2
+    } else {
+      5
+    }
+  }
 
   val rxDemons = rxConfiguration.demonConfigurations
 
@@ -76,7 +84,7 @@ object Dx2Plan extends JSApp {
             if (hasSkill(demonId, "Mana Gain")) maxMpBonus += 2
             if (hasSkill(demonId, "Mana Surge")) maxMpBonus += 3
 
-            GameState.initial(demons.keys.toSeq).regenMp(demonId, mpRegenBonus, maxMpBonus)
+            GameState.initial(demons.keys.toSeq, rxInitialMp()).regenMp(demonId, mpRegenBonus, maxMpBonus)
           }
           lb += initialState
           lastState = Some(initialState)
@@ -474,11 +482,25 @@ object Dx2Plan extends JSApp {
     )
   }
 
-  val permalink = Rx {
+  val topRight = Rx {
     div(
-      a(
-        href := s"#${rxConfiguration.serialize().compress()}",
-        s"Permalink"
+      style := "padding-right: 0.75rem",
+      div(
+        a(
+          href := s"#${rxConfiguration.serialize().compress()}",
+          s"Permalink"
+        ),
+      ),
+      div(
+        "Turn order: ",
+        onclick := { () => {
+          rxConfiguration.first() = !rxConfiguration.first()
+          false
+        }},
+        a(
+          href := "#",
+          if (rxConfiguration.first()) "first" else "second"
+        )
       ),
     )
   }
@@ -525,6 +547,7 @@ object Dx2Plan extends JSApp {
               (ConfigurationId(2) -> pyro),
               (ConfigurationId(3) -> jack)
             ),
+            first = true
           )
         )
       }
@@ -563,7 +586,7 @@ object Dx2Plan extends JSApp {
           ),
           div(
             `class` := "text-right align-self-center",
-            permalink
+            topRight
           )
         ),
 
