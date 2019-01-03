@@ -208,7 +208,7 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[Configura
 
       var x = pressTurns
       // Consume the half-turn first.
-      if (x % 1 != 0) {
+      if (x % 1 != 0 && pressTurnCost != 0) {
         x -= 0.5
         pressTurnCost = Math.max(0, pressTurnCost - 1)
       }
