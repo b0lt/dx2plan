@@ -107,7 +107,15 @@ object Attack {
 }
 
 // TODO: Handle skill levels.
-case class SkillInstance(skill: Skill, awakened: Boolean)
+case class SkillInstance(skill: Skill, awakened: Boolean) {
+  def cost: Int = {
+    if (awakened) {
+      skill.cost.map(_ - 1).getOrElse(0)
+    } else {
+      skill.cost.getOrElse(0)
+    }
+  }
+}
 
 object SkillInstance {
   implicit val rw: RW[SkillInstance] = macroRW
@@ -134,7 +142,7 @@ case class SkillUsage(skillInstance: SkillInstance, usageType: UsageType = Usage
   }
 
   def mpCost = {
-    skillInstance.skill.cost.getOrElse(0)
+    skillInstance.cost
   }
 
   def pressTurnCost = {
