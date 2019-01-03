@@ -149,35 +149,60 @@ object Dx2Plan {
     lb.toSeq
   }
 
-  val rxDemonSkills = ((0 until maxDemonCount) map { i: Int => {
+  val rxDemonBaseSkills = ((0 until maxDemonCount) map { i: Int => {
     val configurationId = ConfigurationId(i)
     (configurationId -> Rx {
       val configuration = rxDemons(configurationId)
-      val skills = ListBuffer[SkillUsage]()
-      configuration.demon() foreach { demon =>
-        demon.baseSkills.foreach { skill =>
+      configuration.demon().map { demon =>
+        demon.baseSkills.map { skill =>
           val skillInstance = SkillInstance(Dx2Plan.db.skills(skill), false)
-          skills += SkillUsage(skillInstance, UsageType.Normal)
+          SkillUsage(skillInstance, UsageType.Normal)
         }
+      }.getOrElse(Seq())
+    })
+  }}).toMap
+
+  val rxDemonAwakenSkill = ((0 until maxDemonCount) map { i: Int => {
+    val configurationId = ConfigurationId(i)
+    (configurationId -> Rx {
+      val configuration = rxDemons(configurationId)
+      configuration.demon().map { demon =>
         demon.awakenSkills.get(configuration.archetype()) match {
           case Some(skill) => {
             val skillInstance = SkillInstance(Dx2Plan.db.skills(skill), true)
-            skills += SkillUsage(skillInstance, UsageType.Normal)
+            Some(SkillUsage(skillInstance, UsageType.Normal))
           }
-          case None => {}
+          case None => None
         }
+      }.getOrElse(None)
+    })
+  }}).toMap
+
+  val rxDemonSkills = ((0 until maxDemonCount) map { i: Int => {
+    val configurationId = ConfigurationId(i)
+    (configurationId -> Rx {
+
+      val transferSkills = ListBuffer[SkillUsage]()
+      val rxBaseSkills = rxDemonBaseSkills(configurationId)
+      transferSkills ++= rxBaseSkills()
+
+      val rxAwakenSkill = rxDemonAwakenSkill(configurationId)
+      rxAwakenSkill().foreach { transferSkills += _ }
+
+      val configuration = rxDemons(configurationId)
+      configuration.demon() foreach { demon =>
         Seq(configuration.transferSkill0, configuration.transferSkill1) foreach {
           rxTransferSkill => {
             val transferSkill = rxTransferSkill()
             transferSkill foreach { skill =>
               val skillInstance = SkillInstance(skill, false)
-              skills += SkillUsage(skillInstance, UsageType.Normal)
+              transferSkills += SkillUsage(skillInstance, UsageType.Normal)
             }
           }
         }
       }
 
-      skills.toList
+      transferSkills
     })
   }}).toMap
 
@@ -268,30 +293,22 @@ object Dx2Plan {
         ),
       ),
       {
-        val baseSkills: Seq[Rx.Dynamic[Option[Skill]]] = (0 until 3) map {
+        val rxBaseSkills = rxDemonBaseSkills(configurationId)
+        val awakenSkill = rxDemonAwakenSkill(configurationId)
+        val lockedSkills = (0 until 3).map {
           i => Rx {
-            val demonOpt = configuration.demon()
-            demonOpt flatMap { demon =>
-              if (demon.baseSkills.length > i) {
-                Some(Dx2Plan.db.skills(demon.baseSkills(i)))
-              } else {
-                None
-              }
+            val baseSkills = rxBaseSkills()
+            if (i < baseSkills.length) {
+              Some(baseSkills(i))
+            } else {
+              None
             }
           }
-        }
+        } ++ Seq(awakenSkill)
 
-        val awakenSkill: Rx.Dynamic[Option[Skill]] = Rx {
-          val demonOpt = configuration.demon()
-          val archetype = configuration.archetype()
-          demonOpt flatMap { _.awakenSkills.get(archetype).map(Dx2Plan.db.skills.apply) }
-        }
-
-        val lockedSkills = baseSkills.map((_, false)) ++ Seq((awakenSkill, true))
-        val lockedSkillElements = lockedSkills map {
-          case (rxSkill, awakened) => Rx {
-            rxSkill() match {
-              case Some(skill) => {
+        val lockedSkillElements = lockedSkills.map { rxSkillUsage => Rx {
+            rxSkillUsage() match {
+              case Some(skillUsage) => {
                 div(
                   `class` := "row",
                   div(
@@ -301,25 +318,14 @@ object Dx2Plan {
                       `type` := "text",
                       `class` := "form-control",
                       style := "background-color: #fff; text-overflow: ellipsis",
-                      placeholder := skill.name,
+                      placeholder := skillUsage.name,
                       disabled := true,
                     ),
                     div(
                       `class` := "input-group-append",
                       span(
                         `class` := "input-group-text",
-                        skill.cost match {
-                          case Some(cost) => {
-                            val adjustedCost = if (awakened) {
-                              cost - 1
-                            } else {
-                              cost
-                            }
-                            s"$adjustedCost MP"
-                          }
-
-                          case None => "0 MP"
-                        }
+                        s"${skillUsage.mpCost} MP"
                       )
                     )
                   )
