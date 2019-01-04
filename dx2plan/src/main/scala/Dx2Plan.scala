@@ -421,7 +421,6 @@ object Dx2Plan {
       val pressTurns = rxGameState().pressTurns
       if (pressTurns > 0) {
         val rxSelectedAction = configuration.actions(round)
-        println(s"rxSelectedAction = $rxSelectedAction")
         val rxSkills = rxDemonSkills(configurationId)
         val skills = rxSkills() filter { skill => skill.mpCost > 0 }
         val moves: Seq[Move] = Seq(Pass(), Attack()) ++ skills
