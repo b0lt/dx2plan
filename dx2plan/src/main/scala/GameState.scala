@@ -2,7 +2,7 @@ package dx2plan
 
 import dx2db._
 
-import upickle.default.{ReadWriter => RW, macroRW}
+import upickle.default.{ReadWriter => RW, macroRW, readwriter}
 
 sealed trait UsageType {
   def next(skill: Skill.Active): UsageType
@@ -116,9 +116,11 @@ case class SkillInstance(skill: Skill, awakened: Boolean) {
     }
   }
 }
-
 object SkillInstance {
-  implicit val rw: RW[SkillInstance] = macroRW
+  implicit val rw: RW[SkillInstance] = readwriter[(SkillId, Boolean)].bimap[SkillInstance](
+    skillInstance => (skillInstance.skill.id, skillInstance.awakened),
+    { case (id: SkillId, awakened: Boolean) => SkillInstance(Dx2Plan.db.skills(id), awakened) }
+  )
 }
 
 case class SkillUsage(skillInstance: SkillInstance, usageType: UsageType = UsageType.Normal) extends Move {
