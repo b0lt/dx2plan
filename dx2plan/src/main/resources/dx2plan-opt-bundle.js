@@ -1,0 +1,1 @@
+../../../.js/target/scala-2.12/scalajs-bundler/main/dx2plan-opt-bundle.js

@@ -29,7 +29,7 @@ jobs:
           command: </dev/null sbt compile
       - run:
           name: Build dx2plan.js
-          command: </dev/null sbt dx2plan/fullOptJS
+          command: </dev/null sbt dx2plan/fullOptJS::webpack
       - run:
           name: Make sure changes to dx2db are checked in
           command: </dev/null sbt dx2dbJVM/run && git diff --exit-code
@@ -42,8 +42,8 @@ jobs:
             mkdir -p /tmp
             git clone $CIRCLE_REPOSITORY_URL /tmp/gh-pages -b gh-pages
 
-            JS_OUTPUT_DIR=/src/dx2plan/.js/target/scala-2.12
-            cp $JS_OUTPUT_DIR/dx2plan-opt.js $JS_OUTPUT_DIR/dx2plan-opt.js.map /tmp/gh-pages
+            JS_OUTPUT_DIR=/src/dx2plan/.js/target/scala-2.12/scalajs-bundler/main
+            cp $JS_OUTPUT_DIR/dx2plan-opt-bundle.js $JS_OUTPUT_DIR/dx2plan-opt-bundle.js.map /tmp/gh-pages
             cp /src/dx2db/shared/src/main/resources/dx2db.json /tmp/gh-pages
 
             cd /tmp/gh-pages

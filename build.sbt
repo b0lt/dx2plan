@@ -5,7 +5,7 @@ ThisBuild / scalacOptions := Seq("-unchecked", "-deprecation", "-feature")
 
 lazy val dx2plan = crossProject(JSPlatform).withoutSuffixFor(JSPlatform).crossType(CrossType.Pure)
   .in(file("dx2plan"))
-  .jsConfigure(_.enablePlugins(WorkbenchPlugin))
+  .jsConfigure(_.enablePlugins(WorkbenchPlugin, ScalaJSBundlerPlugin))
   .settings(
     name := "dx2plan",
     version := "0.1-SNAPSHOT",
