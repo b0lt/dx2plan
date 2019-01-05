@@ -2,6 +2,7 @@ package dx2plan
 
 import java.util.Base64
 
+import scala.collection.mutable.ArrayBuffer
 import scala.scalajs.js.JSConverters._
 
 import upickle.default._
@@ -26,13 +27,14 @@ case class SerializedConfiguration(
   first: Boolean,
 ) {
   def applyTo(configuration: Configuration) = {
+    val assignments = ArrayBuffer[Var.Assignment[_]]()
     demonConfigurations.foreach {
       case (id, demonConfiguration) => {
-        demonConfiguration.applyTo(configuration.demonConfigurations(id))
+        assignments ++= demonConfiguration.applyTo(configuration.demonConfigurations(id))
       }
     }
-
-    configuration.first() = first
+    assignments += Var.Assignment(configuration.first, first)
+    assignments.toArray
   }
 
   def compress(): String = {
@@ -91,16 +93,22 @@ case class DemonConfiguration(
 case class SerializedDemonConfiguration(demon: Option[DemonId], archetype: Archetype, divine: Boolean, lead: Boolean,
                                         transferSkill0: Option[SkillId], transferSkill1: Option[SkillId],
                                         actions: List[Move]) {
-  def applyTo(config: DemonConfiguration) {
-    config.demon() = demon flatMap { Dx2Plan.db.demons.get }
-    config.archetype() = archetype
-    config.divine() = divine
-    config.lead() = lead
-    config.transferSkill0() = transferSkill0.flatMap(Dx2Plan.db.skills.get)
-    config.transferSkill1() = transferSkill1.flatMap(Dx2Plan.db.skills.get)
+  def applyTo(config: DemonConfiguration) = {
+    val assignments = ArrayBuffer[Var.Assignment[_]]()
+    assignments += Var.Assignment(config.demon, demon flatMap { Dx2Plan.db.demons.get })
+    assignments += Var.Assignment(config.archetype, archetype)
+    assignments += Var.Assignment(config.divine, divine)
+    assignments += Var.Assignment(config.lead, lead)
+
+    val skill0 = transferSkill0.flatMap(Dx2Plan.db.skills.get)
+    val skill1 = transferSkill0.flatMap(Dx2Plan.db.skills.get)
+    assignments += Var.Assignment(config.transferSkill0, skill0)
+    assignments += Var.Assignment(config.transferSkill1, skill1)
     actions.zipWithIndex.foreach { case (action, index) => {
-      config.actions(index)() = action
+      assignments += Var.Assignment(config.actions(index), action)
     }}
+
+    assignments.toArray
   }
 }
 

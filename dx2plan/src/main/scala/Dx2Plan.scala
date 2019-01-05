@@ -619,7 +619,10 @@ object Dx2Plan {
       }
     }
 
-    serializedConfiguration.foreach(_.applyTo(rxConfiguration))
+    serializedConfiguration.foreach { serializedConfig =>
+      val assignments = serializedConfig.applyTo(rxConfiguration)
+      Var.set(assignments: _*)
+    }
 
     val demonConfigurationElements = (0 until maxDemonCount) map {
       i => generateDemonConfiguration(ConfigurationId(i), serializedConfiguration)
