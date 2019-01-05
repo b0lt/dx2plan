@@ -618,8 +618,6 @@ object Dx2Plan {
   }
 
   def main(args: Array[String]): Unit = {
-    dom.document.body.innerHTML = ""
-
     val demonConfigurationElements = (0 until maxDemonCount) map {
       i => generateDemonConfiguration(ConfigurationId(i), serializedConfiguration)
     }
