@@ -18,7 +18,7 @@ object Dx2Plan {
   import Framework._
   implicit val ctx: Ctx.Owner = Ctx.Owner.safe()
 
-  val db: Database = read[Database](Dx2DbBlob.blob)
+  val db: Database = Database.fromUrl("dx2db.json").get
 
   val maxDemonCount = 4
   val maxTurnsPerDemon = 4

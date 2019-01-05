@@ -19,26 +19,6 @@ lazy val dx2plan = crossProject(JSPlatform).withoutSuffixFor(JSPlatform).crossTy
       "com.lihaoyi" %%% "scalatags" % "0.6.7",
       "com.lihaoyi" %%% "scalarx" % "0.4.0",
     ),
-    sourceGenerators in Compile += Def.task {
-      val dx2dbPath = baseDirectory.value / "../../dx2db/shared/src/main/resources/dx2db.json"
-      val sourceDir = (sourceManaged in Compile).value
-      val sourceFile = sourceDir / "Dx2DbBlob.scala"
-
-      // Java has a 64k limit on the length of string literals, so chunk the file up and concatenate.
-      // TODO: Load the json directly instead of this abomination.
-      val chunks = IO.read(dx2dbPath).grouped(60000).toList.map(_.replaceAllLiterally("$", "$$"))
-
-      val scalaCode =
-        s"""
-        package dx2plan
-
-        object Dx2DbBlob {
-          final val blob = ${chunks.map("raw\"\"\"" + _ + "\"\"\"").mkString(" + ")}
-        }
-        """
-      IO.write(sourceFile, scalaCode)
-      Seq(sourceFile)
-    }.taskValue,
   ).dependsOn(dx2db)
 
 lazy val dx2db = crossProject(JSPlatform, JVMPlatform).crossType(CrossType.Full)
@@ -55,6 +35,10 @@ lazy val dx2db = crossProject(JSPlatform, JVMPlatform).crossType(CrossType.Full)
     unmanagedResourceDirectories in Compile += baseDirectory.value / "../shared/src/main/resources",
     fork in run := true,
     baseDirectory in run := baseDirectory.value / "../../dx2db/shared/src/main/resources",
+  ).jsSettings(
+    libraryDependencies ++= Seq(
+      "org.scala-js" %%% "scalajs-dom" % "0.9.6",
+    ),
   )
 
 lazy val altemascraper = crossProject(JVMPlatform).withoutSuffixFor(JVMPlatform).crossType(CrossType.Pure)
