@@ -23,9 +23,10 @@ object Dx2Plan {
   val maxDemonCount = 4
   val maxTurnsPerDemon = 4
 
-  val rxConfiguration = Configuration()
+  lazy val serializedConfiguration: Option[SerializedConfiguration] = getSerializedConfiguration()
+  lazy val rxConfiguration = Configuration.fromSerializedConfiguration(serializedConfiguration)
 
-  val rxInitialMp = Rx {
+  lazy val rxInitialMp = Rx {
     val first = rxConfiguration.first()
     if (first) {
       2
@@ -34,15 +35,15 @@ object Dx2Plan {
     }
   }
 
-  val rxDemons = rxConfiguration.demonConfigurations
+  lazy val rxDemons = rxConfiguration.demonConfigurations
 
   // Actually selected demons.
-  val rxSelectedDemons = Rx {
+  lazy val rxSelectedDemons = Rx {
     rxDemons.filter { case (_, value) => value.demon().isDefined }
   }
 
   // List of ConfigurationIds ordered by turn order.
-  val rxOrdering = Rx {
+  lazy val rxOrdering = Rx {
     type OrderEntry = (ConfigurationId, Int, Boolean)
 
     val demonInfo: Iterable[OrderEntry] = rxSelectedDemons().map { case (id, configuration) => {
@@ -88,7 +89,7 @@ object Dx2Plan {
     }
   }
 
-  val rxGameStates: Seq[Rx[GameState]] = {
+  lazy val rxGameStates: Seq[Rx[GameState]] = {
     val lb = ListBuffer[Rx[GameState]]()
     var lastState: Option[Rx[GameState]] = None
     (0 until maxDemonCount * maxTurnsPerDemon).foreach { n =>
@@ -149,7 +150,7 @@ object Dx2Plan {
     lb.toSeq
   }
 
-  val rxDemonBaseSkills = ((0 until maxDemonCount) map { i: Int => {
+  lazy val rxDemonBaseSkills = ((0 until maxDemonCount) map { i: Int => {
     val configurationId = ConfigurationId(i)
     (configurationId -> Rx {
       val configuration = rxDemons(configurationId)
@@ -162,7 +163,7 @@ object Dx2Plan {
     })
   }}).toMap
 
-  val rxDemonAwakenSkill = ((0 until maxDemonCount) map { i: Int => {
+  lazy val rxDemonAwakenSkill = ((0 until maxDemonCount) map { i: Int => {
     val configurationId = ConfigurationId(i)
     (configurationId -> Rx {
       val configuration = rxDemons(configurationId)
@@ -178,7 +179,7 @@ object Dx2Plan {
     })
   }}).toMap
 
-  val rxDemonSkills = ((0 until maxDemonCount) map { i: Int => {
+  lazy val rxDemonSkills = ((0 until maxDemonCount) map { i: Int => {
     val configurationId = ConfigurationId(i)
     (configurationId -> Rx {
 
@@ -550,79 +551,74 @@ object Dx2Plan {
     )
   }
 
+  def getSerializedConfiguration() = dom.document.location.hash match {
+    case "#example" => {
+      val ishtar = SerializedDemonConfiguration(
+        Some(Dx2Plan.db.demons("Ishtar").id),
+        Archetype.Yellow,
+        divine = true, lead = false,
+        None, None,
+        List(
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Concentrate"), true)),
+          Attack(),
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Mesopotamian Star"), false)),
+          Attack(),
+        ),
+      )
+      val fenrir = SerializedDemonConfiguration(
+        Some(Dx2Plan.db.demons("Fenrir").id),
+        Archetype.Purple,
+        divine = false, lead = false,
+        Some(Dx2Plan.db.skills("Rakunda").id), Some(Dx2Plan.db.skills("Makarakarn").id),
+        List(Pass(), Pass(), Pass(), Pass()),
+      )
+      val pyro = SerializedDemonConfiguration(
+        Some(Dx2Plan.db.demons("Pyro Jack").id),
+        Archetype.Yellow,
+        divine = false, lead = false,
+        Some(Dx2Plan.db.skills("Megido").id), None,
+        List(
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Megido"), false)),
+        )
+      )
+      val jack = SerializedDemonConfiguration(
+        Some(Dx2Plan.db.demons("Jack Frost").id),
+        Archetype.Yellow,
+        divine = false, lead = false,
+        None, None,
+        List(
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
+        )
+      )
+
+      Some(
+        SerializedConfiguration(
+          demonConfigurations = Map(
+            (ConfigurationId(0) -> ishtar),
+            (ConfigurationId(1) -> fenrir),
+            (ConfigurationId(2) -> pyro),
+            (ConfigurationId(3) -> jack)
+          ),
+          first = true
+        )
+      )
+    }
+
+    case "" => None
+    case "#" => None
+
+    case hash => {
+      SerializedConfiguration.fromCompressedBytes(hash.substring(1))
+    }
+  }
+
   def main(args: Array[String]): Unit = {
     dom.document.body.innerHTML = ""
-
-    val serializedConfiguration: Option[SerializedConfiguration] = dom.document.location.hash match {
-      case "#example" => {
-        val ishtar = SerializedDemonConfiguration(
-          Some(Dx2Plan.db.demons("Ishtar").id),
-          Archetype.Yellow,
-          divine = true, lead = false,
-          None, None,
-          List(
-            SkillUsage(SkillInstance(Dx2Plan.db.skills("Concentrate"), true)),
-            Attack(),
-            SkillUsage(SkillInstance(Dx2Plan.db.skills("Mesopotamian Star"), false)),
-            Attack(),
-          ),
-        )
-        val fenrir = SerializedDemonConfiguration(
-          Some(Dx2Plan.db.demons("Fenrir").id),
-          Archetype.Purple,
-          divine = false, lead = false,
-          Some(Dx2Plan.db.skills("Rakunda").id), Some(Dx2Plan.db.skills("Makarakarn").id),
-          List(Pass(), Pass(), Pass(), Pass()),
-        )
-        val pyro = SerializedDemonConfiguration(
-          Some(Dx2Plan.db.demons("Pyro Jack").id),
-          Archetype.Yellow,
-          divine = false, lead = false,
-          Some(Dx2Plan.db.skills("Megido").id), None,
-          List(
-            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
-            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
-            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
-            SkillUsage(SkillInstance(Dx2Plan.db.skills("Megido"), false)),
-          )
-        )
-        val jack = SerializedDemonConfiguration(
-          Some(Dx2Plan.db.demons("Jack Frost").id),
-          Archetype.Yellow,
-          divine = false, lead = false,
-          None, None,
-          List(
-            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
-            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
-            SkillUsage(SkillInstance(Dx2Plan.db.skills("Tag"), true)),
-          )
-        )
-
-        Some(
-          SerializedConfiguration(
-            demonConfigurations = Map(
-              (ConfigurationId(0) -> ishtar),
-              (ConfigurationId(1) -> fenrir),
-              (ConfigurationId(2) -> pyro),
-              (ConfigurationId(3) -> jack)
-            ),
-            first = true
-          )
-        )
-      }
-
-      case "" => None
-      case "#" => None
-
-      case hash => {
-        SerializedConfiguration.fromCompressedBytes(hash.substring(1))
-      }
-    }
-
-    serializedConfiguration.foreach { serializedConfig =>
-      val assignments = serializedConfig.applyTo(rxConfiguration)
-      Var.set(assignments: _*)
-    }
 
     val demonConfigurationElements = (0 until maxDemonCount) map {
       i => generateDemonConfiguration(ConfigurationId(i), serializedConfiguration)

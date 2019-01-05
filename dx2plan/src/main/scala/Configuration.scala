@@ -22,6 +22,21 @@ case class Configuration(
   }
 }
 
+object Configuration {
+  def fromSerializedConfiguration(serialized: Option[SerializedConfiguration]): Configuration = {
+    serialized match {
+      case Some(s) => {
+        val result = Configuration()
+        val assignments = s.applyTo(result)
+        Var.set(assignments: _*)
+        result
+      }
+
+      case None => Configuration()
+    }
+  }
+}
+
 case class SerializedConfiguration(
   demonConfigurations: Map[ConfigurationId, SerializedDemonConfiguration],
   first: Boolean,
