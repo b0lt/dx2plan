@@ -5,13 +5,7 @@ import upickle.default.{ReadWriter => RW, macroRW}
 sealed trait Effect
 
 object Effect {
-  implicit val rw: RW[Effect] = {
-    RW.merge(
-      macroRW[Tetraja.type], macroRW[Tetrakarn.type], macroRW[Makarakarn.type], macroRW[FiveElements.type],
-      macroRW[Charge.type], macroRW[Concentrate.type], macroRW[Rebellion.type],
-      macroRW[Barrier.type], macroRW[Lydia.type]
-    )
-  }
+  implicit val rw: RW[Effect] = macroRW
 
   def fromJson(obj: ujson.Obj): Set[Effect] = {
     obj.value.map {

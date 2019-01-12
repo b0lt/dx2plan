@@ -30,10 +30,10 @@ sealed trait Skill extends StringableKey {
 }
 
 object Skill {
-  implicit val rw: ReadWriter[Skill] = ReadWriter.merge(Active.rw, Passive.rw)
+  implicit val rw: ReadWriter[Skill] = ReadWriter.merge(macroRW[Active], macroRW[Passive])
 
   @upickle.implicits.key("active")
-  case class Active(
+  final case class Active(
       id: SkillId,
       name: String,
       description: String,
@@ -46,20 +46,14 @@ object Skill {
   ) extends Skill {
     final override def isActive = true
   }
-  object Active {
-    implicit val rw: ReadWriter[Active] = macroRW
-  }
 
   @upickle.implicits.key("passive")
-  case class Passive(
+  final case class Passive(
       id: SkillId,
       name: String,
       description: String,
   ) extends Skill {
     final override def isActive = false
-  }
-  object Passive {
-    implicit val rw: ReadWriter[Passive] = macroRW
   }
 }
 
