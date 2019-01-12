@@ -38,10 +38,10 @@ object Effect {
   @upickle.implicits.key("repel_almighty")
   final case object FiveElements extends Effect
 
-  @upickle.implicits.key("charge_phy")
+  @upickle.implicits.key("charge")
   final case object Charge extends Effect
 
-  @upickle.implicits.key("concentrate_mag")
+  @upickle.implicits.key("concentrate")
   final case object Concentrate extends Effect
 
   @upickle.implicits.key("force_critical")

@@ -7675,7 +7675,7 @@
       "target": "self",
       "effects": [
         {
-          "$type": "concentrate_mag"
+          "$type": "concentrate"
         }
       ],
       "effectCancels": [
@@ -9686,10 +9686,10 @@
           "$type": "repel_phy"
         },
         {
-          "$type": "concentrate_mag"
+          "$type": "concentrate"
         },
         {
-          "$type": "charge_phy"
+          "$type": "charge"
         }
       ],
       "levels": [
@@ -10813,10 +10813,10 @@
       ],
       "effectCancels": [
         {
-          "$type": "concentrate_mag"
+          "$type": "concentrate"
         },
         {
-          "$type": "charge_phy"
+          "$type": "charge"
         },
         {
           "$type": "force_critical"
@@ -14238,7 +14238,7 @@
       "target": "self",
       "effects": [
         {
-          "$type": "charge_phy"
+          "$type": "charge"
         },
         {
           "$type": "force_critical"
@@ -15559,7 +15559,7 @@
       "target": "self",
       "effects": [
         {
-          "$type": "charge_phy"
+          "$type": "charge"
         }
       ],
       "effectCancels": [
