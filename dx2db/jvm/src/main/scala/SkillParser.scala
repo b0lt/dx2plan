@@ -59,9 +59,79 @@ object SkillParser {
         }
       }
 
-      Skill.Active(id, name, description, element, cost, target, effects, effectCancel)
+      val levels = {
+        if (active.value.contains("skl_levels")) {
+          val skl_levels = active.value("skl_levels").arr
+          skl_levels.map {
+            case skl_level: ujson.Obj => {
+              val level = skl_level("level").num.toInt
+
+              def parseSkillEffect(obj: ujson.Obj): SkillLevelEffect = {
+                val param1 = obj("param1").num.toInt
+                val param2 = obj("param2").num.toInt
+                obj("affect_type").num.toInt match {
+                  case 1 => {
+                    assert(param1 > 0)
+                    assert(param2 == 0)
+                    SkillLevelEffect.Damage(param1)
+                  }
+
+                  case 2 => {
+                    assert(param1 > 0)
+                    assert(param2 > 0)
+                    SkillLevelEffect.ManaRecovery(param1, param2)
+                  }
+
+                  case 3 => {
+                    assert(param1 > 0)
+                    assert(param2 == 0)
+                    SkillLevelEffect.AilmentRate(param1)
+                  }
+
+                  case 4 => {
+                    assert(param1 > 0)
+                    assert(param2 == 0)
+                    SkillLevelEffect.HealingAmount(param1)
+                  }
+
+                  case 5 => {
+                    assert(param1 > 0)
+                    assert(param2 == 0)
+                    SkillLevelEffect.HitRate(param1)
+                  }
+
+                  case 6 => {
+                    assert(param1 > 0)
+                    assert(param2 == 0)
+                    SkillLevelEffect.CostReduction(param1)
+                  }
+
+                  case _ => ???
+                }
+              }
+
+              val effects: Seq[SkillLevelEffect] = skl_level("aff_list").arr.map {
+                case effect: ujson.Obj => parseSkillEffect(effect)
+                case _ => ???
+              }
+
+              // The first effect seems to be duplicated for some reason.
+              val first = parseSkillEffect(skl_level.obj)
+              assert(first == effects(0))
+              effects
+            }
+
+            case _ => ???
+          }
+        } else {
+          Seq[Seq[SkillLevelEffect]]()
+        }
+      }
+
+      Skill.Active(id, name, description, element, cost, target, effects, effectCancel, levels)
     } else {
       assert(skillData.value.contains("passive"))
+      // TODO: Parse passive levels?
       Skill.Passive(id, name, description)
     }
   }

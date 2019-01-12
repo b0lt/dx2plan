@@ -41,7 +41,8 @@ object Skill {
       mpCost: Int,
       target: Target,
       effects: Set[Effect],
-      effectCancels: Set[Effect]
+      effectCancels: Set[Effect],
+      levels: Seq[Seq[SkillLevelEffect]],
   ) extends Skill {
     final override def isActive = true
   }
@@ -62,6 +63,37 @@ object Skill {
   }
 }
 
+sealed trait SkillLevelEffect;
+
+object SkillLevelEffect {
+  implicit val rw: ReadWriter[SkillLevelEffect] =
+    ReadWriter.merge(
+      macroRW[Damage],
+      macroRW[ManaRecovery],
+      macroRW[AilmentRate],
+      macroRW[HealingAmount],
+      macroRW[HitRate],
+      macroRW[CostReduction],
+    )
+
+  @upickle.implicits.key("damage")
+  final case class Damage(percentage: Int) extends SkillLevelEffect
+
+  @upickle.implicits.key("mana_recovery")
+  final case class ManaRecovery(percentage: Int, mp: Int) extends SkillLevelEffect
+
+  @upickle.implicits.key("ailment_rate")
+  final case class AilmentRate(percentage: Int) extends SkillLevelEffect
+
+  @upickle.implicits.key("healing_amount")
+  final case class HealingAmount(percentage: Int) extends SkillLevelEffect
+
+  @upickle.implicits.key("hit_rate")
+  final case class HitRate(percentage: Int) extends SkillLevelEffect
+
+  @upickle.implicits.key("cost_reduction")
+  final case class CostReduction(mp: Int) extends SkillLevelEffect
+}
 
 case class SkillDb(
     skills: Map[SkillId, Skill]
