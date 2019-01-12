@@ -35,7 +35,8 @@ sealed trait Move {
   def postscript: Option[String] = None
 
   def element: Option[Element]
-  def mpCost: Int
+  def mpCost: Int = 0
+  def mpRegen: Int = 0
   def pressTurnCost: Double
 
   def nextType: Move
@@ -54,7 +55,6 @@ case class Pass(usageType: UsageType = UsageType.Normal) extends Move {
   }
 
   def element = None
-  def mpCost = 0
   def pressTurnCost = usageType match {
     case UsageType.Normal => 0.5
     case UsageType.Critical => 0
@@ -84,7 +84,6 @@ case class Attack(usageType: UsageType = UsageType.Normal) extends Move {
   }
 
   def element = Some(Element.Phys)
-  def mpCost = 0
   def pressTurnCost = usageType match {
     case UsageType.Normal => 1
     case UsageType.Critical => 0.5
@@ -114,6 +113,8 @@ case class SkillInstance(skill: Skill, awakened: Boolean, level: Int) {
       skill.cost(level).getOrElse(0)
     }
   }
+
+  def mpRegen: Int = skill.mpRegen(level).getOrElse(0)
 }
 object SkillInstance {
   implicit val rw: RW[SkillInstance] = readwriter[(SkillId, Boolean, Int)].bimap[SkillInstance](
@@ -144,9 +145,8 @@ case class SkillUsage(skillInstance: SkillInstance, usageType: UsageType = Usage
     case passive: Skill.Passive => None
   }
 
-  def mpCost = {
-    skillInstance.cost
-  }
+  override def mpCost = skillInstance.cost
+  override def mpRegen = skillInstance.mpRegen
 
   def pressTurnCost = {
     usageType match {
@@ -212,6 +212,8 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[Configura
       } else {
         mp
       }
+
+      mp + move.mpRegen
     }
 
     val newPressTurns = {

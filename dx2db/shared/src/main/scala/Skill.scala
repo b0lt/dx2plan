@@ -23,6 +23,7 @@ sealed trait Skill extends StringableKey {
   def asPassive = this.asInstanceOf[Skill.Passive]
 
   def cost(level: Int): Option[Int] = None
+  def mpRegen(level: Int): Option[Int] = None
 
   override def toString() = name
   override def asStringKey = name.toLowerCase
@@ -56,6 +57,24 @@ object Skill {
         Some(mpCost - reduction)
       }
     }
+
+    final override def mpRegen(level: Int) = {
+      if (level == 1) {
+        Some(0)
+      } else {
+        val levelEffects = levels(level - 2)
+        val (rate, amount) = levelEffects.collectFirst {
+          case SkillLevelEffect.ManaRecovery(rate, amount) => (rate, amount)
+        }.getOrElse((0, 0))
+
+        if (rate == 100) {
+          Some(amount)
+        } else {
+          Some(0)
+        }
+      }
+    }
+
   }
 
   @upickle.implicits.key("passive")
