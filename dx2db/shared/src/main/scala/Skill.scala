@@ -17,13 +17,12 @@ sealed trait Skill extends StringableKey {
   def isActive: Boolean
   final def isPassive: Boolean = !isActive
 
+  def maxLevel = 1
+
   def asActive = this.asInstanceOf[Skill.Active]
   def asPassive = this.asInstanceOf[Skill.Passive]
 
-  def cost: Option[Int] = this match {
-    case active: Skill.Active => Some(active.mpCost)
-    case passive: Skill.Passive => None
-  }
+  def cost(level: Int): Option[Int] = None
 
   override def toString() = name
   override def asStringKey = name.toLowerCase
@@ -45,6 +44,18 @@ object Skill {
       levels: Seq[Seq[SkillLevelEffect]],
   ) extends Skill {
     final override def isActive = true
+    final override def maxLevel = levels.length + 1
+    final override def cost(level: Int) = {
+      if (level == 1) {
+        Some(mpCost)
+      } else {
+        val levelEffects = levels(level - 2)
+        val reduction = levelEffects.collectFirst {
+          case SkillLevelEffect.CostReduction(mp) => mp
+        }.getOrElse(0)
+        Some(mpCost - reduction)
+      }
+    }
   }
 
   @upickle.implicits.key("passive")

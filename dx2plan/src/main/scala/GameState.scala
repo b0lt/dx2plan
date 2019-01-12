@@ -106,21 +106,22 @@ object Attack {
   implicit val rw: RW[Attack] = macroRW
 }
 
-// TODO: Handle skill levels.
-case class SkillInstance(skill: Skill, awakened: Boolean) {
+case class SkillInstance(skill: Skill, awakened: Boolean, level: Int) {
   def cost: Int = {
     if (awakened) {
-      skill.cost.map(_ - 1).getOrElse(0)
+      skill.cost(level).map(_ - 1).getOrElse(0)
     } else {
-      skill.cost.getOrElse(0)
+      skill.cost(level).getOrElse(0)
     }
   }
 }
 object SkillInstance {
-  implicit val rw: RW[SkillInstance] = readwriter[(SkillId, Boolean)].bimap[SkillInstance](
-    skillInstance => (skillInstance.skill.id, skillInstance.awakened),
-    { case (id: SkillId, awakened: Boolean) => SkillInstance(Dx2Plan.db.skills(id), awakened) }
+  implicit val rw: RW[SkillInstance] = readwriter[(SkillId, Boolean, Int)].bimap[SkillInstance](
+    skillInstance => (skillInstance.skill.id, skillInstance.awakened, skillInstance.level),
+    { case (id: SkillId, awakened: Boolean, level: Int) => SkillInstance(Dx2Plan.db.skills(id), awakened, level) }
   )
+
+  def apply(skill: Skill, awakened: Boolean): SkillInstance = SkillInstance(skill, awakened, skill.maxLevel)
 }
 
 case class SkillUsage(skillInstance: SkillInstance, usageType: UsageType = UsageType.Normal) extends Move {

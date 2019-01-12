@@ -155,8 +155,9 @@ object Dx2Plan {
     (configurationId -> Rx {
       val configuration = rxDemons(configurationId)
       configuration.demon().map { demon =>
-        demon.baseSkills.map { skill =>
-          val skillInstance = SkillInstance(Dx2Plan.db.skills(skill), false)
+        demon.baseSkills.map { skillId =>
+          val skill = Dx2Plan.db.skills(skillId)
+          val skillInstance = SkillInstance(skill, false)
           SkillUsage(skillInstance, UsageType.Normal)
         }
       }.getOrElse(Seq())
@@ -169,8 +170,9 @@ object Dx2Plan {
       val configuration = rxDemons(configurationId)
       configuration.demon().map { demon =>
         demon.awakenSkills.get(configuration.archetype()) match {
-          case Some(skill) => {
-            val skillInstance = SkillInstance(Dx2Plan.db.skills(skill), true)
+          case Some(skillId) => {
+            val skill = Dx2Plan.db.skills(skillId)
+            val skillInstance = SkillInstance(skill, false)
             Some(SkillUsage(skillInstance, UsageType.Normal))
           }
           case None => None
@@ -382,7 +384,7 @@ object Dx2Plan {
 
                       rxTransferSkill() match {
                         case Some(skill) => {
-                          s"${skill.cost.getOrElse(0)} MP"
+                          s"${skill.cost(skill.maxLevel).getOrElse(0)} MP"
                         }
 
                         case None => "0 MP"
@@ -559,9 +561,9 @@ object Dx2Plan {
         divine = true, lead = false,
         None, None,
         List(
-          SkillUsage(SkillInstance(Dx2Plan.db.skills("Concentrate"), true)),
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Concentrate"), true, 1)),
           Attack(),
-          SkillUsage(SkillInstance(Dx2Plan.db.skills("Mesopotamian Star"), false)),
+          SkillUsage(SkillInstance(Dx2Plan.db.skills("Mesopotamian Star"), false, 4)),
           Attack(),
         ),
       )
