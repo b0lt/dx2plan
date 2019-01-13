@@ -205,12 +205,10 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[Configura
     }
 
     val newDemonMp = {
-      val mp = demonMp(configurationId) - move.mpCost
+      var mp = demonMp(configurationId) - move.mpCost
       if (mp < 0 && mp >= -3 && globalModifiers.contains(OrleanPrayer)) {
         newGlobalModifiers -= OrleanPrayer
-        mp + 3
-      } else {
-        mp
+        mp += 3
       }
 
       mp + move.mpRegen
