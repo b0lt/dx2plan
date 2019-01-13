@@ -6683,6 +6683,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -6700,6 +6703,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -6717,6 +6752,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -6734,6 +6801,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -6750,6 +6820,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -6774,6 +6847,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -6797,6 +6896,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -6814,6 +6939,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 14
+          }
+        ]
       ]
     },
     {
@@ -6837,6 +6988,33 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 10,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 20,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 20,
+            "mp": 1
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -6860,6 +7038,42 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -6883,6 +7097,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ]
       ]
     },
     {
@@ -6900,6 +7146,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -6929,6 +7201,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -6946,6 +7221,42 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -6975,6 +7286,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 14
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -7000,6 +7343,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -7017,6 +7363,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -7040,6 +7418,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 5,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 7,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 11,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -7056,6 +7471,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -7086,6 +7504,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          },
+          {
+            "$type": "mana_recovery",
+            "percentage": 100,
+            "mp": 2
+          }
+        ]
       ]
     },
     {
@@ -7133,6 +7588,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -7150,6 +7635,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -7164,10 +7675,13 @@
       "target": "self",
       "effects": [
         {
-          "$type": "concentrate_mag"
+          "$type": "concentrate"
         }
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -7186,6 +7700,30 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 20
+          },
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -7204,6 +7742,9 @@
         }
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -7234,6 +7775,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -7251,6 +7795,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -7268,6 +7844,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          }
+        ]
       ]
     },
     {
@@ -7285,6 +7893,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          }
+        ]
       ]
     },
     {
@@ -7308,6 +7948,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -7325,6 +7985,42 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 25
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 25
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -7341,6 +8037,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -7359,6 +8058,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 5,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 7,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 11,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -7382,6 +8118,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -7399,6 +8155,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -7416,6 +8204,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -7433,6 +8247,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -7449,6 +8283,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -7503,6 +8340,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -7519,6 +8388,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -7537,6 +8409,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          }
+        ]
       ]
     },
     {
@@ -7554,6 +8458,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 5,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 7,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 11,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -7577,6 +8518,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -7594,6 +8565,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -7611,6 +8608,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 13
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -7640,6 +8669,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          },
+          {
+            "$type": "mana_recovery",
+            "percentage": 100,
+            "mp": 2
+          }
+        ]
       ]
     },
     {
@@ -7657,6 +8723,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -7676,6 +8768,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -7693,6 +8788,44 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 2
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -7709,6 +8842,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -7751,6 +8887,44 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 2
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -7770,6 +8944,9 @@
         {
           "$type": "repel_phy"
         }
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -7799,6 +8976,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -7822,6 +9025,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -7839,6 +9074,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 13
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -7856,6 +9123,42 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 25
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 25
+          },
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ]
       ]
     },
     {
@@ -7879,6 +9182,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -7902,6 +9237,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 14
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -7925,6 +9292,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -7942,6 +9312,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -7959,6 +9361,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 5,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 7,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 11,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -7994,6 +9433,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -8017,6 +9482,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -8033,6 +9501,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -8069,6 +9540,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 9
+          }
+        ]
       ]
     },
     {
@@ -8092,6 +9583,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -8109,6 +9603,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -8162,11 +9686,14 @@
           "$type": "repel_phy"
         },
         {
-          "$type": "concentrate_mag"
+          "$type": "concentrate"
         },
         {
-          "$type": "charge_phy"
+          "$type": "charge"
         }
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -8184,6 +9711,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 18
+          }
+        ]
       ]
     },
     {
@@ -8201,6 +9760,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -8218,6 +9797,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -8235,6 +9840,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 9
+          }
+        ]
       ]
     },
     {
@@ -8252,6 +9877,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 14
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -8269,6 +9926,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 2
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -8286,6 +9975,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -8309,6 +10024,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -8338,6 +10073,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -8361,6 +10128,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 18
+          }
+        ]
       ]
     },
     {
@@ -8384,6 +10183,30 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 20
+          },
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -8407,6 +10230,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 5,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 7,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 11,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -8424,6 +10284,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -8441,6 +10333,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -8458,6 +10376,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ]
       ]
     },
     {
@@ -8474,6 +10424,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -8498,6 +10451,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -8515,6 +10488,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          },
+          {
+            "$type": "mana_recovery",
+            "percentage": 100,
+            "mp": 2
+          }
+        ]
       ]
     },
     {
@@ -8531,6 +10541,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -8549,6 +10562,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -8578,6 +10623,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -8595,6 +10660,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -8618,6 +10709,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -8647,6 +10764,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -8664,14 +10813,17 @@
       ],
       "effectCancels": [
         {
-          "$type": "concentrate_mag"
+          "$type": "concentrate"
         },
         {
-          "$type": "charge_phy"
+          "$type": "charge"
         },
         {
           "$type": "force_critical"
         }
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -8689,6 +10841,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -8706,6 +10888,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -8723,6 +10931,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 18
+          }
+        ]
       ]
     },
     {
@@ -8746,6 +10986,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 13
+          }
+        ]
       ]
     },
     {
@@ -8762,6 +11028,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -8786,6 +11055,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 13
+          }
+        ]
       ]
     },
     {
@@ -8803,6 +11098,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -8825,6 +11146,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -8849,6 +11173,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -8878,6 +11232,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -8901,6 +11287,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          },
+          {
+            "$type": "mana_recovery",
+            "percentage": 100,
+            "mp": 2
+          }
+        ]
       ]
     },
     {
@@ -8923,6 +11346,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -8955,6 +11381,33 @@
         {
           "$type": "barrier"
         }
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 10,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 20,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 20,
+            "mp": 1
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -8972,6 +11425,42 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -8989,6 +11478,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          }
+        ]
       ]
     },
     {
@@ -9012,6 +11533,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -9029,6 +11553,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ]
       ]
     },
     {
@@ -9051,6 +11607,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -9087,6 +11646,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 13
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -9122,6 +11713,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -9151,6 +11774,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 13
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -9168,6 +11823,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -9184,6 +11871,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -9214,6 +11904,30 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -9231,6 +11945,33 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 10,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 20,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 20,
+            "mp": 1
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -9259,6 +12000,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -9289,6 +12033,30 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 20
+          },
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -9306,6 +12074,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -9323,6 +12111,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -9340,6 +12160,42 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -9365,6 +12221,9 @@
         {
           "$type": "lydia"
         }
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -9382,6 +12241,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -9401,6 +12280,9 @@
         {
           "$type": "barrier"
         }
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -9424,6 +12306,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          }
+        ]
       ]
     },
     {
@@ -9446,6 +12360,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -9476,6 +12393,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -9499,6 +12442,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 9
+          }
+        ]
       ]
     },
     {
@@ -9516,6 +12479,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -9539,6 +12522,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -9556,6 +12571,44 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 2
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -9573,6 +12626,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -9596,6 +12669,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -9619,6 +12724,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -9641,6 +12772,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -9671,6 +12805,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -9694,6 +12848,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -9719,6 +12905,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -9736,6 +12925,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -9759,6 +12974,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -9776,6 +13023,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -9792,6 +13071,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -9810,6 +13092,42 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -9827,6 +13145,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -9844,6 +13192,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -9875,6 +13255,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -9892,6 +13275,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 13
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -9917,6 +13332,9 @@
         {
           "$type": "repel_mag"
         }
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -9933,6 +13351,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -9963,6 +13384,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -9991,6 +13415,43 @@
         {
           "$type": "repel_phy"
         }
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          },
+          {
+            "$type": "mana_recovery",
+            "percentage": 100,
+            "mp": 2
+          }
+        ]
       ]
     },
     {
@@ -10008,6 +13469,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -10025,6 +13512,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -10042,6 +13561,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -10059,6 +13610,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -10076,6 +13647,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 2
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -10093,6 +13696,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 18
+          }
+        ]
       ]
     },
     {
@@ -10110,6 +13745,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -10127,6 +13788,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -10144,6 +13837,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -10160,6 +13883,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -10178,6 +13904,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -10201,6 +13953,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ]
       ]
     },
     {
@@ -10224,6 +14008,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -10241,6 +14028,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -10257,6 +14047,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -10287,6 +14080,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -10304,6 +14100,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -10327,6 +14149,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -10343,6 +14168,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -10363,6 +14191,33 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 10,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 20,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 20,
+            "mp": 1
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -10383,13 +14238,16 @@
       "target": "self",
       "effects": [
         {
-          "$type": "charge_phy"
+          "$type": "charge"
         },
         {
           "$type": "force_critical"
         }
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -10408,6 +14266,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 2
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -10424,6 +14314,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -10442,6 +14335,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 14
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -10471,6 +14396,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ]
       ]
     },
     {
@@ -10500,6 +14445,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -10516,6 +14464,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -10534,6 +14485,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -10551,6 +14534,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -10568,6 +14577,44 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 2
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -10585,6 +14632,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -10614,6 +14691,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -10637,6 +14734,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -10654,6 +14783,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 18
+          }
+        ]
       ]
     },
     {
@@ -10671,6 +14832,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -10706,6 +14897,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -10729,6 +14923,42 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -10746,6 +14976,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -10763,6 +15025,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -10792,6 +15080,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          },
+          {
+            "$type": "mana_recovery",
+            "percentage": 100,
+            "mp": 2
+          }
+        ]
       ]
     },
     {
@@ -10809,6 +15134,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -10850,6 +15201,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          }
+        ]
       ]
     },
     {
@@ -10867,6 +15250,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 14
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -10884,6 +15299,30 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -10901,6 +15340,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "healing_amount",
+            "percentage": 9
+          }
+        ]
       ]
     },
     {
@@ -10918,6 +15377,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 12
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 18
+          }
+        ]
       ]
     },
     {
@@ -10946,6 +15437,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -10976,6 +15470,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -10999,6 +15519,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -11013,10 +15559,13 @@
       "target": "self",
       "effects": [
         {
-          "$type": "charge_phy"
+          "$type": "charge"
         }
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -11035,6 +15584,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -11052,6 +15627,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -11071,6 +15678,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -11087,6 +15697,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -11111,6 +15724,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -11128,6 +15767,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -11145,6 +15804,43 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 20
+          },
+          {
+            "$type": "mana_recovery",
+            "percentage": 100,
+            "mp": 2
+          }
+        ]
       ]
     },
     {
@@ -11162,6 +15858,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -11185,6 +15901,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -11202,6 +15921,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -11225,6 +15976,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -11260,6 +16043,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -11295,6 +16104,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -11311,6 +16123,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -11347,6 +16162,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -11364,6 +16205,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -11381,6 +16248,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 15
+          }
+        ]
       ]
     },
     {
@@ -11397,6 +16284,9 @@
         
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -11415,6 +16305,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 14
+          }
+        ]
       ]
     },
     {
@@ -11438,6 +16354,32 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ]
       ]
     },
     {
@@ -11455,6 +16397,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -11478,6 +16452,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 13
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 16
+          }
+        ]
       ]
     },
     {
@@ -11501,6 +16507,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -11518,6 +16556,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 12
+          }
+        ]
       ]
     },
     {
@@ -11541,6 +16611,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 14
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -11558,6 +16660,30 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 20
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -11581,6 +16707,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -11606,6 +16762,9 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        
       ]
     },
     {
@@ -11623,6 +16782,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 4
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 7
+          }
+        ],
+        [
+          {
+            "$type": "ailment_rate",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -11640,6 +16819,38 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 8
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 11
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 14
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 17
+          }
+        ]
       ]
     },
     {
@@ -11658,6 +16869,9 @@
         }
       ],
       "effectCancels": [
+        
+      ],
+      "levels": [
         
       ]
     },
@@ -11688,6 +16902,33 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 10,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 20,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 20,
+            "mp": 1
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -11705,6 +16946,26 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "damage",
+            "percentage": 3
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 6
+          }
+        ],
+        [
+          {
+            "$type": "damage",
+            "percentage": 9
+          }
+        ]
       ]
     },
     {
@@ -11722,6 +16983,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     },
     {
@@ -11751,6 +17042,36 @@
       ],
       "effectCancels": [
         
+      ],
+      "levels": [
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 3,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 6,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 9,
+            "mp": 1
+          }
+        ],
+        [
+          {
+            "$type": "mana_recovery",
+            "percentage": 12,
+            "mp": 1
+          }
+        ]
       ]
     }
   ]
