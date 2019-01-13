@@ -59,6 +59,29 @@ object SkillParser {
         }
       }
 
+      val attributes = {
+        val buffer = ListBuffer[SkillAttribute]()
+        if (active.value.contains("other")) {
+          active.value("other").arr.foreach {
+            case obj: ujson.Obj => {
+              val value = obj("value").num
+              obj("type").num.toInt match {
+                case 1 => buffer += SkillAttribute.Lifesteal((value * 100).toInt)
+                case 2 => buffer += SkillAttribute.ManaDrain(value.toInt)
+                case 3 => buffer += SkillAttribute.Instakill(value.toInt)
+                case 5 => buffer += SkillAttribute.PressTurnGain(value.toInt)
+                case 7 => buffer += SkillAttribute.SelfDamage(value.toInt)
+                case 11 => buffer += SkillAttribute.ManaBurn(value.toInt)
+                case _ => println(s"$name: unknown type ${obj("type")} = $value")
+              }
+            }
+
+            case _ => ???
+          }
+        }
+        buffer.toList
+      }
+
       val levels = {
         if (active.value.contains("skl_levels")) {
           val skl_levels = active.value("skl_levels").arr
@@ -128,7 +151,7 @@ object SkillParser {
         }
       }
 
-      Skill.Active(id, name, description, element, cost, target, effects, effectCancel, levels)
+      Skill.Active(id, name, description, element, cost, target, effects, effectCancel, attributes, levels)
     } else {
       assert(skillData.value.contains("passive"))
       // TODO: Parse passive levels?

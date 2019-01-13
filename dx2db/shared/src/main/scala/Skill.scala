@@ -42,6 +42,7 @@ object Skill {
       target: Target,
       effects: Set[Effect],
       effectCancels: Set[Effect],
+      attributes: Seq[SkillAttribute],
       levels: Seq[Seq[SkillLevelEffect]],
   ) extends Skill {
     final override def isActive = true
@@ -117,6 +118,38 @@ object SkillLevelEffect {
 
   @upickle.implicits.key("cost_reduction")
   final case class CostReduction(mp: Int) extends SkillLevelEffect
+}
+
+sealed trait SkillAttribute
+
+object SkillAttribute {
+  implicit val rw: ReadWriter[SkillAttribute] =
+    ReadWriter.merge(
+      macroRW[Lifesteal],
+      macroRW[ManaDrain],
+      macroRW[Instakill],
+      macroRW[PressTurnGain],
+      macroRW[SelfDamage],
+      macroRW[ManaBurn],
+    )
+
+  @upickle.implicits.key("lifesteal")
+  final case class Lifesteal(percentage: Int) extends SkillAttribute
+
+  @upickle.implicits.key("mana_drain")
+  final case class ManaDrain(amount: Int) extends SkillAttribute
+
+  @upickle.implicits.key("instakill")
+  final case class Instakill(percentage: Int) extends SkillAttribute
+
+  @upickle.implicits.key("press_turn_gain")
+  final case class PressTurnGain(amount: Int) extends SkillAttribute
+
+  @upickle.implicits.key("self_damage")
+  final case class SelfDamage(percentage: Int) extends SkillAttribute
+
+  @upickle.implicits.key("mana_burn")
+  final case class ManaBurn(amount: Int) extends SkillAttribute
 }
 
 case class SkillDb(
