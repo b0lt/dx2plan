@@ -211,7 +211,24 @@ case class GameState(turnNumber: Int, pressTurns: Double, demonMp: Map[Configura
         mp += 3
       }
 
-      mp + move.mpRegen
+      mp += move.mpRegen
+
+      move match {
+        case SkillUsage(SkillInstance(skill: Skill.Active, _, _), _) => {
+          skill.attributes.collect {
+            case SkillAttribute.ManaDrain(amount) => {
+              skill.target match {
+                case Target.SingleEnemy => mp += amount
+                case Target.AllEnemies => mp += 4 * amount
+                case _ => ???
+              }
+            }
+          }
+        }
+        case _ => {}
+      }
+
+      mp
     }
 
     val newPressTurns = {
