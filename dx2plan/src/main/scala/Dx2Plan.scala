@@ -371,6 +371,7 @@ object Dx2Plan {
                 input(
                   `type` := "text",
                   `class` := "form-control",
+                  tabindex := idx * 10 + 5 + i,
                   value := transferSkills(i).flatMap(Dx2Plan.db.skills.get).map(_.name).getOrElse(""),
                   oninput := ({(elem: HTMLInputElement) => {
                     rxTransferSkill() = Dx2Plan.db.skills.get(elem.value)
