@@ -116,7 +116,7 @@ case class SerializedDemonConfiguration(demon: Option[DemonId], archetype: Arche
     assignments += Var.Assignment(config.lead, lead)
 
     val skill0 = transferSkill0.flatMap(Dx2Plan.db.skills.get)
-    val skill1 = transferSkill0.flatMap(Dx2Plan.db.skills.get)
+    val skill1 = transferSkill1.flatMap(Dx2Plan.db.skills.get)
     assignments += Var.Assignment(config.transferSkill0, skill0)
     assignments += Var.Assignment(config.transferSkill1, skill1)
     actions.zipWithIndex.foreach { case (action, index) => {
