@@ -2593,7 +2593,7 @@
       "awakenSkills": {
         "clear": 1121,
         "red": 1112,
-        "yellow": 1190,
+        "yellow": 1196,
         "purple": 104004,
         "teal": 101006
       }
@@ -2659,7 +2659,7 @@
       "awakenSkills": {
         "clear": 103039,
         "red": 1127,
-        "yellow": 1195,
+        "yellow": 1183,
         "purple": 103302,
         "teal": 101206
       }
@@ -2826,6 +2826,39 @@
         "yellow": 1199,
         "purple": 102105,
         "teal": 101203
+      }
+    },
+    {
+      "id": 21830,
+      "names": {
+        "en": "Man Eater",
+        "jp": "マンイーター"
+      },
+      "race": {
+        "name": "Undead",
+        "id": 35
+      },
+      "grade": 60,
+      "description": "A man-eating temptress, she was once a woman that seduced countless men and committed unspeakable acts while alive. Now, even as a zombie, she maintains her appearance, continues to seduce men and literally devours them.",
+      "stats": {
+        "hp": 938,
+        "strength": 150,
+        "magic": 130,
+        "vitality": 121,
+        "agility": 132,
+        "luck": 170
+      },
+      "baseSkills": [
+        1169,
+        1027,
+        109039
+      ],
+      "awakenSkills": {
+        "clear": 1176,
+        "red": 1031,
+        "yellow": 1024,
+        "purple": 103028,
+        "teal": 101204
       }
     },
     {
@@ -3054,7 +3087,7 @@
       "awakenSkills": {
         "clear": 103202,
         "red": 1108,
-        "yellow": 1194,
+        "yellow": 3039,
         "purple": 103310,
         "teal": 101001
       }
@@ -3516,6 +3549,39 @@
         "red": 1124,
         "yellow": 1193,
         "purple": 101403,
+        "teal": 101006
+      }
+    },
+    {
+      "id": 21840,
+      "names": {
+        "en": "Bodyconian",
+        "jp": "ボディコニアン"
+      },
+      "race": {
+        "name": "Undead",
+        "id": 35
+      },
+      "grade": 40,
+      "description": "Wearing a form-fitting one-piece dress, with her hair long and straight, she is the embodiment of fasion from Japan's economic bubble years in the late 80's and early 90's. This style was particularly common in Tokyo where girls could often be found waving \"Juliana Fans\" as they danced the nights away. This \"bodycon\" culture burst along with the bubble and lives on now only in this zombified form.",
+      "stats": {
+        "hp": 915,
+        "strength": 88,
+        "magic": 116,
+        "vitality": 116,
+        "agility": 142,
+        "luck": 164
+      },
+      "baseSkills": [
+        103027,
+        1169,
+        109040
+      ],
+      "awakenSkills": {
+        "clear": 103016,
+        "red": 1026,
+        "yellow": 3020,
+        "purple": 103026,
         "teal": 101006
       }
     },
@@ -4105,7 +4171,7 @@
       "awakenSkills": {
         "clear": 101404,
         "red": 1004,
-        "yellow": 1192,
+        "yellow": 3041,
         "purple": 103307,
         "teal": 101001
       }
@@ -4203,7 +4269,7 @@
       "awakenSkills": {
         "clear": 1109,
         "red": 1004,
-        "yellow": 1193,
+        "yellow": 3018,
         "purple": 103036,
         "teal": 101101
       }
@@ -4335,7 +4401,7 @@
       "awakenSkills": {
         "clear": 3023,
         "red": 1148,
-        "yellow": 1190,
+        "yellow": 1200,
         "purple": 103302,
         "teal": 101107
       }
@@ -4861,7 +4927,7 @@
       "awakenSkills": {
         "clear": 103205,
         "red": 1127,
-        "yellow": 1192,
+        "yellow": 2019,
         "purple": 103310,
         "teal": 101001
       }
@@ -5254,7 +5320,7 @@
       "awakenSkills": {
         "clear": 2021,
         "red": 1116,
-        "yellow": 3034,
+        "yellow": 1184,
         "purple": 101410,
         "teal": 101203
       }
@@ -5457,6 +5523,39 @@
       }
     },
     {
+      "id": 21810,
+      "names": {
+        "en": "Masakado",
+        "jp": "マサカド"
+      },
+      "race": {
+        "name": "General",
+        "id": 36
+      },
+      "grade": 98,
+      "description": "Taira no Masakado. A legendary samurai of the mid-heian period.\nAfter conquering Kanto, he declared himself the new emperor of Japan, but soon fell to Hidesato Fujiwara and Sadamori Taira. He was enshrined to quell his spirit, and later became known as the guardian deity of Kanto.",
+      "stats": {
+        "hp": 938,
+        "strength": 256,
+        "magic": 111,
+        "vitality": 121,
+        "agility": 118,
+        "luck": 186
+      },
+      "baseSkills": [
+        1009,
+        109036,
+        9050
+      ],
+      "awakenSkills": {
+        "clear": 103211,
+        "red": 1022,
+        "yellow": 1028,
+        "purple": 102102,
+        "teal": 101301
+      }
+    },
+    {
       "id": 12070,
       "names": {
         "en": "Vetala",
@@ -5517,7 +5616,7 @@
       "awakenSkills": {
         "clear": 3026,
         "red": 1016,
-        "yellow": 1195,
+        "yellow": 3041,
         "purple": 103019,
         "teal": 101101
       }
@@ -6239,7 +6338,7 @@
       "awakenSkills": {
         "clear": 1176,
         "red": 1020,
-        "yellow": 1195,
+        "yellow": 3040,
         "purple": 103209,
         "teal": 101107
       }
@@ -7635,6 +7734,29 @@
       "id": 101106,
       "name": "Null Light",
       "description": "Adds Light Null.　"
+    },
+    {
+      "$type": "active",
+      "id": 3041,
+      "name": "Blood Rush",
+      "description": "Increases own parties ATK and EV/AC by 20%. (3 turns)　",
+      "element": [
+        
+      ],
+      "mpCost": 6,
+      "target": "all_allies",
+      "effects": [
+        
+      ],
+      "effectCancels": [
+        
+      ],
+      "attributes": [
+        
+      ],
+      "levels": [
+        
+      ]
     },
     {
       "$type": "passive",
@@ -11832,58 +11954,6 @@
       ]
     },
     {
-      "$type": "active",
-      "id": 1192,
-      "name": "Dezoreton",
-      "description": "80% chance to inflict Weak on a single enemy.　",
-      "element": [
-        
-      ],
-      "mpCost": 6,
-      "target": "enemy",
-      "effects": [
-        
-      ],
-      "effectCancels": [
-        
-      ],
-      "attributes": [
-        
-      ],
-      "levels": [
-        [
-          {
-            "$type": "ailment_rate",
-            "percentage": 3
-          }
-        ],
-        [
-          {
-            "$type": "ailment_rate",
-            "percentage": 6
-          }
-        ],
-        [
-          {
-            "$type": "ailment_rate",
-            "percentage": 9
-          }
-        ],
-        [
-          {
-            "$type": "ailment_rate",
-            "percentage": 12
-          }
-        ],
-        [
-          {
-            "$type": "ailment_rate",
-            "percentage": 20
-          }
-        ]
-      ]
-    },
-    {
       "$type": "passive",
       "id": 103024,
       "name": "Great Aim",
@@ -12417,7 +12487,7 @@
       "$type": "passive",
       "id": 109027,
       "name": "Law of Hell",
-      "description": "As long as the demon with this skill is alive, no bonus turn will be granted when a party member's weak point is attacked."
+      "description": "As long as the demon with this skill is alive, no bonus turn will be granted when a party member's weak point is attacked.　"
     },
     {
       "$type": "passive",
@@ -13217,6 +13287,12 @@
       "description": "Casts Tetrakarn at the beginning of a battle if the enemy attacks first.　"
     },
     {
+      "$type": "passive",
+      "id": 109040,
+      "name": "Nightlife",
+      "description": "Increases Macca obtained in battle by 5%."
+    },
+    {
       "$type": "active",
       "id": 1199,
       "name": "Rattle",
@@ -13731,6 +13807,35 @@
       "id": 103202,
       "name": "Life Gain",
       "description": "+20% to max HP.　"
+    },
+    {
+      "$type": "active",
+      "id": 1200,
+      "name": "Foresight",
+      "description": "Inflicts Almighty (Magic) damage on all enemies and  increases own parties EV/AC by 20%. (3 turns)\nPower: 100　",
+      "element": [
+        "almighty"
+      ],
+      "mpCost": 9,
+      "target": "all_enemies",
+      "effects": [
+        
+      ],
+      "effectCancels": [
+        
+      ],
+      "attributes": [
+        
+      ],
+      "levels": [
+        
+      ]
+    },
+    {
+      "$type": "passive",
+      "id": 109036,
+      "name": "Warlord's Wrath",
+      "description": "Adds Phys Pierce. Reduces 1 enemy Press Turn Icon at the beginning of a battle if the enemy attacks first. Only up to 2 Press Turn Icons can be reduced by skills or effects. When receiving a Phys Attack, 100% chance to counter dealing Phys damage.\nPower: 100　"
     },
     {
       "$type": "active",
@@ -15326,6 +15431,12 @@
     },
     {
       "$type": "passive",
+      "id": 109039,
+      "name": "Sass",
+      "description": "When an enemy is Charmed, reduces all enemy's DEF by 20%. (3 turns)"
+    },
+    {
+      "$type": "passive",
       "id": 101307,
       "name": "Drain Dark",
       "description": "Adds Dark Drain.　"
@@ -15500,7 +15611,7 @@
       "$type": "passive",
       "id": 109037,
       "name": "Arcane Ritual",
-      "description": "While the demon with this skill is alive, all party members will receive the following effect: 20% increase in status ailment auto cure rate."
+      "description": "While the demon with this skill is alive, all party members will receive the following effect: 20% increase in status ailment auto cure rate.　"
     },
     {
       "$type": "active",
@@ -15808,6 +15919,65 @@
       "id": 103212,
       "name": "Life Aid",
       "description": "Heals 30% HP when clearing a wave.　"
+    },
+    {
+      "$type": "active",
+      "id": 9050,
+      "name": "Occult Flash",
+      "description": "Inflicts Phys (Physical) damage with 50% crit rate on a single enemy, with 100% chance to inflict Mortal.\nPower: 200　",
+      "element": [
+        "phys"
+      ],
+      "mpCost": 8,
+      "target": "enemy",
+      "effects": [
+        
+      ],
+      "effectCancels": [
+        
+      ],
+      "attributes": [
+        {
+          "$type": "instakill",
+          "percentage": 100
+        }
+      ],
+      "levels": [
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 5
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 10
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 15
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 20
+          }
+        ],
+        [
+          {
+            "$type": "hit_rate",
+            "percentage": 20
+          },
+          {
+            "$type": "cost_reduction",
+            "mp": 1
+          }
+        ]
+      ]
     },
     {
       "$type": "passive",
