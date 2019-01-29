@@ -20230,6 +20230,86 @@
                 "anim_type": 2,
                 "attr": 0,
                 "buff": {
+                    "agi": -1,
+                    "atk": -1,
+                    "def": -1,
+                    "turn": 2
+                },
+                "category": 2,
+                "cost": 1,
+                "cost_type": 1,
+                "hit_effect": "eff_skill_infirmity_s_hit.prefab",
+                "hit_effect_type": 0,
+                "hit_max": 1,
+                "hit_min": 1,
+                "invoke_effect": "eff_skill_infirmity_activate.prefab",
+                "pvp_disabled": false,
+                "se_hit": "desoleto_hit",
+                "se_invoke": "desoleto_invoke",
+                "se_world": "",
+                "target": 4,
+                "type": 4,
+                "use_limit_count": 0,
+                "world_effect": ""
+            },
+            "cap_pt": 0,
+            "desc": "\u30b2\u30fc\u30e0\u4e2d\u3067\u306f\u8868\u793a\u3055\u308c\u305a",
+            "id": 8027,
+            "img": "debuff",
+            "max_level": 1,
+            "name": "\u30d0\u30d6\u30eb\u5d29\u58ca\u306e\u4e2d\u8eab\uff08\u30b2\u30fc\u30e0\u4e2d\u306f\u975e\u8868\u793a\uff09",
+            "rarity": 3
+        },
+        {
+            "active": {
+                "anim_type": 2,
+                "attr": 128,
+                "bad": {
+                    "charm": 30
+                },
+                "category": 2,
+                "cost": 6,
+                "cost_type": 1,
+                "damage": {
+                    "atk_coef": 1,
+                    "atk_s_coef": 0,
+                    "atk_s_st": 0,
+                    "cri": 0,
+                    "fix": 0,
+                    "hit": 0,
+                    "multi": 0,
+                    "pnt": false,
+                    "power": 0.4,
+                    "status": 0,
+                    "status_val": 0
+                },
+                "hit_effect": "eff_skill_sexydance_hit.prefab",
+                "hit_effect_type": 0,
+                "hit_max": 4,
+                "hit_min": 3,
+                "invoke_effect": "eff_skill_sexydance_activate.prefab",
+                "pvp_disabled": false,
+                "se_hit": "sexydance_hit",
+                "se_invoke": "sexydance_invoke",
+                "se_world": "sexydance_hit_group",
+                "target": 2,
+                "type": 1,
+                "use_limit_count": 0,
+                "world_effect": "eff_skill_sexydance_hit_group.prefab"
+            },
+            "cap_pt": 0,
+            "desc": "Inflicts Almighty (Magic) damage on all enemies 3 to 4 times with 30% chance to inflict Charm.\nPower: 100",
+            "id": 8028,
+            "img": "almighty",
+            "max_level": 1,
+            "name": "Bubbly Dance",
+            "rarity": 3
+        },
+        {
+            "active": {
+                "anim_type": 2,
+                "attr": 0,
+                "buff": {
                     "agi": 1,
                     "atk": 1,
                     "def": 1,
@@ -30254,7 +30334,7 @@
         },
         {
             "cap_pt": 0,
-            "desc": "Casts Envon at the beginning of own turn and +30% chance to inflict status ailments.\u3000",
+            "desc": "Casts Juon at the beginning of own turn and +30% chance to inflict status ailments.\u3000",
             "id": 108415,
             "img": "psv",
             "max_level": 1,
@@ -30963,6 +31043,24 @@
         },
         {
             "cap_pt": 0,
+            "desc": "When inflicted with Mute, increases own ATK, DEF and EV/AC by 20%. (2 turns)\u3000",
+            "id": 108722,
+            "img": "psv",
+            "max_level": 1,
+            "name": "Bubble Burst",
+            "passive": {
+                "cond": {
+                    "timing_conditions": 11,
+                    "timing_effect": 1,
+                    "timing_target": 3,
+                    "timing_type": 9,
+                    "timing_value": 8027
+                }
+            },
+            "rarity": 3
+        },
+        {
+            "cap_pt": 0,
             "desc": "20% probability to avoid using Press Turn Icon when attacking the enemy's weak point.\u3000",
             "id": 109001,
             "img": "psv",
@@ -31598,7 +31696,7 @@
         },
         {
             "cap_pt": 0,
-            "desc": "As long as the demon with this skill is alive, no bonus turn will be granted when a party member's weak point is attacked.",
+            "desc": "As long as the demon with this skill is alive, no bonus turn will be granted when a party member's weak point is attacked.\u3000",
             "id": 109027,
             "img": "psv",
             "max_level": 6,
@@ -31785,7 +31883,7 @@
         },
         {
             "cap_pt": 0,
-            "desc": "Adds Phys Pierce. Reduces 1 enemy Press Turn Icon at the beginning of a battle if the enemy attacks first. Only up to 2 Press Turn Icons can be reduced by skills or effects. When receiving a Phys Attack, 100% chance to counter dealing Phys damage.\nPower: 100",
+            "desc": "Adds Phys Pierce. Reduces 1 enemy Press Turn Icon at the beginning of a battle if the enemy attacks first. Only up to 2 Press Turn Icons can be reduced by skills or effects. When receiving a Phys Attack, 100% chance to counter dealing Phys damage.\nPower: 100\u3000",
             "id": 109036,
             "img": "psv",
             "max_level": 1,
@@ -31817,7 +31915,7 @@
         },
         {
             "cap_pt": 0,
-            "desc": "While the demon with this skill is alive, all party members will receive the following effect: 20% increase in status ailment auto cure rate.",
+            "desc": "While the demon with this skill is alive, all party members will receive the following effect: 20% increase in status ailment auto cure rate.\u3000",
             "id": 109037,
             "img": "psv",
             "max_level": 1,
@@ -39103,6 +39201,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 1
+                },
                 "rate_up": {
                     "status_hit": 1
                 }
@@ -39117,6 +39220,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 2
+                },
                 "rate_up": {
                     "status_hit": 2
                 }
@@ -39131,6 +39239,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 3
+                },
                 "rate_up": {
                     "status_hit": 3
                 }
@@ -39145,6 +39258,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 4
+                },
                 "rate_up": {
                     "status_hit": 4
                 }
@@ -39159,6 +39277,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 5
+                },
                 "rate_up": {
                     "status_hit": 5
                 }
@@ -39173,6 +39296,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 6
+                },
                 "rate_up": {
                     "status_hit": 6
                 }
@@ -39187,6 +39315,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 7
+                },
                 "rate_up": {
                     "status_hit": 7
                 }
@@ -39201,6 +39334,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 8
+                },
                 "rate_up": {
                     "status_hit": 8
                 }
@@ -39215,6 +39353,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 9
+                },
                 "rate_up": {
                     "status_hit": 9
                 }
@@ -39229,6 +39372,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 10
+                },
                 "rate_up": {
                     "status_hit": 10
                 }
@@ -39243,6 +39391,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 11
+                },
                 "rate_up": {
                     "status_hit": 11
                 }
@@ -39257,6 +39410,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 12
+                },
                 "rate_up": {
                     "status_hit": 12
                 }
@@ -39271,6 +39429,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 13
+                },
                 "rate_up": {
                     "status_hit": 13
                 }
@@ -39285,6 +39448,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 14
+                },
                 "rate_up": {
                     "status_hit": 14
                 }
@@ -39299,6 +39467,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 15
+                },
                 "rate_up": {
                     "status_hit": 15
                 }
@@ -39313,6 +39486,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 16
+                },
                 "rate_up": {
                     "status_hit": 16
                 }
@@ -39327,6 +39505,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 17
+                },
                 "rate_up": {
                     "status_hit": 17
                 }
@@ -39341,6 +39524,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 18
+                },
                 "rate_up": {
                     "status_hit": 18
                 }
@@ -39355,6 +39543,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 19
+                },
                 "rate_up": {
                     "status_hit": 19
                 }
@@ -39369,6 +39562,11 @@
             "max_level": 1,
             "name": "\u30b2\u30fc\u30e0\u4e0a\u3067\u306f\u8868\u793a\u3055\u308c\u306a\u3044\u30c6\u30ad\u30b9\u30c8\u306e\u70ba\u3001\u30ed\u30fc\u30ab\u30e9\u30a4\u30ba\u4e0d\u8981\u3067\u3059",
             "passive": {
+                "cond": {
+                    "attack_effect": 1,
+                    "attack_type": 5,
+                    "attack_value": 20
+                },
                 "rate_up": {
                     "status_hit": 20
                 }
@@ -47174,6 +47372,141 @@
             "val_b": 0
         },
         {
+            "area_type": 0,
+            "area_types": [
+                4
+            ],
+            "button_a": 255,
+            "button_b": 249,
+            "button_g": 249,
+            "button_r": 255,
+            "dungeon_types": [],
+            "event_type": 21,
+            "id": 210001,
+            "img": "2000",
+            "item_name": "Juliana Fan",
+            "term_end": 1548921599000,
+            "term_reward_end": 1549526399000,
+            "term_start": 1547712000000,
+            "text_a": 255,
+            "text_b": 202,
+            "text_g": 203,
+            "text_r": 209,
+            "ticker": "ANNIVERSARY OF THE DEAD! Event Now On!",
+            "val_a": 0,
+            "val_b": 0,
+            "window_announce": "*Juliana Fan are obtainable during the event period.",
+            "window_info": "The streets are overflowing with \nzombies. Masakado's voice urges you forward. \nDon't forget to collect those Juliana Fans!"
+        },
+        {
+            "area_type": 0,
+            "area_types": [
+                0
+            ],
+            "event_type": 24,
+            "term_end": 1548921599000,
+            "term_start": 1547712000000,
+            "ticker": "Gatekeeper Extermination Mission Now On!",
+            "val_a": 0,
+            "val_b": 0
+        },
+        {
+            "area_type": 0,
+            "area_types": [
+                0
+            ],
+            "event_type": 25,
+            "term_end": 1548921599000,
+            "term_start": 1547712000000,
+            "ticker": "MASAKADO Challenge! Event Now On!",
+            "val_a": 1002100001,
+            "val_b": 35000
+        },
+        {
+            "area_type": 4,
+            "area_types": [
+                4
+            ],
+            "event_type": 27,
+            "term_end": 1548921599000,
+            "term_start": 1547712000000,
+            "ticker": "Bodyconian Hunt! Event Now On!",
+            "val_a": 21840,
+            "val_b": 5000000
+        },
+        {
+            "area_type": 0,
+            "area_types": [
+                0
+            ],
+            "event_type": 12,
+            "term_end": 1548028799000,
+            "term_start": 1547769600000,
+            "ticker": "Battle Points x2! Event Now On!",
+            "val_a": 100,
+            "val_b": 0
+        },
+        {
+            "area_type": 6,
+            "area_types": [
+                6
+            ],
+            "event_type": 17,
+            "term_end": 1548057599000,
+            "term_start": 1547884800000,
+            "ticker": "Stamina costs reduced! Event Now On!",
+            "val_a": -100,
+            "val_b": 0
+        },
+        {
+            "area_type": 0,
+            "area_types": [
+                0
+            ],
+            "event_type": 8,
+            "term_end": 1548460799000,
+            "term_start": 1548028800000,
+            "ticker": "Increased AETHER! Event Now On!",
+            "val_a": 100,
+            "val_b": 0
+        },
+        {
+            "area_type": 3,
+            "area_types": [
+                3
+            ],
+            "event_type": 17,
+            "term_end": 1548662399000,
+            "term_start": 1548489600000,
+            "ticker": "Stamina costs reduced! Event Now On!",
+            "val_a": -100,
+            "val_b": 501
+        },
+        {
+            "area_type": 2,
+            "area_types": [
+                2
+            ],
+            "event_type": 18,
+            "term_end": 1549094399000,
+            "term_start": 1548662400000,
+            "ticker": "Demon Talk Occurrence Rate Up Event Now On!",
+            "val_a": 100,
+            "val_b": 0
+        },
+        {
+            "area_type": 4,
+            "area_types": [
+                4
+            ],
+            "event_type": 18,
+            "term_end": 1549094399000,
+            "term_start": 1548662400000,
+            "ticker": "Demon Talk Occurrence Rate Up Event Now On!",
+            "val_a": 100,
+            "val_b": 0
+        },
+        {
             "area_type": 3,
             "event_type": 5,
             "term_end": 1534143599000,
@@ -47206,6 +47539,13 @@
             "event_type": 5,
             "term_end": 1544428799000,
             "term_start": 1544223600000,
+            "ticker": "Emergency Wanted! Now On!"
+        },
+        {
+            "area_type": 3,
+            "event_type": 5,
+            "term_end": 1548662399000,
+            "term_start": 1548457200000,
             "ticker": "Emergency Wanted! Now On!"
         }
     ],
@@ -47417,7 +47757,7 @@
             "type": 0
         },
         {
-            "desc": "+[param1]% to all damage.\u3000",
+            "desc": "+[param1]% to damage.\u3000",
             "type": 1
         },
         {

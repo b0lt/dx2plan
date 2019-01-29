@@ -974,6 +974,15 @@
             "skill": 0
         },
         {
+            "desc": "Used to perform a Masakado Summon at Summoning Portal.",
+            "effect_type": 9,
+            "id": 10000,
+            "img": "masakado_ticket",
+            "name": "Tome of Masakado",
+            "param": 0,
+            "skill": 0
+        },
+        {
             "desc": "A special material acquired by selling demons. Use this to perform Compendium Summons.",
             "effect_type": 1,
             "id": 20100,
@@ -1411,6 +1420,15 @@
             "id": 33006,
             "img": "devil_shifter_05",
             "name": "Arch-Shifter 5\u2605",
+            "param": 0,
+            "skill": 0
+        },
+        {
+            "desc": "The item required to challenge Masakado, proof that you have defeated the Four Heavenly Kings.",
+            "effect_type": 0,
+            "id": 35000,
+            "img": "masakado_pass",
+            "name": "Sign of the Four Heavenly Kings",
             "param": 0,
             "skill": 0
         }
@@ -5768,6 +5786,16 @@
             "ts": 0
         },
         {
+            "desc": "Complete the Masakado Challenge",
+            "end_ts": 1548932399000,
+            "id": 9000099,
+            "img": "battle_02",
+            "name": "Lord Masakado Approved",
+            "rarity": 3,
+            "tab": 4,
+            "ts": 1547722800000
+        },
+        {
             "desc": "Clear Demon Buster Kiwami: Siegfried",
             "end_ts": 0,
             "id": 9000100,
@@ -6017,6 +6045,13 @@
             "id": 100200011,
             "img": "0019",
             "name": "Ema Boards",
+            "type": 14
+        },
+        {
+            "desc": "A feathered fan popular among \"Bodycon\" dancers and symbol of the early 90's bubble economy.",
+            "id": 210001,
+            "img": "2000",
+            "name": "Juliana Fan",
             "type": 14
         },
         {
