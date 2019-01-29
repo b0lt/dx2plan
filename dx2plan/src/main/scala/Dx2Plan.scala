@@ -172,7 +172,7 @@ object Dx2Plan {
         demon.awakenSkills.get(configuration.archetype()) match {
           case Some(skillId) => {
             val skill = Dx2Plan.db.skills(skillId)
-            val skillInstance = SkillInstance(skill, false)
+            val skillInstance = SkillInstance(skill, true)
             Some(SkillUsage(skillInstance, UsageType.Normal))
           }
           case None => None
